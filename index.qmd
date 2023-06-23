@@ -1,0 +1,23 @@
+---
+title: "ISI-BUDS Summer 2023 Schedule (July 10 - August 18) "
+format: 
+  html:
+    toc: true
+    toc-title: Schedule
+    css: style.css
+    embed-resources: true
+editor: visual
+---
+
+```{r, echo = FALSE}
+library(fontawesome)
+```
+
+![](images/ISI-Buds-homepage-graphicv1.png){width="100%"}
+
+The program meets daily from 9 am - 3:25 pm, unless otherwise specified.
+
+
+## Before the program
+
+## Day 1 - July 10, 2023
