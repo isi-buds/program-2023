@@ -29,5 +29,5 @@ The program meets daily from 9 am - 3:25 pm, unless otherwise specified. Lunch w
 
 | Location | Topic                                          | Materials |
 |:---------|:-----------------------------------------------|:----------|
-| DBH 2011 | Git & GitHub installation, R & RStudio, Quarto |           |
+| DBH 2011 | Git & GitHub installation, R & RStudio, Quarto | [GitHub username survey](https://forms.gle/Ux79QFztgxjTdZP88) |
 | DBH 2011 | Lab: practice reproducible reports             |           |
