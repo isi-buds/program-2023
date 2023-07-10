@@ -21,12 +21,12 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 
 ## Day 1 - July 10, 2023
 
-+-----------------------------------------------+-----------------------------------------------------------------+
-| Topic                                         | Materials                                                       |
-+:==============================================+:================================================================+
-| R, RStudio, Git, GitHub installation & Quarto | [Happy Git and GitHub for the useR](https://happygitwithr.com/) |
-|                                               |                                                                 |
-|                                               | [GitHub username survey](https://forms.gle/Ux79QFztgxjTdZP88)   |
-+-----------------------------------------------+-----------------------------------------------------------------+
-| Lab: practice reproducible reports            |                                                                 |
-+-----------------------------------------------+-----------------------------------------------------------------+
+| Topic                              | Materials                                                                                                                           |
+|:-------------------------|:--------------------------------------------|
+| Happy Git and GitHub for the useR installation manual                | [ `r fa(name = "desktop")`](https://happygitwithr.com/)                                                                     |
+| Survey                             | [GitHub username survey](https://forms.gle/Ux79QFztgxjTdZP88)                                                                       |
+| Setup                              | [Setup Slides](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/0-setup/0-setup.html)                     |
+| R basics                           | [R & Rstudio Slides](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/1-lec-r-basics/1-lec-r-basics.html) |
+| Quarto                             | [Quarto Slides](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/2-lec-quarto/2-lec-quarto.html)          |
+| GitHub                             | [GitHub slides](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/3-lec-github/3-lec-github.html)          |
+| Lab: practice reproducible reports |                                                                                                                                     |
