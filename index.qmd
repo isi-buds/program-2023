@@ -15,18 +15,18 @@ library(fontawesome)
 
 ![](images/ISI-Buds-homepage-graphicv1.png){width="100%"}
 
-The program meets daily from 9 am - 3:30 pm, unless otherwise specified. Lunch will be from noon to 1:30pm.
+The program meets daily from 9 am - 3:30 pm in DBH 2011, unless otherwise specified. Lunch will be from noon to 1:30pm.
 
 Make sure to join our **Slack workspace**, you should have received an email. You may want to download the Slack app because we will be using this for communication throughout the program. Make sure notifications are on.
 
 ## Day 1 - July 10, 2023
 
-+---------------+-----------------------------------------------+------------------------------------------------------------------+
-| Location      | Topic                                         | Materials                                                        |
-+:==============+:==============================================+:=================================================================+
-| DBH 2011      | R, RStudio, Git, GitHub installation & Quarto | [Happy Git and GitHub for the useR](https://happygitwithr.com/)  |
-|               |                                               |                                                                  |
-|               |                                               | [GitHub username survey](https://forms.gle/Ux79QFztgxjTdZP88)    |
-+---------------+-----------------------------------------------+------------------------------------------------------------------+
-| DBH 2011      | Lab: practice reproducible reports            |                                                                  |
-+---------------+-----------------------------------------------+------------------------------------------------------------------+
++-----------------------------------------------+-----------------------------------------------------------------+
+| Topic                                         | Materials                                                       |
++:==============================================+:================================================================+
+| R, RStudio, Git, GitHub installation & Quarto | [Happy Git and GitHub for the useR](https://happygitwithr.com/) |
+|                                               |                                                                 |
+|                                               | [GitHub username survey](https://forms.gle/Ux79QFztgxjTdZP88)   |
++-----------------------------------------------+-----------------------------------------------------------------+
+| Lab: practice reproducible reports            |                                                                 |
++-----------------------------------------------+-----------------------------------------------------------------+
