@@ -30,3 +30,9 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Quarto                                                | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/2-lec-quarto/2-lec-quarto.html)     |
 | GitHub                                                | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/3-lec-github/3-lec-github.html)     |
 | Lab: practice reproducible reports                    |                                                                                                                                           |
+
+## Day 2 - July 11, 2023
+
+| Topic                        | Materials                                                                                                       |
+|------------------------------------------------|-------------------------|
+| Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html) |
