@@ -1,0 +1,238 @@
+---
+title: "Lab 2 solutions"
+format: html
+editor: visual
+---
+
+```{r}
+#| label: load libraries/packages
+
+library(tidyverse) # The tidyverse package is a massive package that includes packages such as ggplot
+
+library(janitor) # The janitor package has functions to help clean data, such as clean_names()
+```
+
+## Question 1
+
+For this lab we will be exploring the [Arthritis Treatment data](https://www.causeweb.org/tshs/arthritis-treatment/). Visit the website, read the abstract, and browse the data dictionary to learn more about this data.
+
+**1a.** Read and clean the data by running the two following code chunks.
+
+```{r}
+#| label: read in data
+
+arthritis_og <- read_csv("https://raw.githubusercontent.com/cosmos-uci-dshs/data/main/RheumArth_Tx_AgeComparisons.csv")
+```
+
+```{r}
+#| label: clean data
+
+# clean_names() changes the variable names to fit tidyverse style guidelines
+# factor() is re-coding the digits to meaningful labels
+
+arthritis <- clean_names(arthritis_og) %>%
+  mutate(
+    sex = factor(
+      sex,
+      levels = c(0,1),
+      labels = c("Female", "Male")
+    ),
+    cdai_yn = factor(
+      cdai_yn,
+      levels = c(1,2),
+      labels = c("No", "Yes")
+    ),
+    das28_yn = factor(
+      das28_yn,
+      levels = c(1,2),
+      labels = c("No", "Yes")
+    ),
+    steroids_gt_5 = factor(
+      steroids_gt_5,
+      levels = c(0,1),
+      labels = c("No", "Yes")
+    ),
+    dmar_ds = factor(
+      dmar_ds,
+      levels = c(0,1),
+      labels = c("No", "Yes")
+    ),
+    biologics = factor(
+      biologics,
+      levels = c(0,1),
+      labels = c("No", "Yes")
+    ),
+    s_dmards = factor(
+      s_dmards,
+      levels = c(0,1),
+      labels = c("No", "Yes")
+    ),
+    osteop_screen = factor(
+      osteop_screen,
+      levels = c(0,1),
+      labels = c("No", "Yes")
+    ),
+    age_gp = factor(
+      age_gp,
+      levels = c(1,2),
+      labels = c("control", "elderly")
+    )
+  )
+```
+
+**1b.** Use `head(arthritis, n = 10)` to view the first 10 rows of the data frame.
+
+Note:
+
+-   `NA` means missing data.
+-   The assumed variable type is under the variable name. A factor is a categorical variable with the grouping specified (e.g. cdai_yn is either yes or no) while a double is a numerical variable (e.g. age).
+
+**1b. Solution**
+
+```{r}
+head(arthritis, n = 10)
+```
+
+**1c.** Use `glimspe(arthritis)` to see an overview of the data. How many observations and variables does this data have?
+
+**1c. Solution**
+
+There are 530 observations (rows) of 14 variables (columns).
+
+**1d.** It is important to learn if there are any repeat measurements on study participants. Use `sum(duplicated(arthritis$id))` to check if there are any duplicated subject ids in the data.
+
+**1d. Solution**
+
+```{r}
+sum(duplicated(arthritis$id))
+```
+
+There are not any duplicated subject ids, each person is only in the data once.
+
+## Question 2
+
+Now we are going to investigate using some numerical and graphical summaries of our data.
+
+**2a.** Use `summary(arthitis)` to view quick summaries of each of the variables. What are some observations about the distribution of the data or missing data?
+
+**2a. Solution**
+
+```{r}
+summary(arthritis)
+```
+
+There are 428 females and only 102 males in this data. People in this data range from 42 to 90+, with the average patient begin 60 years old. Our possible responses of interest, cdai and das_28, have a lot of missing data, especially considering there are only 530 people in this data set. Some treatments are more common than others.
+
+**2b.** To better understand the ages distribution of the patients, it would be helpful to have a visual summary. Make a one variable plot that helps visualize the distribution of age. What do you observe from the plot?
+
+**2b. Solution**
+
+Two common options would be either a box plot or a violin plot. I chose a box plot.
+
+```{r}
+ggplot(arthritis, aes(x = age)) +
+  geom_boxplot()
+```
+
+The interquartile range shows 50 percent of the people in this study were between 54 and 66, with a few people 85+.
+
+**2c.** Create a plot to visualize the counts of females and males in this study. Use `xlab("Sex")`, `ylab("Count")` to specify the axis labels. Use `ggtitle("Number of study participants by sex")` to provide an informative title. For all plots in this document make sure to manually specify the axis labels
+
+**2c. Solution**
+
+A bar plot would be appropriate for this.
+
+```{r}
+ggplot(arthritis, aes(x = sex)) +
+  geom_bar() +
+  xlab("Sex") +
+  ylab("Count") +
+  ggtitle("Number of study participants by sex")
+```
+
+**2d.** Why would a histogram not be appropriate to visualize the counts of females and males in this study? What is a variable in this data that would be appropriate to visualize with a histogram?
+
+**2d. Solution**
+
+**2e.** Choose a plot to visualize the distribution of the clinical disease activity indicator. Note the median cdai as well as extreme outliers.
+
+**2e. Solution**
+
+Again I chose a bar plot for this.
+
+```{r}
+ggplot(arthritis, aes(x = cdai)) +
+  geom_boxplot() +
+  xlab("Clinical Disease Activity Indicator (CDAI)")
+```
+
+The median cdai is 10 with some extreme cdai values of approximately 51 and 71.
+
+## Question 3
+
+Of interest was whether patients in this study was whether elderly were less likely to have disease activity measured and less likely to received aggressive treatment. This means we want to look at one variable grouped by another variable.
+
+**3a.** Below we use `group_by()` and `summarize()` to obtain the counts of each age group as well as the counts and percents of people within each group that did not have clinical disease activity measured.
+
+```{r}
+arthritis %>% 
+  group_by(age_gp) %>% 
+  summarize(
+    total_count = n(),
+    cdai_NA_count = sum(is.na(cdai)),
+    cdai_NA_per = 100 * cdai_NA_count / total_count
+  )
+```
+
+Does there appear to be an equal amount of `cdai` missingness between the two groups? Did you use the counts or percentages to conclude this and why?
+
+**3a. Solution**
+
+The control and elderly age groups are not of equal size, so we should be comparing percentages not counts. The elderly age group has a much higher missingness rate for cdai than the control group.
+
+**3b.** Let's plot this missingness. We want to plot relative `cdai_yn` for each `age_gp`. Chose an appropriate way to visualize this.
+
+**3b. Solution**
+
+I chose to plot the cdai missingness variable on a bar plot, color coded by age group.
+
+```{r}
+ggplot(arthritis, aes(x = age_gp, fill = cdai_yn)) +
+  geom_bar(position = "fill") +
+  xlab("Age group") +
+  ylab("Percent") 
+```
+
+## Question 4
+
+Now we want to investigate the relationship between years since diagnosis and clinical disease activity indicator.
+
+**4a.** Create a plot to visualize the relationship between these two variables. What information does your plot provide you with?
+
+**4a. Solution**
+
+```{r}
+ggplot(arthritis, aes(x = cdai, y = yrs_from_dx)) +
+  geom_point()
+```
+
+There does not appear to be any relationship between clinical disease activity indicator and years since diagnosis. It generally appears to be random.
+
+**4b.** Now we want to learn if the relationship differs for patients patient that were and were not on steroids at more than 5 mg daily. Create a plot to aid in this investigation and state your findings.
+
+**4b. Solution**
+
+```{r}
+ggplot(arthritis, aes(x = cdai, y = yrs_from_dx, color = steroids_gt_5)) +
+  geom_point() 
+```
+
+No evidence of a relationship is revealed by this plot.
+
+## Question 5
+
+Visualizing data is an art and there is not necessarily one perfect way. Compare your answers with you neighbors and debate your plotting choices.
+
+Also, spend some time looking up plotting options and making your plots more visually appealing (e.g. changing the theme, colors, font size, etc). Look up how to change your legend title and apply it to any of your plots with legends.
+
+Once you have finished this lab you should save and commit your changes to Git, then pull and push to GitHub.

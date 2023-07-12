@@ -1,0 +1,238 @@
+---
+title: "Day 1 Lab Solutions"
+format: html
+editor: visual
+---
+
+This Quarto document operates similar to a word document with extra capabilities.
+
+## Rendering your document
+
+To produce an html document with this work, click the "Render" button at the top. View the html document and compare it the .qmd file before proceeding.
+
+## Getting started
+
+There are two different forms you can edit this document with. "**Source**" uses traditional markdown display and can be helpful for advanced users wanting more flexibility. "**Visual**" is more user friendly so we recommend using it as the editor.
+
+Below is a code chunk. It allows us to insert, display, and run R code in our document. To run a code chunk press the green arrow in the chunk.
+
+```{r}
+1 + 3
+```
+
+Notice the output is printed below the chunk, with `[1]` signifying a line of output.
+
+```{r}
+# Hashtags are used for comments in your code 
+# Comments do not get run
+2 + 3
+4 / 3
+```
+
+## Variable assignment
+
+```{r}
+w <- 0 # Stores the value 0 into the variable w
+print(w) # Prints the value stored
+
+x <- "a" # Stores the character/letter "a" into the variable x
+x # Also prints the value stored
+```
+
+Change the variable "age" to contain your actual age
+
+```{r}
+age <- 26
+```
+
+Run the following code to print your age to the console.
+
+```{r}
+print(paste("My age is ", age))
+```
+
+### Committing your changes
+
+At this point we have made a change to this document. You should save your document frequently, and it is up to you how often you commit those changes to Git.
+
+Let's practice committing. Save this document now. In the Git pane commit the change you have made to this document with a meaning full commit message.
+
+After you have committed, "pull" using the blue arrow and then "push" using the green arrow.
+
+Now proceed on through the rest of this lab. Make sure to commit your changes occasionally.
+
+## Vectors
+
+The code below stores the vector containing values 1-5 into variable `y`.
+
+```{r}
+y <- c(1, 2, 3, 4, 5)
+```
+
+This prints the vector stored in variable y
+
+```{r}
+y
+```
+
+Computes the length of the vector (i.e. number of elements stored)
+
+```{r}
+length(y)
+```
+
+Another way to store vectors of consecutive numbers
+
+```{r}
+z_vector <- 1:5
+
+z_vector
+```
+
+Elements of a vector can be access by specifying its position in the vector.
+
+```{r}
+y[1] # prints the first value stored in y
+```
+
+Change `new_vector` to contain a vector with the elements: 4, 6, 8, 10.
+
+**Solution**
+
+```{r}
+new_vector <- c(4, 6, 7, 10)
+```
+
+Print the 3rd (not 1st) value stored in `new_vector`.
+
+**Solution**
+
+```{r}
+new_vector[3]
+```
+
+## if statements
+
+If statements only run the accompanying code if the condition is true
+
+```{r}
+if (w == 0) { 
+  print("w equals 0") 
+}
+```
+
+If else statements provide different code to be run depending on the condition
+
+```{r}
+if (w > 0) { 
+  print("w is greater than 0") 
+} else { 
+  print("w is less than 0") 
+}
+```
+
+Note "!=" means "does not equal"
+
+```{r}
+if (age != 999) { 
+  print("message 1") 
+} else { 
+  print("message 2") 
+}
+```
+
+Write an if statement to check if age is less than 21. If true, print the message "I am younger than 21!". If false, print the message "I am 21 or over!". *Make sure to add an R code chunk here using the green +C button above*
+
+**Solution**
+
+```{r}
+if (age < 21) {
+  print("I am younger than 21!")
+} else {
+  print("I am 21 or over!")
+}
+```
+
+
+You can also write if statements with multiple conditions.
+
+```{r}
+if (z_vector[2] == 1) {
+  print("Stuff")
+} else if (z_vector[2] == 2) {
+  print("Other stuff")
+} else {
+  print("More stuff")
+}
+```
+
+## for loops
+
+For loops iterate over the accompanying code for a given sequence
+
+```{r}
+for (iteration in y) { 
+  print(iteration) # the value stored in iteration changes with each loop 
+}
+```
+
+The sequence to iterate over does not need to be defined outside of the loop
+
+```{r}
+for (i in 3:5) { 
+  print(i) 
+}
+```
+
+For loops can be helpful for accessing individual elements of a vector
+
+```{r}
+for (i in 1:length(new_vector)) { # i will go from 1 to 5 (length of the vector) 
+  print(
+    paste( 
+      "The value stored in position", i, "of new_vector is:", new_vector[i]
+    )
+  ) 
+}
+```
+
+`paste()` allows us to print what is stored in a variable. Here we used it within `print()`.
+
+Change the loop below to loop over the days of the week and print the day instead of the month.
+
+**Solution**
+
+```{r}
+for (week in c("Mon.", "Tues.", "Wed.", "Thur.", "Fri.")) { 
+  print(paste("The week is", week)) 
+}
+```
+
+## Basic plotting
+
+For a scatterplot we have to specify x and y axis values
+
+```{r}
+plot(x = 1:3, y = c(5, 0, 2)) # plots the points (1, 5), (2, 0), (3, 2)
+```
+
+We can specify axis labels
+
+```{r}
+plot(x = c(-4, 3, 1), y = c(5, 0, 2), xlab = "location", ylab = "height")
+```
+
+Make a plot with the following points (1, -3), (-2, 5), (4, 0). *You will have to add an R chunk to write your code in.*
+
+**Solution**
+
+```{r}
+plot(x = c(1, -2, 4), y = c(-3, 5, 0))
+```
+
+
+## Wrapping up
+
+We have finished editing this lab now so save, commit, pull, push this document.
+
+Render this document to html and commit, pull, push the html.
