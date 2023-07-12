@@ -22,7 +22,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 1 - July 10, 2023
 
 | Topic                                                 | Materials                                                                                                                                                                                                                 |
-|:--------------------------------------------|:--------------------------|
+|:--------------------------------------------------|:--------------------|
 | Happy Git and GitHub for the useR installation manual | [`r fa(name = "link")`](https://happygitwithr.com/)                                                                                                                                                                       |
 | GitHub Username Survey                                | [`r fa(name = "link")`](https://forms.gle/Ux79QFztgxjTdZP88)                                                                                                                                                              |
 | Setup                                                 | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/0-setup/0-setup.html)                                                                                               |
@@ -31,9 +31,15 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | GitHub                                                | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/3-lec-github/3-lec-github.html)                                                                                     |
 | Lab: practice reproducible reports                    | HTML file: [`r fa(name = "file")`](week1-material/day01-prerequisites/day01-lab-coding-intro-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day01-prerequisites/day01-lab-coding-intro-solutions.qmd)) |
 
-## Day 2 - July 11, 2023
+## Day 2 - July 11
 
-| Topic                        | Materials                                                                                                       |
-|----------------------------------------------|--------------------------|
-| Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html) |
+| Topic                        | Materials                                                                                                                                                                       |
+|:--------------------------------------------------|:--------------------|
+| Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html)                                                                 |
 | Lab: plotting with ggplot    | HTML file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.html) (Qmd file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.qmd)) |
+
+## Day 3 - July 12
+
+| Topic                               | Materials                                                                                                                           |
+|:--------------------------------------------------|:--------------------|
+| Data science and data visualization | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/day02-slides_dataviz_principles.pdf) |
