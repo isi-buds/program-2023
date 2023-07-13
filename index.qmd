@@ -45,3 +45,9 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 |:------------------------|:------------------------|
 | Intro to probability    | [`r fa(name = "desktop")`](week1-material/day03-into-prob/day03_prob_lecture.pdf)           |
 | Lab: inverse CDF method | Solution HTML file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.qmd)) |
+
+## Day 4 - July 13
+
+| Topic                   | Materials               |
+|:------------------------|:------------------------|
+| Probability continued   |                         |
