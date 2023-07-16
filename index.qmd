@@ -53,3 +53,15 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | More probability and Monte Carlo Integration | [`r fa(name = "desktop")`](week1-material/day04-prob-cont/day04_mc_lecture.pdf) |
 | Lab: Monte Carlo Integration | Solution HTML file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.qmd)) |
 
+## Day 5 - July 14
+
+| Topic                 | Materials |
+|:----------------------|:----------|
+| Likelihood and Monte Carlo Inference | |
+| Lab: Monte Carlo Integration | Solution HTML file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.qmd)) |
+
+## Day 6 - July 17
+
+| Topic                 | Materials |
+|:----------------------|:----------|
+| Data Wrangling Basics | |
