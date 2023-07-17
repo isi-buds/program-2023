@@ -22,7 +22,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 1 - July 10, 2023
 
 | Topic                                                 | Materials                                                                                                                                                                                                                          |
-|:-----------------------------------------------|:-----------------------|
+|:----------------------------------------------|:-----------------------|
 | Happy Git and GitHub for the useR installation manual | [`r fa(name = "link")`](https://happygitwithr.com/)                                                                                                                                                                                |
 | GitHub Username Survey                                | [`r fa(name = "link")`](https://forms.gle/Ux79QFztgxjTdZP88)                                                                                                                                                                       |
 | Setup                                                 | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/0-setup/0-setup.html)                                                                                                        |
@@ -34,7 +34,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 2 - July 11
 
 | Topic                        | Materials                                                                                                                                                                                |
-|:-----------------------------------------------|:-----------------------|
+|:----------------------------------------------|:-----------------------|
 | Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html)                                                                          |
 | Principles of visualization  | [`r fa(name = "desktop")`](week1-material/day02-ggplot/day02-slides_dataviz_principles.pdf)                                                                                              |
 | Lab: plotting with ggplot    | Solution HTML file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.html) (Qmd file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.qmd)) |
@@ -49,14 +49,14 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 4 - July 13
 
 | Topic                                        | Materials                                                                                                                                                                                                                                        |
-|:-----------------------------------------------|:-----------------------|
+|:----------------------------------------------|:-----------------------|
 | More probability and Monte Carlo Integration | [`r fa(name = "desktop")`](week1-material/day04-prob-cont/day04_mc_lecture.pdf)                                                                                                                                                                  |
 | Lab: Monte Carlo Integration                 | Solution HTML file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.qmd)) |
 
 ## Day 5 - July 14
 
 | Topic                                | Materials                                                                                                                                                                                                                    |
-|:-----------------------------------------------|:-----------------------|
+|:----------------------------------------------|:-----------------------|
 | Likelihood and Monte Carlo Inference |                                                                                                                                                                                                                              |
 | Lab: Monte Carlo Integration         | Solution HTML file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.qmd)) |
 
@@ -64,4 +64,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 
 | Topic                                              | Materials |
 |:---------------------------------------------------|:----------|
-| Basic Data Wrangling and Exploratory Data Analysis |           |
+| Summarizing Data | [`r fa(name = "desktop")`](week2-material/day06-wrangle/1-lec-summarizing-data/1-lec-summarizing-data.html)          |
+| Changing Variables | [`r fa(name = "desktop")`](week2-material/day06-wrangle/2-lec-change-variables/2-lec-change-variables.html)          |
+| Subsetting Data | [`r fa(name = "desktop")`](week2-material/day06-wrangle/3-lec-subsetting-data/3-lec-subsetting-data.html)          |
+| Joining Data | [`r fa(name = "desktop")`](week2-material/day06-wrangle/4-lec-joining-data/4-lec-joining-data.html)          |
