@@ -379,8 +379,8 @@ c(4, 8, 16) %>%
 We can use the pipe operator with the `summarize()` function. 
 
 ```{r}
-summarize(fastfood, 
-          mea_cal = mean(calories), 
+fastfood %>% 
+  summarize(mea_cal = mean(calories), 
           med_cal = median(calories),
           var_cal = var(calories),
           sd_cal = sd(calories),

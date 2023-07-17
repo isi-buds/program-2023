@@ -783,8 +783,8 @@ Round the output</p>
 <h2></h2>
 <p>We can use the pipe operator with the <code>summarize()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="fu">summarize</span>(fastfood, </span>
-<span id="cb55-2"><a href="#cb55-2"></a>          <span class="at">mea_cal =</span> <span class="fu">mean</span>(calories), </span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>fastfood <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href="#cb55-2"></a>  <span class="fu">summarize</span>(<span class="at">mea_cal =</span> <span class="fu">mean</span>(calories), </span>
 <span id="cb55-3"><a href="#cb55-3"></a>          <span class="at">med_cal =</span> <span class="fu">median</span>(calories),</span>
 <span id="cb55-4"><a href="#cb55-4"></a>          <span class="at">var_cal =</span> <span class="fu">var</span>(calories),</span>
 <span id="cb55-5"><a href="#cb55-5"></a>          <span class="at">sd_cal =</span> <span class="fu">sd</span>(calories),</span>

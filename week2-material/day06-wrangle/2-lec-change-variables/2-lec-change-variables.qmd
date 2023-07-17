@@ -107,6 +107,8 @@ arthritis %>%
 glimpse(arthritis)
 ```
 
+##
+
 **Goal**: 
 
 Create a new variable called `das_level` which has the following categories based on `das_28` scores. 
@@ -156,7 +158,7 @@ Change `das_28_yn` and `age_gp` to appropriate variable types.
 
 ```{r}
 arthritis %>% 
-  mutate(das28_yn = as.logical(das28_yn),
+  mutate(das28_yn = as.factor(das28_yn),
          age_gp = as.factor(age_gp)) 
 ```
 
@@ -182,7 +184,7 @@ arthritis <-
     das_28 >= 2.6 & das_28 <= 3.2 ~ "low disease activity",
     das_28 > 3.2 & das_28 <= 5.1 ~ "moderate disease activity",
     das_28 > 5.1 ~ "high disease activity")) %>% 
-  mutate(das28_yn = as.logical(das28_yn),
+  mutate(das28_yn = as.factor(das28_yn),
          age_gp = as.factor(age_gp)) 
 ```
 
