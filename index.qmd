@@ -68,3 +68,4 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Changing Variables | [`r fa(name = "desktop")`](week2-material/day06-wrangle/2-lec-change-variables/2-lec-change-variables.html)          |
 | Subsetting Data | [`r fa(name = "desktop")`](week2-material/day06-wrangle/3-lec-subsetting-data/3-lec-subsetting-data.html)          |
 | Joining Data | [`r fa(name = "desktop")`](week2-material/day06-wrangle/4-lec-joining-data/4-lec-joining-data.html)          |
+| Lab: Data Wrangling         | Solution HTML file: [`r fa(name = "file")`](week2-material/day06-wrangle/lab/day06-lab-data-wrangling-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day06-wrangle/lab/day06-lab-data-wrangling-solutions.qmd)) |
