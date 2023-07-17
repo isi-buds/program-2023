@@ -1,0 +1,270 @@
+---
+title: "Joining Data"
+execute:
+  echo: true
+subtitle: "ISI-BUDS 2023"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    title-slide-attributes: 
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+```{r}
+#| echo: false
+library(tidyverse)
+
+xaringanExtra::use_panelset()
+
+artists <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "artist")
+songs <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "top_song")
+albums <- readxl::read_xlsx("../data/spotify.xlsx", sheet = "album") %>% 
+  mutate(album_release_date = lubridate::ymd(album_release_date))
+```
+
+
+```{r echo = FALSE}
+knitr::include_graphics("img/data_joins.png")
+```
+
+Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)
+
+
+
+## Inner Join
+
+```{r echo = FALSE}
+knitr::include_graphics("img/inner_join.png")
+```
+
+Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)
+
+
+## Outer Joins
+
+```{r echo = FALSE, out.width="40%"}
+knitr::include_graphics("img/outer_joins.png")
+```
+
+Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)
+
+## Data Joins
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/join_venn.png")
+```
+
+Image from [R for Data Science book](https://r4ds.had.co.nz/index.html) licensed under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License](https://creativecommons.org/licenses/by-nc-nd/3.0/us/)
+
+##
+
+
+::: {.panel-tabset}
+
+
+
+## artists
+
+```{r}
+artists
+```
+
+
+## songs
+
+```{r}
+songs
+```
+
+
+## albums
+
+```{r}
+albums
+```
+
+:::
+
+##
+
+```{r echo = FALSE, out.width="90%"}
+knitr::include_graphics("img/data_joins_spotify.png")
+```
+
+
+
+## Join Functions
+
+`something_join(x, y)` All the join functions in dplyr package are in this fashion where x represents the first data frame and y represents the second data frame.
+
+
+## 
+
+::: {.panel-tabset}
+
+
+## songs
+
+```{r}
+songs
+```
+
+
+
+
+## albums
+
+```{r}
+albums
+```
+
+
+
+## left_join()
+
+```{r}
+left_join(songs, albums, by = "album_name")
+```
+
+
+:::
+
+
+`left_join()` includes all rows from x
+
+##
+
+::: {.panel-tabset}
+
+
+## songs
+
+```{r}
+songs
+```
+
+## albums
+
+```{r}
+albums
+```
+
+
+## right_join()
+
+```{r}
+right_join(songs, albums, by = "album_name")
+```
+
+
+:::
+
+
+`right_join()` includes all rows from `y`
+
+##
+
+::: {.panel-tabset}
+
+
+## songs
+
+```{r}
+songs
+```
+
+
+## albums
+
+```{r}
+albums
+```
+
+
+## inner_join()
+
+```{r}
+inner_join(songs, albums, by = "album_name")
+```
+
+
+:::
+
+
+`inner_join()` includes all rows that are in x **and** y
+
+##
+
+::: {.panel-tabset}
+
+
+## songs
+
+```{r}
+songs
+```
+
+
+## albums
+
+```{r}
+albums
+```
+
+
+
+
+## full_join()
+
+```{r}
+full_join(songs, albums, by = "album_name")
+```
+
+
+:::
+
+
+
+`full_join()` includes all rows that are in x **or** y
+
+##
+
+::: {.panel-tabset}
+
+
+## artists
+
+```{r}
+artists
+```
+
+
+## songs
+
+```{r}
+songs
+```
+
+
+
+## albums
+
+```{r}
+albums
+```
+
+
+## full_join()
+
+```{r}
+full_join(artists, songs, by = "name") %>% 
+  full_join(albums, by = "album_name")
+```
+
+
+:::
+
+
+
