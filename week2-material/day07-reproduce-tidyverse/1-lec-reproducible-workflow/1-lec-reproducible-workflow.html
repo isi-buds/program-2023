@@ -418,6 +418,11 @@
 <li class="fragment"><p>README file is the first file users read. In our case a user might be our future self, a teammate, or (if open source) anyone.</p></li>
 <li class="fragment"><p>There can be multiple README files within a single directory: e.g.&nbsp;for the general project folder and then for a data subfolder. Data folder README’s can possibly contain codebook (data dictionary).</p></li>
 <li class="fragment"><p>It should be brief but detailed enough to help user navigate.</p></li>
+</ul>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<ul>
 <li class="fragment"><p>a README should be up-to-date (can be updated throughout a project’s lifecycle as needed).</p></li>
 <li class="fragment"><p>On GitHub we use markdown for README file (<code>README.md</code>). Good news: <a href="https://gist.github.com/rxaviers/7360908">emojis are supported.</a></p></li>
 </ul>
@@ -512,7 +517,7 @@
 </div>
 <p>Useful when you are going to use a function once or few times. Also useful if there are any conflicts. For instance if there is some other package in your environment that has a beep() function that prints the word beep, you would want to distinguish the beep function from the beepr package and the beep function from the other imaginary package.</p>
 </section>
-<section id="section" class="slide level2">
+<section id="section-1" class="slide level2">
 <h2></h2>
 
 <img data-src="img/beep-help.png" style="width:80.0%" class="r-stretch quarto-figure-center"></section>
@@ -545,7 +550,7 @@
 <li class="fragment">forcats</li>
 </ul>
 </section>
-<section id="section-1" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p>We can also load multiple tidyverse packages all at the same time.</p>
 <div class="cell">
@@ -704,19 +709,27 @@
 
 <img data-src="img/issue-number.png" style="width:90.0%" class="r-stretch"><p>If you are working on an issue, it makes sense to refer to issue number in your commit message (e.g.&nbsp;“add first draft of alternate texts for #4”). If your commit resolves the issue then you can use key words such as “fixes #4” or “closes #4” to close the issue. Issues can also be manually closed.</p>
 </section>
-<section id="section-2" class="slide level2">
+<section id="gitignore" class="slide level2">
+<h2>.gitignore</h2>
+<p>A .gitignore file contains the list of files which Git has been explicitly told to ignore.</p>
+<p>For instance README.html can be git ignored.</p>
+<p>You may consider git ignoring confidential files (e.g.&nbsp;some datasets) so that they would not be pushed by mistake to GitHub.</p>
+<p>A file can be git ignored either by point-and-click using RStudio’s Git pane or by adding the file path to the .gitignore file. For instance weather.csv data file in a data folder need to be added as data/weather.csv</p>
+<p>Files with certain files (e.g.&nbsp;all .log files) can also be ignored. See git ignore patterns.</p>
+</section>
+<section id="section-3" class="slide level2">
 <h2></h2>
 <p>It is also a good practice to save session information as package versions change, in order to be able to reproduce results from an analysis we need to know under what technical conditions the analysis was conducted.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
-Platform: x86_64-apple-darwin20 (64-bit)
+<pre><code>R version 4.3.1 (2023-06-16)
+Platform: aarch64-apple-darwin20 (64-bit)
 Running under: macOS Ventura 13.4.1
 
 Matrix products: default
-BLAS:   /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRblas.0.dylib 
-LAPACK: /Library/Frameworks/R.framework/Versions/4.3-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
+BLAS:   /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.11.0
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -733,15 +746,15 @@ other attached packages:
  [9] tibble_3.2.1    ggplot2_3.4.2   tidyverse_2.0.0
 
 loaded via a namespace (and not attached):
- [1] gtable_0.3.3     jsonlite_1.8.5   compiler_4.3.0   tidyselect_1.2.0
- [5] scales_1.2.1     yaml_2.3.7       fastmap_1.1.1    R6_2.5.1        
- [9] generics_0.1.3   knitr_1.43       munsell_0.5.0    pillar_1.9.0    
-[13] tzdb_0.4.0       rlang_1.1.1      utf8_1.2.3       stringi_1.7.12  
-[17] xfun_0.39        timechange_0.2.0 cli_3.6.1        withr_2.5.0     
-[21] digest_0.6.31    grid_4.3.0       rstudioapi_0.14  hms_1.1.3       
-[25] lifecycle_1.0.3  vctrs_0.6.2      evaluate_0.21    glue_1.6.2      
-[29] fansi_1.0.4      colorspace_2.1-0 rmarkdown_2.22   tools_4.3.0     
-[33] pkgconfig_2.0.3  htmltools_0.5.5 </code></pre>
+ [1] gtable_0.3.3      jsonlite_1.8.7    compiler_4.3.1    tidyselect_1.2.0 
+ [5] scales_1.2.1      yaml_2.3.7        fastmap_1.1.1     R6_2.5.1         
+ [9] generics_0.1.3    knitr_1.43        munsell_0.5.0     pillar_1.9.0     
+[13] tzdb_0.4.0        rlang_1.1.1       utf8_1.2.3        stringi_1.7.12   
+[17] xfun_0.39         timechange_0.2.0  cli_3.6.1         withr_2.5.0      
+[21] digest_0.6.33     grid_4.3.1        rstudioapi_0.15.0 hms_1.1.3        
+[25] lifecycle_1.0.3   vctrs_0.6.3       evaluate_0.21     glue_1.6.2       
+[29] fansi_1.0.4       colorspace_2.1-0  rmarkdown_2.23    tools_4.3.1      
+[33] pkgconfig_2.0.3   htmltools_0.5.5  </code></pre>
 </div>
 </div>
 <div class="footer footer-default">
