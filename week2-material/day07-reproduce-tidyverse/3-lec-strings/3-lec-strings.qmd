@@ -1,5 +1,5 @@
 ---
-title: "Working with Dates"
+title: "Working with Strings"
 execute:
   echo: true
 subtitle: "ISI-BUDS 2023"
