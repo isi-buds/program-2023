@@ -421,11 +421,11 @@
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">today</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-07-17"</code></pre>
+<pre><code>[1] "2023-07-18"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">now</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-07-17 16:52:07 PDT"</code></pre>
+<pre><code>[1] "2023-07-18 11:05:53 PDT"</code></pre>
 </div>
 </div>
 </section>
@@ -513,15 +513,19 @@
 <section id="types" class="slide level2">
 <h2>Types</h2>
 <p><code>date</code></p>
-<p>–</p>
+<div class="fragment">
 <p><code>time</code></p>
-<p>–</p>
+</div>
+<div class="fragment">
 <p><code>date-time</code></p>
-<p>–</p>
+</div>
+<div class="fragment">
 <p><code>POSIXct</code></p>
-<p>–</p>
+</div>
+<div class="fragment">
 <p><code>POSIXlt</code></p>
 <p>These represent date-time vectors in R.</p>
+</div>
 </section>
 <section id="including-time-zones" class="slide level2">
 <h2>Including time zones</h2>
@@ -870,7 +874,7 @@ attr(,"Version")
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">today</span>() <span class="sc">-</span> <span class="fu">ymd</span>(<span class="st">"1911/05/31"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 40955 days</code></pre>
+<pre><code>Time difference of 40956 days</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -878,7 +882,7 @@ attr(,"Version")
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>since_titanic <span class="ot">&lt;-</span> <span class="fu">today</span>() <span class="sc">-</span> <span class="fu">ymd</span>(<span class="st">"1911/05/31"</span>)</span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="fu">str</span>(since_titanic)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> 'difftime' num 40955
+<pre><code> 'difftime' num 40956
  - attr(*, "units")= chr "days"</code></pre>
 </div>
 </div>
@@ -895,7 +899,7 @@ attr(,"Version")
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>since_titanic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "3538512000s (~112.13 years)"</code></pre>
+<pre><code>[1] "3538598400s (~112.13 years)"</code></pre>
 </div>
 </div>
 </section>
@@ -942,8 +946,8 @@ attr(,"Version")
 </div>
 </section></section>
 <section>
-<section id="components-of-data-and-time" class="title-slide slide level1 center">
-<h1>Components of Data and Time</h1>
+<section id="components-of-date-and-time" class="title-slide slide level1 center">
+<h1>Components of Date and Time</h1>
 
 </section>
 <section id="getting-year" class="slide level2">
@@ -1010,7 +1014,7 @@ Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
 </section>
 <section id="section-7" class="slide level2">
 <h2></h2>
-<p><a href="https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf">lubridate cheatsheet</a></p>
+<p><a href="https://rstudio.github.io/cheatsheets/html/lubridate.html">lubridate cheatsheet</a></p>
 <div class="footer footer-default">
 
 </div>

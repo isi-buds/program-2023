@@ -178,4 +178,4 @@ fct_recode(places,
 
 ##
 
-[forcats cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/factors.pdf)
+[forcats cheatsheet](http://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf)

@@ -231,5 +231,5 @@ str_replace(first_episode_desc, "Monica", "Monika")
 
 ##
 
-[stringr cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)
+[stringr cheatsheet](https://evoldyn.gitlab.io/evomics-2018/ref-sheets/R_strings.pdf)
 

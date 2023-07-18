@@ -233,7 +233,7 @@ Lubridate package takes daylight savings into account.
 
 
 
-# Components of Data and Time
+# Components of Date and Time
 
 
 
@@ -285,4 +285,4 @@ wday(apollo11_return, label = TRUE)
 
 ##
 
-[lubridate cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/lubridate.pdf)
+[lubridate cheatsheet](https://rstudio.github.io/cheatsheets/html/lubridate.html)
