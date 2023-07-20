@@ -1,0 +1,696 @@
+---
+title: "UC Irvine ISI-BUDS 2023 Day 09: GLM"
+author: "Zhaoxia Yu"
+date: "`r Sys.Date()`"
+geometry: "left=0.5cm,right=2.5cm,top=1cm,bottom=1cm"
+output: 
+  beamer_presentation:
+    theme: "Goettingen"
+    colortheme: "whale"
+    fonttheme: "structurebold"
+    slide_level: 2
+header-includes:
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{footline}[frame number]
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Learning Objectives
+
+-   Review of LM \vspace{0.5cm}
+-   GLM
+    -   Logistic Regression
+    -   Poisson Regression
+    -   Multinomial Regression \vspace{0.5cm}
+-   The assumption of independent observations
+
+# Review of LM
+
+## A Linear Model (LM)
+
+-   Suppose
+    $$Y = \beta_0 + x_{1} \times \beta_1+ … + x_{p} \times \beta_p + \epsilon,$$
+    where
+    -   the regressand $Y$ is the response / outcome / dependent /
+        endogenous variable
+    -   the regressors $(x_1, \cdots, x_p)$ are the $p$ covariates /
+        independent / explanatory variables
+    -   the random term $\epsilon$ has a zero mean and variance
+        $\sigma^2>0$
+    -   the intercept is $\beta_0$, the other $p$ coefficients are
+        $\beta_1, \cdots, \beta_p$
+
+## A Linear Model (LM)
+
+-   Consider the $i$th observation:
+    $$Y_i = \beta_0 + x_{i1} \times \beta_1+ … + x_{ip} \times \beta_p + \epsilon_i , i =1, …, n$$
+-   Basic assumptions
+    -   $E(\epsilon_i)=0$, which is equivalent to
+        \textcolor{red}{$E(Y_i|X_i)=\beta_0 + x_{i1} \times \beta_1+ … + x_{ip} \times \beta_p$}
+    -   $Var(\epsilon_i)=\sigma^2$. Note, this is equivalent to say
+        \textcolor{red}{$Var(Y_i|X_i)=\sigma^2$}.
+    -   $(\epsilon_1, \cdots, \epsilon_n)$ are mutually independent
+-   If $(\epsilon_1, \cdots, \epsilon_n)$ are i.i.d. $N(0, \sigma^2)$,
+    we can derive t-tests and F-tests
+-   Question: what if the assumptions are violated?
+
+# Logistic Regression
+
+## A Motivating Example of GLM
+
+-   A motivating example: Consider a binary response variable, i.e.,
+    $Y_i$ takes values of 0 or 1. \vspace{0.5cm}
+-   Is LM a good choice for this problem? \vspace{4cm}
+
+## A Motivating Example of GLM (continued)
+
+-   Consider the Alzheimer data
+-   We create a binary variable
+
+\tiny
+
+```{r alzheimer_data}
+alzheimer=read.csv("alzheimer_data.csv", header = TRUE)
+#dim(alzheimer)
+#names(alzheimer)
+attach(alzheimer) 
+#length(unique(id))
+alzh=(diagnosis>0)*1 #"*1" to create a 0-1 variable
+```
+
+\normalsize
+
+## A Motivating Example of GLM (continued)
+
+\tiny
+
+```{r fig.pos = 'h', fig.height = 2, fig.width = 3, fig.align = "center"}
+alzh.lm = lm(alzh ~ age + female + educ+lhippo + rhippo)
+par(mar = c(4, 4, 0.5, 0.5))
+plot(alzh, predict(alzh.lm)); abline(h=c(0,1), col=2)
+```
+
+\normalsize
+
+## A Motivating Example of GLM (continued)
+
+-   Is alzh.lm a good model for alzh? \vspace{0.5cm}
+-   Several assumptions of the LM have been violated, and
+-   The predicted values using LM are not between 0 and 1!
+-   Let $X_i=(x_{i1}, \cdots, x_{ip})^T$, i.e., the vector of covariates
+    for the $i$th subject.
+-   Let $\pi_i=E(Y_i|X_i)$, the expected probability. We would like to
+    make sure that $\pi_i\in [0,1]$
+-   How?
+
+## Logistic Regression
+
+-   Consider the a special transformation of $\pi_i$:
+    $$logit(\pi_i)=log\frac{\pi_i}{1-\pi_i}\in (-\infty, \infty)$$
+    -   This is the so-called "logit" link!
+    -   $\pi_i=E[Y_i|X_i]$: probability of having AD for a subject with
+        covariates $X_i$.
+    -   $\frac{\pi_i}{1-\pi_i}$: odds
+    -   $logit(\pi_i)=log\frac{\pi_i}{1-\pi_i}=log\frac{P(Y_i=1|X_i)}{P(Y_i=0|X_i)}$:
+        log-odds!
+
+## Logistic Regression
+
+-   We connect $\pi_i$ and a linear function of the covariates $X_i$ by
+    assuming
+    $$log\frac{\pi_i}{1-\pi_i} = \beta_0 + x_{i1} \times \beta_1+ … + x_{ip} \times \beta_p$$
+-   Essentially, we model the log-odds.
+-   But $Y_i$ is a random variable. We need a distribution. A natural
+    choice is the Bernoulli distribution
+    $$Y_i|X_i \sim Bernoulli(\pi_i)$$
+-   pmf, mean, variance:
+
+## Logistic Regression
+
+-   Estimation of is typically conducted by maximizing the corresponding
+    likelihood function\
+-   How to obtain the likelihood function
+    -   $E(Y_i|X_i)=\pi_i=\frac{exp\{\beta_0 + x_{i1} \times \beta_1+ … + x_{ip} \times \beta_p\}}{1+exp\{\beta_0 + x_{i1} \times \beta_1+ … + x_{ip} \times \beta_p\}}$
+    -   $f(Y_i|X_i) = \pi_i^{Y_i} (1-\pi_i)^{1-Y_i}$, i.e.,
+        -   $f(Y_i|X_i)=\pi_i$ if $Y_i=1$
+        -   $f(Y_i|X_i)=1-\pi_i$ if $Y_i=0$
+    -   independence: $f(Y|X) = \prod_{i=1}^n f(Y_i|X_i)$
+    -   $L(\beta_0, \beta_1, \cdots, \beta_p) = f(Y|X)$
+
+## Logistic Regression for Retrospective Studies
+
+-   In the previous slide we model $E(Y_i|X_i)$. Because $Y_i$ is
+    binary, we have $E(Y_i|X_i)=Pr(Y_i=1|X_i)$.
+-   Retrospective studies are often considered because a prospective
+    study might take many years and is costly.
+-   In a retrospective study, subjects are recruited based on their
+    disease status. Let $z=1$ denote being sampled and $z=0$ otherwise.
+    Let $$\begin{aligned}
+    Pr(z=1|y=0) & = p_0\\
+    Pr(z=1|y=1) & = p_1
+    \end{aligned}
+    $$
+-   For a retrospective study, the logistic regression models
+    $Pr(y=1|z=1, x)$
+
+## Logistic Regression for Retrospective Studies
+
+-   Does this affect the interpretation of the parameters?
+-   Let $\theta=Pr(y=1|x)$ and $\phi=Pr(y=1|z=1, x)$. By Bayes' theorem
+    and assuming that $z$ does not dependent on $x$, 
+\tiny    
+    $$
+    \begin{aligned}
+    \phi &= Pr(y=1|z=1, x) \\
+    &= \frac{Pr(z=1|y=1,x)Pr(y=1|x)}
+    {Pr(z=1|y=1,x)Pr(y=1|x) + Pr(z=1|y=0,x)Pr(y=0|x)}\\
+    &= \frac{p_1\theta}{p_1\theta + p_0 (1-\theta)}
+    \end{aligned}
+    $$
+\normalsize    
+
+
+## Logistic Regression for Retrospective Studies
+
+-   Therefore $$
+    log(\frac{\phi}{1-\phi})=log(\frac{p_1\theta}{p_0(1-\theta)})=log(p_1/p_0) + log(\frac{\theta}{1-\theta})
+    $$
+
+-   The result suggests that, when using logistic regression,
+
+    -   the only difference between a prospective study and a
+        retrospective study would be the intercept.
+    -   the inference for the other parameters is still valid even
+        though the subjects were recruited based on their disease status
+        (such as a retrospective case-control study)
+
+## Logistic Regression
+
+-   How to obtain the maximum likelihood estimates (MLE) of the
+    parameters ($\beta_0, \cdots, \beta_p$)?
+    -   Iteratively re-weighted least squares (IRLS): the default method
+        used by R
+    -   The Newton-Raphson algorithm
+
+## The Motivating Example of Logistic Regression
+
+\tiny
+
+```{r, fig.height=3}
+alzh.glm = glm(alzh ~ age + female + educ+lhippo, family=binomial)
+par(mar = c(4, 4, 0.5, 0.5))
+plot(alzh, predict(alzh.glm, type="response")); abline(h=c(0,1), col=2)
+#More visualizaitons
+#https://blogs.uoregon.edu/rclub/2016/04/05/plotting-your-logistic-regression-models/
+```
+
+\normalsize
+
+## Interpreting a logistic regression
+
+\tiny
+
+```{r}
+summary(alzh.glm)$coefficients[-1,]
+```
+
+\normalsize
+
+## Interpreting a logistic regression
+
+-   What is the $\beta_0$ in a logistic regression?
+-   
+
+## Interpreting a logistic regression
+
+-   Consider the age variable. The estimated coefficient is 0.018138.
+    What information does it provide?
+-   The estimated log-odds AD for subject $i$ is (or add a constant
+    \textcolor{red}{determined by study design}, as the previous slides)
+    $$loigt(\hat\pi_i) = \hat\beta_0 + \hat\beta_{age} age_i + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
+-   Let $\tilde \pi_i$ denote estimated log-odds after one year
+    $$loigt(\tilde\pi_i) = \hat\beta_0 + \hat\beta_{age} (age_i+1) + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
+
+## Interpreting a logistic regression
+
+-   The estimated change in log-odds
+    $$logit(\tilde\pi_i) - logit(\hat\pi_i)=log\frac{\tilde \pi_i}{1-\tilde \pi_i} -log \frac{\hat \pi_i}{1-\hat \pi_i}=0.018138$$
+-   Take exponential of both sides, we have
+    $$\frac{\frac{\tilde \pi_i}{1-\tilde \pi_i}}{\frac{\hat \pi_i}{1-\hat \pi_i}} = exp(0.018138)$$
+-   The odds of AD in one year later is
+    $exp(0.018138)=$\textcolor{red}{1.018303 times} of the current odds.
+-   The estimated increase in odds of AD in a year is
+    $e^{0.018138}-1=1.8303\%$
+
+## Interpreting a logistic regression
+
+-   A $95\%$ confidence interval
+    -   First, obtain a $95\%$ C.I. for the difference in log-odds:
+        $(0.018138-1.96*0.004246, 0.018138+1.96*0.004246)=(0.00982, 0.0265)$
+    -   Then, we transform them to increase in odds:
+        $(e^{0.00982}-1, e^{0.0265}-1)=(0.99\%, 2.69\%)$
+
+## Interpreting a logistic regression
+
+-   What if we are interested in the increase in odds of AD in ten years
+    (everything else is fixed)?
+-   The estimated increase in odds of AD in 10 years is
+    $$e^{10*0.018138}-1=19.89\%$$
+-   A $95\%$ C.I. for 10-year increase in odds:
+
+\tiny
+
+```{r}
+exp(10*c(0.018138-1.96*0.004246, 0.018138+1.96*0.004246))-1
+```
+
+\normalsize
+
+i.e., $(10.3\%, 30.3\%)$
+
+## Interpreting a logistic regression
+
+-   Very often, we also want to know the significance of a variable
+    after adjusting for other important covariates?
+-   Does age show a significant effect after adjusting for gender,
+    education, and hippocampus volume?
+-   A test for $H_0: \beta_{age}=0$ using the Wald test (a type of
+    large-sample test)
+
+\tiny
+
+```{r}
+summary(alzh.glm)$coefficients["age",]
+```
+
+\normalsize
+
+-   Other tests, such as likelihood ratio test, can also be used
+
+## GLM
+
+-   Recall that we used the \underline{logit} link in the logistic
+    regression $$g(\pi_i)=logit(\pi_i)=\frac{\pi_i}{1-\pi_i},$$ where
+    $\pi_i=E(Y_i|X_i)$.
+-   How about LM? $g(\mu_i)=\mu_i$, i.e., LM uses the
+    \underline{identity} link
+-   Poisson $g(\lambda_i)=log(\lambda_i)$.
+    $Y_i|X_i \sim Poisson(\lambda_i)$.
+
+# Poisson Regression
+
+## Poisson Regression: The Model
+
+-   Poisson regression is often used to model count data
+-   Why are count data special?
+    -   Count data are non-negative
+    -   Count data take integer values
+-   Count data often violate the assumption of \`\`constant variance"
+    -   Count data often follow a Poisson distribution
+    -   Consider $K\sim Poisson(\lambda)$. $E(K)=?, Var(K)=, pmf$?
+
+## Poisson Regression: Motivating Example
+
+-   Neurons may \underline{fire} selectively for particular types of
+    stimuli
+-   To understand whether a neuron is a visual-selective neuron, 20
+    trials were run for each of the five image categories:
+    -   animal, fruit, kids, military, space
+-   In each trial, the number of spikes (the number of times that the
+    neuron fired) within a 1-second window was recorded
+
+## Poisson Regression
+
+\tiny
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+#https://www.ics.uci.edu/~zhaoxia/Data/chosen_neuron_data.csv
+chosen_neuron_data <- read_csv(
+  "https://www.ics.uci.edu/~zhaoxia/Data/chosen_neuron_data.csv")
+chosen_neuron_data <- chosen_neuron_data[, c(2:4)]
+dim(chosen_neuron_data)
+names(chosen_neuron_data)
+```
+
+\normalsize
+
+## Poisson Regression
+
+```{r}
+attach(chosen_neuron_data)
+# Even split of image categories among trials
+table(image_categ)
+sapply(split(n_spikes, image_categ), mean)
+```
+
+## Poisson Regression: Visualize the count data (by image category)
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# Plots -------------------------------------------------------------------
+library(tidyverse)
+library(gridExtra)
+library(grid)
+image_category_colors <- c("#D55E00", "#009E73", "#E69F00", "#56B4E9", "#CC79A7")
+
+# Spike counts per trial
+neuron_trial_plot <- chosen_neuron_data %>% 
+  mutate(ordered_trial_num = as.numeric(
+    factor(trial_number, levels = unique(trial_number[order(image_categ)]))
+    )) %>% 
+  ggplot(aes(ordered_trial_num + 0.5, n_spikes,
+             fill = image_categ)) +
+  geom_col() +
+  labs(y = "Total Spikes Detected\n(0.2 to 1.2 seconds after stimulus onset)", 
+       x = "Trial (sorted by image category)", 
+       fill = "Image Category") +
+  scale_fill_manual(values = image_category_colors) +
+  scale_y_continuous(breaks = seq(0, 10, by = 1), minor_breaks = NULL) +
+  scale_x_continuous(breaks = seq(0, 100, by = 20), minor_breaks = seq(0, 100)) +
+  coord_cartesian(expand = FALSE) +
+  theme_bw() +
+  theme(text = element_text(size = 10),
+        legend.position = "bottom")
+```
+
+```{r, fig.height=2, fig.width=4}
+neuron_trial_plot
+```
+
+## Poisson Regression
+
+\tiny
+
+```{r}
+# Fit generalized linear model 
+# Poisson GLM with the default log link function
+poisson_fit <- glm(n_spikes ~ image_categ-1, 
+                   data = chosen_neuron_data,
+                   family = poisson(link="log"))
+# Tabulate the coefficient estimates
+poisson_neuron_table <- summary(poisson_fit)$coefficients
+row.names(poisson_neuron_table)=c("Animal", "Fruit", 
+                                  "Kids", "Military", "Space")
+```
+
+\normalsize
+
+## Poission Regression: Model Summary
+
+\tiny
+
+```{r, tidy=TRUE}
+poisson_neuron_table
+```
+
+\normalsize
+
+## Poisson Regression: Visualize Observed v.s. Fitted
+
+```{r, message = FALSE, warning = FALSE, echo = FALSE}
+# Comparison of spike count distribution with Poisson fit
+poisson_dist_params <- chosen_neuron_data %>% 
+  mutate(image_categ_number = as.numeric(factor(image_categ)) - 3) %>% 
+  group_by(image_categ) %>% 
+  summarise(predicted_trial_counts = c(sapply(mean(n_spikes), 
+                                              function(x) {dpois(0:9, x)}) * 20),
+            spike_count = c(0:9) + unique(image_categ_number) * 0.1) %>% 
+  ungroup()
+
+# Spike counts per image category (vs Poisson fits)
+poisson_obs_fit_plt <- chosen_neuron_data %>% 
+  ggplot(aes(n_spikes, fill = image_categ)) +
+  geom_histogram(binwidth = 0.5, position = "dodge") +
+  geom_point(aes(spike_count, predicted_trial_counts, 
+                 color = "Poisson Distribution Fit"),
+             data = poisson_dist_params) +
+  labs(x = "Total Spikes Detected (0.2 to 1.2 seconds after stimulus onset)", 
+       y = "Number of Trials", fill = "Image Category", color = "") +
+  scale_fill_manual(values = image_category_colors, 
+                    guide = guide_legend(override.aes = list(shape = NA))) +
+  scale_color_manual(values = "black") +
+  scale_x_continuous(breaks = seq(0, 10), minor_breaks = NULL) +
+  scale_y_continuous(breaks = seq(0, 20, by = 4)) +
+  coord_cartesian(xlim = c(-0.5, NA), ylim = c(0, 20), expand = FALSE) +
+  theme_bw() +
+  theme(text = element_text(size = 14),
+        legend.position = "bottom")
+```
+
+```{r, fig.height=4}
+poisson_obs_fit_plt
+```
+
+## The Deviance of GLM object
+
+-   Next, we would like to discuss the significance of the image_categ
+    variable. To do so, we first look at the deviance of a GLM object
+-   The deviance of a GLM object obj is
+    $$2[log(L_{saturated})- log (L_{obj})]$$
+-   What is the null hypothesis of no visual-selection?
+    $$H_0: \beta_{Animal}=\beta_{Fruit}=\beta_{Kids}=\beta_{Military}=\beta_{Space}$$
+-   What is the d.f. in a likelihood ratio test (LRT)?
+
+## Poission Regression: The Overall Significance
+
+-   Consider two \underline{nested} models obj1 and obj2, the difference
+    in their deviances is $$2[log(L_{obj2}) - log(L_{obj1})],$$ which is
+    the LRT statistic.
+-   What is the saturated model?
+    -   Logistic: $\pi_i=y_i$ and $L_{saturated}=1$
+    -   Poisson: $\lambda_i = y_i$ and
+        $L_{saturated}= \prod_i \frac{y_i^{y_i}e^{-y_i}}{y_i!}$.
+
+## Poission Regression: The Overall Significance
+
+\tiny
+
+```{r}
+# Test for visual selectivity: Likelihood Ratio Test
+poisson_fit0 = glm(n_spikes ~1, data=chosen_neuron_data, family=poisson(link="log")) 
+anova(poisson_fit0, poisson_fit, test = "LRT")
+```
+
+\normalsize
+
+## Poission Regression: The Overall Significance
+
+\tiny
+
+```{r}
+# Test for visual selectivity: Rao's score test
+anova(poisson_fit0, poisson_fit, test = "Rao")
+```
+
+\normalsize
+
+## Poission Regression: The Overall Significance
+
+\tiny
+
+```{r}
+# Test for visual selectivity: Wald test. I will explain reparameterization in a few slides
+poisson_fit_repara <- glm(n_spikes ~ image_categ, data = chosen_neuron_data,
+                   family = poisson(link="log"))
+Wald.stat=poisson_fit_repara$coefficients[2:5] %*% 
+  solve (summary(poisson_fit_repara)$cov.unscaled[2:5,2:5]) %*% 
+  poisson_fit_repara$coefficients[2:5]
+1-pchisq(Wald.stat, df=4)
+```
+
+\normalsize
+
+## Poission Regression: Model Interpretation
+
+\tiny
+
+```{r}
+summary(poisson_fit)$coefficients
+```
+
+-   $\hat\beta_{Fruit}=1.2809$: What does it tell us?
+-   Recall that we used the log link \vspace{3cm}
+
+## Poission Regression: Model Interpretation
+
+-   Note that the model poisson_fit does not include $\beta_0$.
+-   That's why we can estimate $\beta_{Animal}$, $\beta_{Fruit}$,
+    $\beta_{Kids}$, $\beta_{Military}$, $\beta_{space}$.
+-   Question: how should we interprete the estimated coefficients if the
+    intercept term was included?
+    -   Try poisson_fit_repara \<- glm(n_spikes \~ image_categ, data =
+        chosen_neuron_data, family = poisson(link="log"))
+    -   Are the two models equivalent? (Lab activity)
+
+## Poisson Regression: Model Interpretation
+
+-   Re-parameterization
+
+```{r, message=FALSE, echo=FALSE}
+poisson_fit_repara <- glm(n_spikes ~ image_categ, data = chosen_neuron_data,
+                   family = poisson(link="log"))
+```
+
+-   Parameters:
+    -   poisson_fit:
+    -   poisson_fit_repara:
+-   Compare the summary of the two models:
+-   Are they different models? \vspace{2cm}
+
+## Parameterization 1: without intercept
+
+\tiny
+
+```{r}
+summary(poisson_fit)
+```
+
+\normalsize
+
+## Parameterization 2: with intercept
+
+\tiny
+
+```{r}
+summary(poisson_fit_repara)
+```
+
+\normalsize
+
+## Linear Functions of Parameters
+
+-   The Poisson regression we fit provides estimates of
+    $\beta_{Animal}$, $\beta_{Fruit}$, $\beta_{Kids}$,
+    $\beta_{Military}$, $\beta_{space}$, which are the log of the
+    Poisson rates
+-   What if we are interested in difference between specific groups?
+    e.g.,
+    -   $\beta_{Fruit}-\beta_{Animal}$
+    -   $\frac{\beta_{Fruit}+\beta_{Animal}+\beta_{Kids} +\beta_{Military} + \beta_{Space} }{5}$
+    -   $\beta_{Fruit}-\frac{\beta_{Animal}+\beta_{Kids} +\beta_{Military} + \beta_{Space} }{4}$
+-   They are linear functions of the coefficients, i.e., in the form of
+    $a^T \beta$, where $a$ is a 5-by-1 vector.
+
+## Linear Functions of Parameters
+
+-   LM/GLM provides not only estimated coefficients but also the
+    variance-covariance of the estimated covariates
+    -   Let $\hat\beta=c(\hat\beta_1, \cdots, \hat\beta_p)^T$
+    -   Let $\hat \Sigma$ denote the estimated variance-covariance of
+        $\hat\beta$
+    -   Let $a$ be linear coefficients \vspace{3cm}
+
+## Inference of Linear Functions of Parameters
+
+-   Consider a linear function : $a^T\beta$
+-   Estimate: $a^T\hat\beta$
+-   Variance of the estimate: $Var(a^T\hat\beta)=a^T\hat\Sigma a$
+-   Standard Error (SE): $s.e.(a^T\hat\beta)=\sqrt{a^T\hat\Sigma a}$
+-   A $95\%$ confidence interval:
+    $$(a^T\hat\beta - 1.96*s.e.(a^T\hat\beta), a^T\hat\beta + 1.96*s.e.(a^T\hat\beta))$$
+-   Z-value: $\frac{a^T\hat\beta- a^T\beta}{s.e.(a^T\hat\beta)}$
+
+## Inference of Linear Functions of Parameters: Example
+
+-   Parameter of interest:
+    $\frac{\beta_{Fruit}+\beta_{Animal}+\beta_{Kids} +\beta_{Military} + \beta_{Space} }{5}$
+
+\tiny
+
+```{r, message = FALSE, warning = FALSE, echo = TRUE}
+a=matrix(rep(1/5,5), 1)
+a%*%poisson_fit$coefficients #estimate
+sqrt(a%*%summary(poisson_fit)$cov.unscaled%*%t(a)) #s.e.
+```
+
+\normalsize
+
+## Linear Contrasts
+
+-   Linear contrasts are a special family of linear functions
+    \vspace{0.3cm}
+-   We say $a^T\beta=\sum_i a_i \beta_i$ is a linear contrast if
+    $\sum a_i=0$, where $a=(a_1, \cdots, a_p)^T$. \vspace{0.3cm}
+-   Often, we are interested in whether a linear contrast is zero, i.e.,
+    $H_0: a^T \beta=0$ \vspace{0.3cm}
+-   z-value: $\frac{a^T\hat\beta - 0 }{s.e.(a^T\hat\beta)}$
+
+## Linear Contrast (e.g., Fruit vs Animal)
+
+\tiny
+
+```{r,  message = FALSE, warning = FALSE, echo = TRUE}
+a <- matrix(c(-1, 1, 0, 0, 0), 1)
+#estimate
+fruit_animal_est = a%*%poisson_fit$coefficients
+#variance
+fruit_animal_var = a%*%summary(poisson_fit)$cov.unscaled%*%t(a)
+#z value
+print(fruit_animal_est/sqrt(fruit_animal_var))
+```
+
+\normalsize
+
+## Linear Contrast (e.g., Fruit vs Animal) with the multcomp package
+
+\tiny
+
+```{r,  message = FALSE, warning = FALSE, echo = TRUE}
+library(multcomp)
+a <- matrix(c(-1, 1, 0, 0, 0), 1)
+t <- glht(poisson_fit, linfct = a)
+summary(t)
+```
+
+\normalsize
+
+## Multinomial Logistic Regression
+
+\tiny
+
+```{r, message=FALSE}
+library(nnet)
+multinom(diagnosis ~ age + female + educ + lhippo + rhippo)
+```
+
+\normalsize
+
+## Other concerns
+
+-   Dispersion: under- or over-dispersion
+-   Zero-inflated Poisson Regression
+-   Model selection ...
+
+\tiny
+
+```{r, fig.height=3}
+hist(n_spikes)
+#Interested in how to fit a zero-inflated Poisson regression? See the link 
+#https://www.rdocumentation.org/packages/pscl/versions/1.5.5/topics/zeroinfl
+```
+
+\normalsize
+
+# The Assumption of Independence
+
+## Independent Observations
+
+-   The common assumption we have made in LM and GLM is that the
+    observations are independent with each other
+-   This is not always the case
+-   Examples: \vspace{3cm}
+
+## Independent Observations
+
+-   What is the consequence of ignoring data independence?
+    -   The damage is probably worse than violations of distributions
+    -   Fortunately, tools have been developed to account for data
+        dependence
+    -   Linear Mixed-Effects Model (LME)
+    -   Generalized Linear Mixed-Effects Model (GLMM)
