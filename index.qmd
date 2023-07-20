@@ -85,3 +85,9 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Topic               | Materials                                                                                                                                                                                                                          |
 |:-----------------------------------------------------|:-----------------|
 | Linear Models    | [`r fa(name = "desktop")`](week2-material/day08-linear-models/LinearModels.pdf) |
+
+## Day 9 - July 20
+
+| Topic               | Materials                                                                                                                                                                                                                          |
+|:-----------------------------------------------------|:-----------------|
+| Generalized Linear Models    | [`r fa(name = "desktop")`](week2-material/day09-glm/day09-GLM.pdf) |
