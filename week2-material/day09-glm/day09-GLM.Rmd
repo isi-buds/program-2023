@@ -289,15 +289,16 @@ summary(alzh.glm)$coefficients["age",]
 
 -   Other tests, such as likelihood ratio test, can also be used
 
+
+# GLM
+
 ## GLM
 
 -   Recall that we used the \underline{logit} link in the logistic
     regression $$g(\pi_i)=logit(\pi_i)=\frac{\pi_i}{1-\pi_i},$$ where
     $\pi_i=E(Y_i|X_i)$.
--   How about LM? $g(\mu_i)=\mu_i$, i.e., LM uses the
-    \underline{identity} link
--   Poisson $g(\lambda_i)=log(\lambda_i)$.
-    $Y_i|X_i \sim Poisson(\lambda_i)$.
+-   How about LM? $g(\mu_i)=\mu_i$, where $\mu_i=E(Y_i|X_i)$. LM uses the \underline{identity} link
+-   Poisson $g(\lambda_i)=log(\lambda_i)$, where $\lambda_i=E(Y_i|X_i)$, and $Y_i|X_i \sim Poisson(\lambda_i)$.
 
 # Poisson Regression
 
