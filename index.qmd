@@ -91,3 +91,4 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Topic               | Materials                                                                                                                                                                                                                          |
 |:-----------------------------------------------------|:-----------------|
 | Generalized Linear Models    | [`r fa(name = "desktop")`](week2-material/day09-glm/day09-GLM.pdf) |
+| Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.qmd)) |
