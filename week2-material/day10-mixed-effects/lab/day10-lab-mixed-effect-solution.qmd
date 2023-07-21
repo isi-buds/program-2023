@@ -1,0 +1,163 @@
+---
+title: "Day 10 Lab Solutions: Mixed Effect Models"
+format: 
+  html:
+    toc: true
+theme: cerulean
+editor: visual
+---
+
+## Example 1: pCREB immunoreactivity of mice with different treatments
+
+The response variable pCREB immunoreactivity is continuous so a logical conclusion could be to model the relationship between pCREB immunoreactivity and treatment group with a linear model. The issue, as we saw in lecture, is that there are repeated measurements on each mouse so a there is dependence among the data from the same mouse.
+
+Mixed effect models allow for the normal regression predictors we are familiar with, fixed effects $X\beta$, and random effects, $u_i$, to account for dependence.
+
+Adding a random intercept for each mouse would allow each mouse to be modeled with a different average pCREB immunoreactivity level.
+
+Adding a random slope for each mouse would allow for a different effect of treatment group on pCREB immunoreactivity for each mouse.
+
+In this example we expect similar pCREB immunoreactivity wihtin a treatment group, so a random slope is not necessary. But, we do expect variation in average pCREB immunoreactivity for each mouse so a random intercept would be appropriate.
+
+\begin{equation}
+  \begin{split}
+  &\text{pCREB immunoreactivity}_{ij} = \beta_0\\
+  &+ \beta_1 I(\text{treatment group}_{ij} = 2) + \beta_2 I(\text{treatment group}_{ij} = 3)\\ 
+  &+ \beta_3 I(\text{treatment group}_{ij} = 4) + \beta_4 I(\text{treatment group}_{ij} = 5)\\
+  &+ u_i + \epsilon_{ij}
+  \end{split}
+\end{equation} for $i = \text{mouse} = 1,...,24$ and $j = \text{neuron} = 1,...,n_i$ (not all mice have the same number of neurons measured).
+
+In this model our fixed effects are the treatment group. There were 5 treatment groups so group 1, the group observed at baseline, is chosen to be the reference group. This means the treatment group coefficients will estimate the change in expected value of pCREB immunoreactivity, with respect to the baseline group. A caveat in interpretation arises because we have the random intercept.
+
+Note when we take the expectation:
+
+\begin{equation}
+  \begin{split}
+  &E[\text{pCREB immunoreactivity}_{ij}] = \beta_0\\
+  &+ \beta_1 I(\text{treatment group}_{ij} = 2) + \beta_2 I(\text{treatment group}_{ij} = 3)\\ 
+  &+ \beta_3 I(\text{treatment group}_{ij} = 4) + \beta_4 I(\text{treatment group}_{ij} = 5)\\
+  &+ 0 + 0
+  \end{split}
+\end{equation} for $i = 1,...,24$ and $j = 1,...,n_i$, since $E[u_{i}] = 0$ and $E[\epsilon_{ij}] = 0$ by assumption.
+
+This means when we are interpreting it is with respect to the average mouse. So when interpreting the fixed effects in a mixed effect model, it is with respect to the average individual (i.e. $u_i= 0$).
+
+Correct interpretation of the treatment time coefficients:
+
+The $\hat{\beta_k}$, $k = 2,...,4$, will estimate the change in average value of pCREB immunoreactivity, with respect to the baseline, for the typical mouse.
+
+### 1a
+
+Let's start by reading in the data and setting the id variables as factors instead of numerical variables.
+
+```{r}
+# Note the suppressMessages()
+suppressMessages(library(tidyverse))
+
+mice_data_og <- read_csv(
+  "https://www.ics.uci.edu/~zhaoxia/Data/BeyondTandANOVA/Example1.txt", 
+  show_col_types = FALSE
+)
+
+mice_data <- mice_data_og %>% 
+  mutate(treatment_id = factor(treatment_idx)) %>% 
+  mutate(mouse_id = factor(midx)) %>% 
+  select(mouse_id, pcreb = res, treatment_id)
+
+mice_data
+```
+
+### 1b
+
+Fit the equation specified above using the `nlme` package. Note you may need to install the package by entering `install.packages("nlme")` into your console.
+
+**Solution**
+
+```{r}
+mice_lme <- nlme::lme(
+  pcreb ~ treatment_id, 
+  random = ~ 1|mouse_id,
+  data = mice_data
+  )
+```
+
+### 1c
+
+Group 3 consists of the mice measured 48 hours after being treated with ketamine. What is the estimate for the increase in average pCREB immunoreactivity from mice in the baseline group to mice in treatment group 3, for the typical mouse?
+
+**Solution**
+
+This is the definition of $\beta_2$ from our model defined above.
+
+```{r}
+mice_lme_summary <- summary(mice_lme)
+
+mice_group3_est <- as.numeric(mice_lme_summary$coefficients$fixed["treatment_id3"])
+```
+
+The estimate is the coeffieicent on treatment group 3, `r round(mice_group3_est, 3)`.
+
+### 1d
+
+Provide and interpret in context the estimated fixed effect coefficient for the group measured 1 week after treatment with ketimine.
+
+**Solution**
+
+This is actually the reverse of problem 1c, where I provided the interpretation and asked you to identify the coefficient.
+
+Group 5 consists of the mice measured 1 week after being treated with ketamine, so we are being asked to provide and interpret $\beta_4$.
+
+```{r}
+mice_group5_est <- as.numeric(mice_lme_summary$coefficients$fixed["treatment_id5"])
+```
+
+We estimate that mice measured 1 week after being treated have `r round(abs(mice_group5_est), 3)` lower pCREB immunoreactivity than the baseline group, on average, for the typical mouse.
+
+### 1e
+
+Use the `intervals` function from the `nlme` packag4e to compute the 95% confidence intervals for the fixed effects.
+
+**Solution**
+
+```{r}
+nlme::intervals(mice_lme)
+```
+
+### 1f
+
+So far we have interpreted everything at the population average level, similar to how we interpret the coefficients in lm and glm's. One advantage of a mixed effect model, as opposed to a Generalized Estimating Equation model (GEE), is the ability to predict at the individual level. This could be of interest if we cared about the study participants specifically, instead of intending to generalize the results. When predicting at the individual level we would include the estimated mouse specific mean $u_i$ for that mouse.
+
+## 2 Expanding our model table
+
+Fill in the missing cells in the table below.
+
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Data scenario                                     | Model name                                   | Model equation (with 1 predictor)                       | Interpretation of predictor coefficient                                                                                      |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   | (and model class)                            |                                                         |                                                                                                                              |
++===================================================+==============================================+=========================================================+==============================================================================================================================+
+| Continuous response variable                      | Linear model                                 | $E[Y_i] = \beta_0 + \beta_1 X_i$                        | $\beta_1$ is the expected change in $Y$ for a one unit increase in $X$.                                                      |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   | (LM)                                         |                                                         |                                                                                                                              |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Binary response variable                          | Logistic regression (GLM)                    | $log(\frac{\pi_i}{1 - \pi_i}) = \beta_0 + \beta_1 X_i$  | $\beta_1$ is the change in log odds for a one unit increase in $X$.                                                          |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   |                                              |                                                         | $e^{\beta_1}$ is the odds ratio for a one unit increase in $X$.                                                              |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   |                                              |                                                         | $e^{\beta_1} -1$ is the percent increase/decrease in odds for a one unit increase in $X$.                                    |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Count data as response variable                   | Poisson regression (GLM)                     | $\log(\lambda_i) = \beta_0 + \beta_1 X$                 | $\beta_1$ is the log rate ratio (or relative risk or multiplicative change in risk) for a one unit increase in $X$.          |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   |                                              |                                                         | $e^{\beta_1}$ is the rate ratio for a one unit increase in $X$.                                                              |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Categorical (3+) response variable                | Multinomial logistic regression (GLM)        | Let's not worry about it...                             | Each category level of the model is interpreted as if it is a logistic regression, with respect to the same reference group. |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Continuous response variable with correlated data | Linear mixed effect model (LME)              | $$                                                      | Same as with a linear model but for a "typical individual"                                                                   |
+|                                                   |                                              | Y_{ij} = \beta_0 + \beta_1 X_{ij} + u_i + \epsilon_{ij} |                                                                                                                              |
+|                                                   |                                              | $$                                                      |                                                                                                                              |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Discrete response variable with correlated data   | Generalized linear mixed effect model (GLMM) | Depends on link function                                | Same as with a glm but for a "typical individual"                                                                            |
+|                                                   |                                              |                                                         |                                                                                                                              |
+|                                                   | (could be logistic, poisson, etc.)           |                                                         |                                                                                                                              |
++---------------------------------------------------+----------------------------------------------+---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+

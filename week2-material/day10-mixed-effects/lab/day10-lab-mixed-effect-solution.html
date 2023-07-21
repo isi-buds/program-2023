@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Day 10 Lab Solutions: Mixed Effect Models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="day10-lab-mixed-effect-solution_files/libs/clipboard/clipboard.min.js"></script>
+<script src="day10-lab-mixed-effect-solution_files/libs/quarto-html/quarto.js"></script>
+<script src="day10-lab-mixed-effect-solution_files/libs/quarto-html/popper.min.js"></script>
+<script src="day10-lab-mixed-effect-solution_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="day10-lab-mixed-effect-solution_files/libs/quarto-html/anchor.min.js"></script>
+<link href="day10-lab-mixed-effect-solution_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="day10-lab-mixed-effect-solution_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="day10-lab-mixed-effect-solution_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="day10-lab-mixed-effect-solution_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="day10-lab-mixed-effect-solution_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#example-1-pcreb-immunoreactivity-of-mice-with-different-treatments" id="toc-example-1-pcreb-immunoreactivity-of-mice-with-different-treatments" class="nav-link active" data-scroll-target="#example-1-pcreb-immunoreactivity-of-mice-with-different-treatments">Example 1: pCREB immunoreactivity of mice with different treatments</a>
+  <ul class="collapse">
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a">1a</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b">1b</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c">1c</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d">1d</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e">1e</a></li>
+  <li><a href="#f" id="toc-f" class="nav-link" data-scroll-target="#f">1f</a></li>
+  </ul></li>
+  <li><a href="#expanding-our-model-table" id="toc-expanding-our-model-table" class="nav-link" data-scroll-target="#expanding-our-model-table">2 Expanding our model table</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Day 10 Lab Solutions: Mixed Effect Models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="example-1-pcreb-immunoreactivity-of-mice-with-different-treatments" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-pcreb-immunoreactivity-of-mice-with-different-treatments">Example 1: pCREB immunoreactivity of mice with different treatments</h2>
+<p>The response variable pCREB immunoreactivity is continuous so a logical conclusion could be to model the relationship between pCREB immunoreactivity and treatment group with a linear model. The issue, as we saw in lecture, is that there are repeated measurements on each mouse so a there is dependence among the data from the same mouse.</p>
+<p>Mixed effect models allow for the normal regression predictors we are familiar with, fixed effects <span class="math inline">\(X\beta\)</span>, and random effects, <span class="math inline">\(u_i\)</span>, to account for dependence.</p>
+<p>Adding a random intercept for each mouse would allow each mouse to be modeled with a different average pCREB immunoreactivity level.</p>
+<p>Adding a random slope for each mouse would allow for a different effect of treatment group on pCREB immunoreactivity for each mouse.</p>
+<p>In this example we expect similar pCREB immunoreactivity wihtin a treatment group, so a random slope is not necessary. But, we do expect variation in average pCREB immunoreactivity for each mouse so a random intercept would be appropriate.</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{split}
+  &amp;\text{pCREB immunoreactivity}_{ij} = \beta_0\\
+  &amp;+ \beta_1 I(\text{treatment group}_{ij} = 2) + \beta_2 I(\text{treatment group}_{ij} = 3)\\
+  &amp;+ \beta_3 I(\text{treatment group}_{ij} = 4) + \beta_4 I(\text{treatment group}_{ij} = 5)\\
+  &amp;+ u_i + \epsilon_{ij}
+  \end{split}
+\end{equation}\]</span> for <span class="math inline">\(i = \text{mouse} = 1,...,24\)</span> and <span class="math inline">\(j = \text{neuron} = 1,...,n_i\)</span> (not all mice have the same number of neurons measured).</p>
+<p>In this model our fixed effects are the treatment group. There were 5 treatment groups so group 1, the group observed at baseline, is chosen to be the reference group. This means the treatment group coefficients will estimate the change in expected value of pCREB immunoreactivity, with respect to the baseline group. A caveat in interpretation arises because we have the random intercept.</p>
+<p>Note when we take the expectation:</p>
+<p><span class="math display">\[\begin{equation}
+  \begin{split}
+  &amp;E[\text{pCREB immunoreactivity}_{ij}] = \beta_0\\
+  &amp;+ \beta_1 I(\text{treatment group}_{ij} = 2) + \beta_2 I(\text{treatment group}_{ij} = 3)\\
+  &amp;+ \beta_3 I(\text{treatment group}_{ij} = 4) + \beta_4 I(\text{treatment group}_{ij} = 5)\\
+  &amp;+ 0 + 0
+  \end{split}
+\end{equation}\]</span> for <span class="math inline">\(i = 1,...,24\)</span> and <span class="math inline">\(j = 1,...,n_i\)</span>, since <span class="math inline">\(E[u_{i}] = 0\)</span> and <span class="math inline">\(E[\epsilon_{ij}] = 0\)</span> by assumption.</p>
+<p>This means when we are interpreting it is with respect to the average mouse. So when interpreting the fixed effects in a mixed effect model, it is with respect to the average individual (i.e.&nbsp;<span class="math inline">\(u_i= 0\)</span>).</p>
+<p>Correct interpretation of the treatment time coefficients:</p>
+<p>The <span class="math inline">\(\hat{\beta_k}\)</span>, <span class="math inline">\(k = 2,...,4\)</span>, will estimate the change in average value of pCREB immunoreactivity, with respect to the baseline, for the typical mouse.</p>
+<section id="a" class="level3">
+<h3 class="anchored" data-anchor-id="a">1a</h3>
+<p>Let’s start by reading in the data and setting the id variables as factors instead of numerical variables.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note the suppressMessages()</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressMessages</span>(<span class="fu">library</span>(tidyverse))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mice_data_og <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://www.ics.uci.edu/~zhaoxia/Data/BeyondTandANOVA/Example1.txt"</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>mice_data <span class="ot">&lt;-</span> mice_data_og <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">treatment_id =</span> <span class="fu">factor</span>(treatment_idx)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mouse_id =</span> <span class="fu">factor</span>(midx)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(mouse_id, <span class="at">pcreb =</span> res, treatment_id)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>mice_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,200 × 3
+   mouse_id pcreb treatment_id
+   &lt;fct&gt;    &lt;dbl&gt; &lt;fct&gt;       
+ 1 1        1.63  1           
+ 2 1        0.970 1           
+ 3 1        0.518 1           
+ 4 1        0.303 1           
+ 5 1        0.582 1           
+ 6 1        0.500 1           
+ 7 1        0.732 1           
+ 8 1        0.980 1           
+ 9 1        0.897 1           
+10 1        0.508 1           
+# ℹ 1,190 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="b" class="level3">
+<h3 class="anchored" data-anchor-id="b">1b</h3>
+<p>Fit the equation specified above using the <code>nlme</code> package. Note you may need to install the package by entering <code>install.packages("nlme")</code> into your console.</p>
+<p><strong>Solution</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mice_lme <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  pcreb <span class="sc">~</span> treatment_id, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">|</span>mouse_id,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> mice_data</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="c" class="level3">
+<h3 class="anchored" data-anchor-id="c">1c</h3>
+<p>Group 3 consists of the mice measured 48 hours after being treated with ketamine. What is the estimate for the increase in average pCREB immunoreactivity from mice in the baseline group to mice in treatment group 3, for the typical mouse?</p>
+<p><strong>Solution</strong></p>
+<p>This is the definition of <span class="math inline">\(\beta_2\)</span> from our model defined above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mice_lme_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(mice_lme)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mice_group3_est <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(mice_lme_summary<span class="sc">$</span>coefficients<span class="sc">$</span>fixed[<span class="st">"treatment_id3"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The estimate is the coeffieicent on treatment group 3, 0.843.</p>
+</section>
+<section id="d" class="level3">
+<h3 class="anchored" data-anchor-id="d">1d</h3>
+<p>Provide and interpret in context the estimated fixed effect coefficient for the group measured 1 week after treatment with ketimine.</p>
+<p><strong>Solution</strong></p>
+<p>This is actually the reverse of problem 1c, where I provided the interpretation and asked you to identify the coefficient.</p>
+<p>Group 5 consists of the mice measured 1 week after being treated with ketamine, so we are being asked to provide and interpret <span class="math inline">\(\beta_4\)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mice_group5_est <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(mice_lme_summary<span class="sc">$</span>coefficients<span class="sc">$</span>fixed[<span class="st">"treatment_id5"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We estimate that mice measured 1 week after being treated have 0.32 lower pCREB immunoreactivity than the baseline group, on average, for the typical mouse.</p>
+</section>
+<section id="e" class="level3">
+<h3 class="anchored" data-anchor-id="e">1e</h3>
+<p>Use the <code>intervals</code> function from the <code>nlme</code> packag4e to compute the 95% confidence intervals for the fixed effects.</p>
+<p><strong>Solution</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>nlme<span class="sc">::</span><span class="fu">intervals</span>(mice_lme)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Approximate 95% confidence intervals
+
+ Fixed effects:
+                    lower       est.     upper
+(Intercept)    0.61538221  1.0006729 1.3859636
+treatment_id2  0.21448705  0.8194488 1.4244105
+treatment_id3  0.09185394  0.8429473 1.5940406
+treatment_id4 -0.56073264  0.1898432 0.9404191
+treatment_id5 -0.95697221 -0.3199877 0.3169969
+
+ Random Effects:
+  Level: mouse_id 
+                    lower      est.     upper
+sd((Intercept)) 0.3699472 0.5127092 0.7105627
+
+ Within-group standard error:
+    lower      est.     upper 
+0.5757893 0.5995358 0.6242617 </code></pre>
+</div>
+</div>
+</section>
+<section id="f" class="level3">
+<h3 class="anchored" data-anchor-id="f">1f</h3>
+<p>So far we have interpreted everything at the population average level, similar to how we interpret the coefficients in lm and glm’s. One advantage of a mixed effect model, as opposed to a Generalized Estimating Equation model (GEE), is the ability to predict at the individual level. This could be of interest if we cared about the study participants specifically, instead of intending to generalize the results. When predicting at the individual level we would include the estimated mouse specific mean <span class="math inline">\(u_i\)</span> for that mouse.</p>
+</section>
+</section>
+<section id="expanding-our-model-table" class="level2">
+<h2 class="anchored" data-anchor-id="expanding-our-model-table">2 Expanding our model table</h2>
+<p>Fill in the missing cells in the table below.</p>
+<table class="table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data scenario</th>
+<th><p>Model name</p>
+<p>(and model class)</p></th>
+<th>Model equation (with 1 predictor)</th>
+<th>Interpretation of predictor coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Continuous response variable</td>
+<td><p>Linear model</p>
+<p>(LM)</p></td>
+<td><span class="math inline">\(E[Y_i] = \beta_0 + \beta_1 X_i\)</span></td>
+<td><span class="math inline">\(\beta_1\)</span> is the expected change in <span class="math inline">\(Y\)</span> for a one unit increase in <span class="math inline">\(X\)</span>.</td>
+</tr>
+<tr class="even">
+<td>Binary response variable</td>
+<td>Logistic regression (GLM)</td>
+<td><span class="math inline">\(log(\frac{\pi_i}{1 - \pi_i}) = \beta_0 + \beta_1 X_i\)</span></td>
+<td><p><span class="math inline">\(\beta_1\)</span> is the change in log odds for a one unit increase in <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(e^{\beta_1}\)</span> is the odds ratio for a one unit increase in <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(e^{\beta_1} -1\)</span> is the percent increase/decrease in odds for a one unit increase in <span class="math inline">\(X\)</span>.</p></td>
+</tr>
+<tr class="odd">
+<td>Count data as response variable</td>
+<td>Poisson regression (GLM)</td>
+<td><span class="math inline">\(\log(\lambda_i) = \beta_0 + \beta_1 X\)</span></td>
+<td><p><span class="math inline">\(\beta_1\)</span> is the log rate ratio (or relative risk or multiplicative change in risk) for a one unit increase in <span class="math inline">\(X\)</span>.</p>
+<p><span class="math inline">\(e^{\beta_1}\)</span> is the rate ratio for a one unit increase in <span class="math inline">\(X\)</span>.</p></td>
+</tr>
+<tr class="even">
+<td>Categorical (3+) response variable</td>
+<td>Multinomial logistic regression (GLM)</td>
+<td>Let’s not worry about it…</td>
+<td>Each category level of the model is interpreted as if it is a logistic regression, with respect to the same reference group.</td>
+</tr>
+<tr class="odd">
+<td>Continuous response variable with correlated data</td>
+<td>Linear mixed effect model (LME)</td>
+<td><span class="math display">\[
+Y_{ij} = \beta_0 + \beta_1 X_{ij} + u_i + \epsilon_{ij}
+\]</span></td>
+<td>Same as with a linear model but for a “typical individual”</td>
+</tr>
+<tr class="even">
+<td>Discrete response variable with correlated data</td>
+<td><p>Generalized linear mixed effect model (GLMM)</p>
+<p>(could be logistic, poisson, etc.)</p></td>
+<td>Depends on link function</td>
+<td>Same as with a glm but for a “typical individual”</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
