@@ -58,6 +58,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 |:---------------------------------------------|:------------------------|
 | Likelihood and Monte Carlo Inference |                                                                                                                                                                                                                              |
 | Lab: Monte Carlo Integration         | Solution HTML file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.qmd)) |
+| Project 1 intro | |
 
 ## Day 6 - July 17
 
@@ -98,3 +99,4 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Topic               | Materials                                                                                                                                                                                                                          |
 |:-----------------------------------------------------|:-----------------|
 | Mixed Effect Models    | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/day10-mixedeffects.pdf) |
+| Project 3 intro | |
