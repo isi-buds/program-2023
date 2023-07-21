@@ -222,20 +222,16 @@ summary(alzh.glm)$coefficients[-1,]
 
 \normalsize
 
-## Interpreting a logistic regression
-
--   What is the $\beta_0$ in a logistic regression?
--   
 
 ## Interpreting a logistic regression
 
 -   Consider the age variable. The estimated coefficient is 0.018138.
     What information does it provide?
 -   The estimated log-odds AD for subject $i$ is (or add a constant
-    \textcolor{red}{determined by study design}, as the previous slides)
-    $$loigt(\hat\pi_i) = \hat\beta_0 + \hat\beta_{age} age_i + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
+    \textcolor{red}{determined by study design}, see the slides about retrospective studies)
+    $$logit(\hat\pi_i) = \hat\beta_0 + \hat\beta_{age} age_i + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
 -   Let $\tilde \pi_i$ denote estimated log-odds after one year
-    $$loigt(\tilde\pi_i) = \hat\beta_0 + \hat\beta_{age} (age_i+1) + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
+    $$logit(\tilde\pi_i) = \hat\beta_0 + \hat\beta_{age} (age_i+1) + \hat\beta_2 female_i + \hat\beta_3 educ_i + \hat\beta_4 lhippo_i$$
 
 ## Interpreting a logistic regression
 
@@ -293,15 +289,16 @@ summary(alzh.glm)$coefficients["age",]
 
 -   Other tests, such as likelihood ratio test, can also be used
 
+
+# GLM
+
 ## GLM
 
 -   Recall that we used the \underline{logit} link in the logistic
     regression $$g(\pi_i)=logit(\pi_i)=\frac{\pi_i}{1-\pi_i},$$ where
     $\pi_i=E(Y_i|X_i)$.
--   How about LM? $g(\mu_i)=\mu_i$, i.e., LM uses the
-    \underline{identity} link
--   Poisson $g(\lambda_i)=log(\lambda_i)$.
-    $Y_i|X_i \sim Poisson(\lambda_i)$.
+-   How about LM? $g(\mu_i)=\mu_i$, where $\mu_i=E(Y_i|X_i)$. LM uses the \underline{identity} link
+-   Poisson $g(\lambda_i)=log(\lambda_i)$, where $\lambda_i=E(Y_i|X_i)$, and $Y_i|X_i \sim Poisson(\lambda_i)$.
 
 # Poisson Regression
 
@@ -522,7 +519,7 @@ summary(poisson_fit)$coefficients
 -   Note that the model poisson_fit does not include $\beta_0$.
 -   That's why we can estimate $\beta_{Animal}$, $\beta_{Fruit}$,
     $\beta_{Kids}$, $\beta_{Military}$, $\beta_{space}$.
--   Question: how should we interprete the estimated coefficients if the
+-   Question: how should we interpret the estimated coefficients if the
     intercept term was included?
     -   Try poisson_fit_repara \<- glm(n_spikes \~ image_categ, data =
         chosen_neuron_data, family = poisson(link="log"))
