@@ -191,7 +191,7 @@ summary(lm(res~treatment_idx, data=Ex1))
 
 \tiny
 ```{r}
-treatment=rep(1:5, c(7,6,3,3,5))
+treatment=as.factor(rep(1:5, c(7,6,3,3,5)))
 ncell=sapply(split(Ex1, Ex1$midx), dim)[1,]
 #generate pseudo (permuted) 1000 times by randomly 
 #shuffling the treatment labels across mice
@@ -199,7 +199,7 @@ pvalues=rep(NA, 1000)#initialize a vector of p-values
 for(i in 1:1000) {
   Ex1.perm = data.frame(res=Ex1$res, 
                         treatment_idx=rep(sample(treatment),ncell), midx=Ex1$midx)
-  pvalues[i]=summary(lm(res~treatment_idx, data=Ex1.perm))$coefficients[2,4] }
+  pvalues[i]=anova(lm(res~treatment_idx, data=Ex1.perm))$"Pr(>F)"[1] }
 ```
 \normalsize
 
@@ -343,7 +343,7 @@ Y_{ij} &= \beta_0 + x_{ij,1}\beta_1 + … + x_{ij,4}\beta_4 + z_{ij,1}u_1 + … 
     -   random errors: $\mathbf \epsilon \sim N(0, \sigma^2 \mathbf I)$,
         independent with $\mathbf u$.
 
-## GLM
+## GLM and GLMM
 
 -   The components of GLM:
     -   a linear predictor $X\beta$
