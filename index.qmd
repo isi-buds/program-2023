@@ -101,3 +101,10 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Mixed Effect Models    | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/day10-mixedeffects.pdf) |
 | Project 3 intro | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/Introduction to Project 3_ Colorectal Cancer and Serum Metabolic Profiling.pdf) |
 | Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.html) (Qmd file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.qmd)) |
+
+## Day 11 - July 24
+
+| Topic               | Materials                                                                                                                                                                                                                          |
+|:-----------------------------------------------------|:-----------------|
+| Goals of Statistics | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture1_RoleOfStatistics.pdf) |
+| Covariate Adjustment | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture2_adjustment.pdf) |
