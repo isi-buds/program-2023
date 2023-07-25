@@ -106,7 +106,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Topic                  | Materials                                                                                         |
 |:----------------|:------------------------------------------------------|
 | Goals of Statistics    | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture1_RoleOfStatistics.pdf) |
-| Data analysis plab lab | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/ISIBUDS_UWSalaryLab.pdf)          |
+| Data analysis plan lab | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/ISIBUDS_UWSalaryLab.pdf)          |
 
 ## Day 12 - July 25
 
@@ -116,3 +116,4 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | FEV data               | [`r fa(name = "file")`](week3-material/day12-adjustment/fev.raw)                          |
 | FEV R Script           | [`r fa(name = "file")`](week3-material/day12-adjustment/ISI_BUDS_Adjustment_FEV.R)        |
 | Prediction    | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture3_Prediction_Pt1.pdf) |
+| Data analysis lab data | [`r fa(name = "file")`](week3-material/day12-adjustment/salary95.txt)          
