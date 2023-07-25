@@ -1,0 +1,734 @@
+---
+title: "Linear Models"
+author: "Zhaoxia Yu"
+format: 
+  revealjs:
+    theme: blood
+    menu:
+      side: right
+      slide-number: c/t
+      show-slide-number: all
+editor: visual
+---
+
+# Learning Objectives
+
+-   Simple linear regression
+
+    -   Interpretation of (estimated) parameters
+
+    -   Outliers
+
+-   Multiple linear regression
+
+-   Design matrices
+
+-   Theory of Linear Models
+
+# Simple Linear Regression
+
+## Simple Linear Regression
+
+-   Simple linear regression is the regression model with only one explanatory variable.
+
+-   It can be used to assess the linear relationship between two variables. Example, age and hippocampus volume in healthy subjects
+
+```{r}
+#| code-fold: true
+#| fig-align: center
+
+library(ggplot2)
+alzheimer=read.csv("alzheimer_data.csv", header = TRUE)
+alzheimer$female=as.factor(alzheimer$female)
+alzheimer$diagnosis=as.factor(alzheimer$diagnosis)
+alzheimer0=alzheimer[alzheimer$diagnosis=="0" & alzheimer$age>35,]
+alzheimer0=data.frame(alzheimer0, hippo=alzheimer0$lhippo+alzheimer0$rhippo)
+ggplot(alzheimer0, aes(x=age, y=hippo))+geom_point()
+```
+
+## Simple Linear Regression
+
+-   $y_i=\beta_0 + \beta_1 x_i + \epsilon_i, i=1, \cdots, n$
+
+    -   $\beta_0$ is the intercept. It is the expected value when $x=0$.
+
+    -   $\beta_1$ is the slope. It is the expected change of the response variable when $x$ increases by 1 (unit).
+
+    -   $\epsilon_i$ is assumed to have mean 0.
+
+-   The least squares fit minimizes the sum of squared errors, i.e., $\hat\beta_0$ and $\hat\beta_1$ are obtained by minimizing
+
+    $$\sum_{i=1}^n (y_i - \beta_0 -\beta_1 x_i)^2$$
+
+## The Fitted Line Using Least Squares Estimate
+
+-   The LSE of $\beta_0, \beta_1$ is:
+    -   $b_0=\hat\beta_0=\bar{y}-b_1\bar{x}$
+    -   $b_1=\hat\beta_1=\dfrac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2}$
+-   There are alternative ways to express $\hat\beta_1$. Please verify the following
+    -   $\hat\beta_1=\dfrac{\sum_{i=1}^{n}x_i y_i - n \bar x \bar y}{\sum_{i=1}^n x_i^2 - n\bar x^2}=r_{xy}\dfrac{s_y}{s_x}$ where
+    -   $r_{x,y}$ is the sample correlation coefficient between $x$ and $y$ , $s_x$ and $s_y$ are the sample standard deviation
+
+## Example: LSE and the Fitted Line
+
+```{r}
+#| echo: true
+obj=lm(hippo~age, data=alzheimer0)
+coef(obj) #alternatively: obj$coefficients
+```
+
+```{r}
+#| fig-align: center
+#| code-fold: true
+ggplot(alzheimer0, aes(x = age, y = hippo)) + 
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE)
+```
+
+The fitted line is $hippo = 8.29 - 0.027 \times age$
+
+For each added year, the hippocampus size decreased by 0.027 (cc)
+
+## Model Assumptions
+
+-   $y_i=\beta_0 + \beta_1 x_i + \epsilon_i, i=1, \cdots, n$
+-   $E(\epsilon_i)=0$
+-   The $n$ observations are independent
+-   Reasonally large $n$ or normality assumption: $\epsilon_i \sim N(0, \sigma^2)$
+
+## Residuals
+
+-   $e_i = y_i - \hat y_i$ where $\hat y_i = \hat\beta_0 + \hat \beta_1 x_i$
+-   Residual sum of squares (RSS): $RSS=\sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i -\hat y_i)^2$
+-   An unbiased estimate of $\sigma^2$ is $s^2$: $$s^2= \frac{RSS}{n-2}$$
+
+## Standard Error and Confidence Interval
+
+-   The standard error of $\hat\beta_1$ is $$se(\hat \beta_1)=\frac{\sqrt{s^2}}{\sqrt{\sum (x_i - \bar{x})^2}}$$
+
+-   A $100(1-\alpha)\%$ confidence interval for $\beta_1$ is $$\hat\beta_1 \pm t_{\alpha / 2, n - 2} se(\hat\beta_1)$$
+
+## t and p-value
+
+```{r}
+#| echo: true
+summary(obj)
+confint(obj)
+```
+
+## Estimation vs Prediction
+
+-   Estimate $E(y|x=x_h)=\beta_0 + \beta_1 x_h$
+    -   The estimate is $\hat\beta_0 + \hat\beta_1 x_h$
+    -   Confidence interval:
+
+$$\hat{y}_h \pm t_{\alpha / 2, n - 2} \sqrt{s^2 \left(\frac{1}{n} + \frac{(x_h - \bar{x})^2}{\sum(x_i - \bar{x}^2)} \right)}$$
+
+-   Predict the response value when $x=x_h$
+    -   The prediction is $\hat y_h = \hat\beta_0 + \hat\beta_1 x_h$
+    -   Prediction interval: $$\hat{y}_h \pm t_{\alpha / 2, n - 2} \sqrt{s^2 \left(1 + \frac{1}{n} + \frac{(x_h - \bar{x})^2}{\sum(x_i - \bar{x}^2)} \right)}$$
+
+## Example: Estimation vs Prediction
+
+```{r}
+#| echo: TRUE
+predict(obj, newdata = data.frame(age=44), interval = 'confidence')
+predict(obj, newdata = data.frame(age=44), interval = 'predict')
+```
+
+## Outliers
+
+**Outliers** are points that do not follow the general pattern of the majority of the data.
+
+-   **Leverage points** are also called x-outliers.
+
+-   **Influential Outliers:** These are data points that, when removed, lead to a significant change in the regression model. They can drastically affect the slope and intercept of the regression line.
+
+-   Residuals ($e_i=y_i - \hat y_i, i=1, \cdots, n$) and their standardized versions are often used to visually inspect assumptions.
+
+-   **Outliers** often have large residuals. Residual plots can be used to visually detect these outliers. An observation with a residual significantly larger or smaller than the other residuals may be an outlier.
+
+## Outliers: Examples
+
+![](images/image-1452328645.png)
+
+## Model Diagnostics
+
+-   **Linearity**: The relationship between predictors and response is linear. Violation seen when residuals display a systematic pattern.
+-   **Independence**: The residuals are independent. Violation seen when residuals display trends over time or space.
+-   **Homoscedasticity**: The variance of the residuals is constant. Violation seen when residuals show a "funnel" shape pattern.
+-   **Normality**: The residuals are normally distributed. Violation seen when residuals don't follow a bell-shaped pattern in a histogram or a straight line on a Q-Q plot.
+
+# Multiple Linear Regression
+
+## Motivating Example
+
+-   Are healthy men and women differ in hippocampus volume?
+
+```{r}
+#| echo: TRUE
+ggplot(alzheimer0, aes(x=female, y=hippo, color=female)) + geom_boxplot() +
+  labs(x = "gender") 
+summary(lm(hippo~female, data=alzheimer0))
+```
+
+## Can the difference be explained by height?
+
+-   Men have larger hippocampus volume
+
+```{r}
+#| echo: TRUE
+ggplot(alzheimer0, aes(x=height, y=hippo, color=female))+geom_point()
+summary(lm(hippo ~ height + female, data=alzheimer0))
+```
+
+-   The **adjusted** difference between men and women is much smaller
+
+## Do Men and Women have the same hippo\~height relationship?
+
+```{r}
+#| echo: TRUE
+ggplot(alzheimer0, aes(x=height, y=hippo, color=female))+
+  geom_point()+
+  geom_smooth(method=lm, se=F)
+```
+
+## Do Men and Women have the same hippo\~height relationship?
+
+```{r}
+#| echo: TRUE
+summary(lm(hippo ~ height* female, data=alzheimer0))
+```
+
+## Compare two Linear Models
+
+```{r}
+#| echo: true
+#| code-fold: true
+obj0=lm(hippo ~ height, data=alzheimer0)
+obj1=lm(hippo ~ height* female, data=alzheimer0)
+anova(obj0, obj1)
+```
+
+## Interpret Interactions
+
+-   Do men and women shrink brain in the same speed?
+
+```{r}
+#| echo: true
+#| code-fold: true
+ggplot(alzheimer0, aes(x=age, y=hippo, color=female))+
+  geom_point()+
+  geom_smooth(method=lm, se=F)
+```
+
+## Interpret Interactions
+
+```{r}
+#| echo: true
+#| code-fold: true
+summary(lm(lhippo~ age*female, data=alzheimer0))
+```
+
+## Interpret Interactions
+
+-   The estimated brain shrinking speed for men is 0.017cc per year
+-   The estimated brain shrinking speed for women is 0.013cc per year
+-   The result about the interaction item indicates that the difference in brain shrinking speed between men and women is 0.005cc per year and it is statistically significant
+
+## Interpret transformed data
+
+-   Weight is a little bit skewed. Regress hippocampus volume on log(weight). How to interpret the results?
+```{r}
+#| echo: true
+#| code-fold: true
+#plot(log(alzheimer0$weight), alzheimer0$hippo, xlab="weight", ylab="log(weight)")
+summary(lm(hippo~log(weight), data=alzheimer0))
+```
+
+
+## Interpret transformed data
+
+- Regress log(weight) on height. How to interpret the results?
+```{r}
+#| echo: true
+#| code-fold: true
+#plot(alzheimer0$height, log(alzheimer0$weight), xlab="height", ylab="log(weight)")
+summary(lm(log(weight)~height, data=alzheimer0))
+```
+
+
+
+
+
+# Linear Models Are a Unified Tool
+
+## Conduct t-test Using LM
+
+```{r}
+#| echo: true
+#| code-fold: true
+t.test(hippo~female, data=alzheimer0)
+summary(lm(hippo~female, data=alzheimer0))
+```
+
+## Conduct ANOVA Using LM
+
+```{r}
+#| echo: TRUE
+#| code-fold: true
+summary(aov(lhippo~diagnosis, data=alzheimer))
+summary(lm(lhippo~diagnosis, data=alzheimer))
+#anova(lm(lhippo~diagnosis, data=alzheimer))
+```
+
+# Design Matrix
+
+-   Definition: The design matrix, often denoted as $\mathbf X$, is a matrix of observed data in which each row represents an observation, and each column corresponds to a predictor or independent variable in the linear model.
+
+-   Matrix format: $\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}$:
+
+    -   $\mathbf Y$ is the $n\times 1$ response vector.
+    -   $\mathbf X$ is the $n\times p$ design matrix.
+    -   $\boldsymbol{\beta}$ is the $p\times 1$ vector of coefficients.
+    -   $\boldsymbol{\varepsilon}$ is the $n\times 1$ vector of error terms.
+
+## Design Matrix: Example 1
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(hippo~age, data=alzheimer0)
+dim(model.matrix(obj))
+head(model.matrix(obj))
+```
+
+## Design Matrix: Example 1
+
+-   The model in Example 1 is $$Y_i = \beta_0 + \beta_1 x_i + \varepsilon, i=1,\dots,n$$
+-   Align the $n$ equations vertically, $$\begin{pmatrix}
+    Y_1\\ Y_2\\ \vdots\\ Y_n
+    \end{pmatrix} = 
+    \begin{pmatrix}
+    1&x_1\\ 1&x_2\\ \vdots\\ 1&x_n
+    \end{pmatrix}
+    \begin{pmatrix}
+    \beta_0\\ \beta_1 \end{pmatrix}  +
+    \begin{pmatrix}
+    \varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n
+    \end{pmatrix}$$
+-   The matrix format is $\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}$
+
+## Design Matrix: Example 2
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(hippo~female, data=alzheimer0)
+dim(model.matrix(obj))
+head(model.matrix(obj))
+```
+
+## Design Matrix: Example 2
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(hippo~female, data=alzheimer0)
+summary(obj)
+```
+
+-   How to interpret the results?
+
+## Design Matrix: Example 2
+
+```{r}
+obj=lm(hippo~female-1, data=alzheimer0)
+summary(obj)
+head(model.matrix(obj))
+```
+
+## Design Matrix: Example 3
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(lhippo~diagnosis, data=alzheimer)
+dim(model.matrix(obj))
+head(model.matrix(obj))
+```
+
+-   According to the design matrix, which diagnosis group is used as the reference group?
+
+## Design Matrix: Example 3
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(lhippo~diagnosis, data=alzheimer)
+summary(obj)
+```
+
+-   How to interpret the results?
+
+## Design Matrix: Example 3
+
+-   Let's remove the intercept
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(lhippo~diagnosis-1, data=alzheimer)
+#obj=lm(lhippo~diagnosis+0, data=alzheimer) #also works
+summary(obj)
+```
+
+-   How to interpret the results?
+
+## Design Matrix: Example 3
+
+-   We can also change the reference group
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(lhippo~relevel(diagnosis, ref="1"), data=alzheimer)
+summary(obj)
+```
+
+-   How to interpret the results?
+
+## Inference of A Linear Combination
+
+-   The lm function in R produces not only estimates but also the variance-covariance matrix
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj=lm(lhippo~diagnosis-1, data=alzheimer)
+coef(obj)
+vcov(obj)
+```
+
+-   What if we are interested in a specific linear combination of the coefficients, say $\frac{\beta_1 +\beta_2}{2} - \beta_0$
+
+## Inference of A Linear Combination
+
+-   Note that $\frac{\beta_1 +\beta_2}{2} - \beta_0 = (-1, \frac{1}{2}, \frac{1}{2}) \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{pmatrix}$
+
+-   $cov(a^T \hat {\boldsymbol{\beta}})=a^T cov(\hat {\boldsymbol{\beta}}) a$
+
+```{r}
+#| code-fold: true
+#| echo: true
+
+a=matrix(c(-1, 0.5, 0.5), 1, 3)
+print("estimate")
+a%*%as.matrix(coef(obj), 3, 1) #estimate
+print("standard error")
+sqrt(a%*% vcov(obj) %*% t(a)) #se
+```
+
+## Inference of A Linear Combination
+
+```{r}
+#| code-fold: true
+#| echo: true
+t.stat=a%*%as.matrix(coef(obj), 3, 1) / sqrt(a%*% vcov(obj) %*% t(a))
+print(t.stat)
+
+df=df.residual(obj)
+print("p-value")
+2*(1-pt(abs(t.stat), df=df))
+
+```
+
+# Theory of Linear Models
+
+## Outline
+
+-   Warning: due to limited time, we cannot review everything needed to establish all the results. The goal of this one-hour lecture is to get the big picture. To fully understand everything, we need 10+ lectures.
+-   The normal equation and LSE
+-   The Gauss-Markov theorem
+-   Multivariate normal distributions
+-   Chi-squared distributions
+-   F-test and t-test
+
+## Least Squares Estimate: An Optimization Problem
+
+-   Suppose $\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}$. The LSE is obtained by minimizing the sum of squared errors $$Q(\boldsymbol\beta)= ||\mathbf Y - \mathbf{X}\boldsymbol{\beta}||^2 = (\mathbf Y - \mathbf{X}\boldsymbol{\beta})^T (\mathbf Y - \mathbf{X}\boldsymbol{\beta})$$
+
+-   Differentiation with respect to a vector of parameters. Let $f(\boldsymbol \beta)$ be a scaluar-valued function of a vector $\boldsymbol \beta$. The differentiation with respect to (wrt) the vector $\boldsymbol \beta$ is defined as $$\dfrac{d}{d \boldsymbol \beta}f(\boldsymbol \beta) =
+    \begin{pmatrix}
+    \frac{\partial f}{\partial \beta_0} \\
+    \frac{\partial f}{\partial \beta_1} \\
+    \cdots\\
+    \frac{\partial f}{\partial \beta_{p-1}}
+    \end{pmatrix}$$
+
+-   Note. This is known as the gradient of $f(\boldsymbol \beta)$
+
+## Least Squares Estimate: Derivation for Simple Linear Regression
+
+-   $Q(\boldsymbol \beta)=Q(\beta_0, \beta_1)=\sum_{i=1}^n (y_i - \beta_0 - \beta_1)^2$
+
+$$\dfrac{d}{d \boldsymbol \beta}f(\boldsymbol \beta) =
+\begin{pmatrix}
+\frac{\partial f}{\partial \beta_0} \\
+\frac{\partial f}{\partial \beta_1}
+\end{pmatrix} = \begin{pmatrix}
+-2\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)\\
+2 \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)x_i
+\end{pmatrix}$$
+
+-   Set them to zero, we have $$\begin{aligned}
+    \beta_0 + \beta_1 \bar x & =  \bar y \\
+    \sum_{i=1}^n x_i^2 \beta_1 +  \beta_0 n \bar x &=\sum_{i=1}^n x_i y_i
+    \end{aligned}$$
+
+-   It follows immediately that $$\hat\beta_1=\frac{\sum_{i=1}^n x_i y_i  - n \bar x \bar y}{\sum_{i=1}^n x_i^2 - n\bar x^2}, \hat \beta_0 = \bar y - \hat\beta_1 \bar x $$
+
+## Least Squares Estimate: Derivation for Multiple Linear Regression
+
+-   The same principal applies but knowledge of matrix theory is needed to understand the derivation.
+-   Don't know or cannot remember results of matrix algebra? Not a big deal. Just search "[the matrix cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)" $$Q(\boldsymbol \beta)=||\mathbf Y - \mathbf{X}\boldsymbol{\beta}||^2 = \mathbf Y ^T \mathbf Y - 2 \mathbf Y^T \mathbf X \boldsymbol \beta + \boldsymbol \beta^T \mathbf X^T \mathbf X \boldsymbol \beta$$
+
+$$\begin{aligned}
+\frac{d }{d \boldsymbol \beta}\mathbf Y^T \mathbf X \boldsymbol \beta &= \mathbf X^T \mathbf Y\\
+\frac{d }{d \boldsymbol \beta} \boldsymbol \beta^T \mathbf X^T \mathbf X \boldsymbol \beta & = 2 \mathbf X^T \mathbf X \boldsymbol \beta
+\end{aligned}
+$$
+
+-   Thus, $0=\frac{d}{d \boldsymbol \beta}Q(\boldsymbol \beta)$ gives the so called  **normal equation** $$\mathbf X^T \mathbf X \boldsymbol \beta = \mathbf X ^T \mathbf Y$$
+
+## The Normal Equation
+
+-   The normal equation is $$\mathbf X^T \mathbf X \boldsymbol \beta = \mathbf X ^T \mathbf Y$$
+
+-   The normal equation includes a list of equations. A solution to it is an LSE of $\boldsymbol \beta$.
+
+-   LSE exists but might not be unique.
+
+-   When $rank(\mathbf X_{n\times p})=p$, $\mathbf X^T \mathbf X$ is invertible and the LSE is unique
+
+$$\hat {\boldsymbol \beta} = (\mathbf X^T \mathbf X)^{-1}\mathbf X ^T \mathbf Y$$
+
+## The Normal Equation: Example
+
+-   Use the lm function in R
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj1=lm(hippo ~ height* female, data=alzheimer0)
+coef(obj1)
+```
+
+-   Use the LSE formula in the previous slide:
+
+```{r}
+#| code-fold: true
+#| echo: true
+X=model.matrix(obj1)
+Y=as.matrix(alzheimer0$hippo, dim(alzheimer0)[1], 1)
+solve(t(X)%*%X) %*% t(X) %*% Y
+```
+
+-   Note, R and other software do not calculate the inverse of $\mathbf X^T \mathbf X$ directly; they use more efficient matrix decomposition methods
+
+## Gauss-Markov Theorem
+
+-   The LSE is optimal (minimum variance among all linear unbiased estimators) when
+    -   $\boldsymbol{\varepsilon}=\mathbf 0$
+    -   $cov(\boldsymbol{\varepsilon})=\sigma^2 \mathbf I$
+-   This result is know as Gauss-Markov theorem: the LSE is the Best Linear Unbiased Estimator (BLUE) when the two above conditions hold.
+-   When the covariance assumption is violated, the LSE is still unbiased but it does not attain the minimum variance
+    -   Transform the response variable
+    -   Use Generalized Least Squares Estimate (GLSE).
+    -   Use GLM if it applies
+
+## Gauss-Markov Theorem
+
+-   Suppose that $cov(\boldsymbol{\varepsilon})=\boldsymbol \Sigma$. Note $cov(\mathbf Y) =\boldsymbol \Sigma$.
+-   If $\boldsymbol \Sigma$ is known, we can model $\boldsymbol \Sigma^{-1/2}\mathbf Y$ on $\boldsymbol \Sigma^{-1/2}\mathbf X$ and find its LSE. This is because the transformed data $\boldsymbol \Sigma^{-1/2}\mathbf Y$ has covariance $\mathbf I$.
+-   A more practical situation is when $cov(\boldsymbol{\varepsilon})\propto \boldsymbol \Sigma$. The above strategy still works.
+-   Example $$cov(\boldsymbol{\varepsilon})=\sigma^2 \begin{bmatrix}
+     n_1 &  &  & \\ 
+     & n_2 &  & \\ 
+     &  &  \ddots & \\ 
+     &  &   & n_K 
+     \end{bmatrix}
+    $$
+
+## PDF of Normal Distributions
+
+-   Univariate normal distribution: $$
+      f(y) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{ -\frac{(y - \mu)^2}{2\sigma^2} }
+      $$
+
+-   Bivariate normal distribution: $$
+      f(y_1, y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} e^{ -\frac{1}{2(1-\rho^2)} \left(\frac{(y_1 - \mu_1)^2}{\sigma_1^2} + \frac{(y_2 - \mu_2)^2}{\sigma_2^2} - 2\rho\frac{(y_1 - \mu_1)(y_2 - \mu_2)}{\sigma_1\sigma_2} \right)}
+      $$ The formula for a $p\ge 3$-dimensional multivariate normal distribution is much messier, so we use a compact way:
+
+-   Multivariate normal distribution: $$
+      f(\mathbf{Y}) = \frac{1}{\sqrt{(2\pi)^p|\boldsymbol\Sigma|}} e^{ -\frac{1}{2} (\mathbf{Y
+    } - \boldsymbol\mu)^T \boldsymbol\Sigma^{-1} (\mathbf{Y} - \boldsymbol\mu)}
+      $$
+
+## Once Normal, Always Normal
+
+-   Of course this cannot be true!
+-   What it means is that if we start from a random vector following a MVN, then any linear function of it follows a normal distribution
+-   Let $\mathbf Y \sim N(\boldsymbol\mu, \boldsymbol \Sigma)$, then using a tool called moment generating function (MGF), one can show that
+    -   $\mathbf Y -\mathbf M \sim N(\boldsymbol \mu -\mathbf M, \boldsymbol\Sigma)$
+    -   $a^T \mathbf Y \sim N(a^T\boldsymbol\mu, a^T \boldsymbol \Sigma a)$, where $a$ is a column vector
+    -   $A \mathbf Y \sim N(A \boldsymbol\mu, A \boldsymbol \Sigma A^T)$, where $A$ is a matrix
+    -   $A\mathbf Y \perp B \mathbf Y \iff A\boldsymbol \Sigma B^T = 0$
+
+## Once Normal, Always Normal: Example 1 (the LSE)
+
+-   Suppose that $\mathbf Y \sim N(\mathbf X \boldsymbol \beta, \sigma^2 \mathbf I)$. $\hat{\boldsymbol \beta}$ is a linear function of $\mathbf Y$. Therefore, $$\begin{aligned}
+    \hat{\boldsymbol \beta} &=  \color{red}{(\mathbf X^T \mathbf X)^{-1}\mathbf X^T}  \mathbf Y \\
+    &\sim N(\color{red}{(\mathbf X^T \mathbf X)^{-1}\mathbf X^T}  \mathbf X \boldsymbol \beta, \sigma^2 \color{red}{(\mathbf X^T \mathbf X)^{-1} \mathbf X^T \mathbf X (\mathbf X^T \mathbf X)^{-1} }) \\
+    &\sim N(\boldsymbol \beta, \sigma^2 (\mathbf X^T \mathbf X)^{-1})
+    \end{aligned}
+    $$
+-   $\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\hat{\boldsymbol \beta}$ is a linear function of $\hat{\boldsymbol \beta}$. Therefore,
+
+$$\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\hat{\boldsymbol \beta} \sim N(\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\boldsymbol \beta, \mathbf I)$$
+
+-   We can also center it, leading to $$\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) \sim N(\mathbf 0, \mathbf I)$$
+
+## Once Normal, Always Normal: Example 2 (the Residuals)
+
+-   The vector of residuals is $$\begin{aligned}
+    \mathbf e &= \mathbf Y - \hat{\mathbf Y} = \mathbf Y - \mathbf X  \hat{\boldsymbol \beta} = \mathbf Y - \mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T \mathbf Y \\
+    &=[\mathbf I - \mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T ]\mathbf Y
+    \end{aligned}$$
+
+-   The matrix $\mathbf H=\mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T$ is the so-called Hat matrix because $\mathbf H \mathbf Y = \hat {\mathbf Y}$.
+
+-   It is easy to verify that $\mathbf H$ satisfies two conditions
+
+    -   symmetric: $\mathbf H = \mathbf H^T$
+    -   idempotent: $\mathbf H^2 = \mathbf H$.
+
+-   A matrix that is both symmetric and idepotent is a projection matrix.
+
+-   You can verify that $\mathbf I - \mathbf H$ is also a projection matrix.
+
+## Once Normal, Always Normal: Example 2 (the Residuals)
+
+-   $\mathbf e$ is linear in $\mathbf Y$ because $\mathbf e = \color{red}{(\mathbf I-\mathbf H)}\mathbf Y$. It is not difficult to verify that 
+$$(\mathbf I - \mathbf H) \mathbf X \boldsymbol \beta = \mathbf 0$$ 
+- Therefore $$\mathbf e = \color{red}{(\mathbf I-\mathbf H)}(\mathbf Y - \mathbf X \boldsymbol \beta)$$
+
+## Projection Matrices
+
+-   As stated earlier, a projection matrix is both symmetric and idempotent.
+-   An imporant and useful property is that if $P$ is a projection matrix, then
+    -   $rank(P) = trace(P)$
+    -   Spectral decomposition: $$P=\Gamma 
+        \begin{pmatrix}
+        \mathbf I_r & \mathbf 0\\
+        \mathbf 0 & \mathbf 0
+        \end{pmatrix}
+        \Gamma^T$$ where $\Gamma$ is an orthogonal matrix, i.e., $\Gamma\Gamma^T=\Gamma^T \Gamma=\mathbf I$.
+-   Example
+
+```{r}
+#| code-fold: true
+#| echo: true
+obj1=lm(hippo ~ height* female, data=alzheimer0)
+X=model.matrix(obj1)
+Y=as.matrix(alzheimer0$hippo, dim(alzheimer0)[1], 1)
+H=X%*%solve(t(X)%*%X)%*% t(X)
+sum(diag(H))
+#eigen(H, only.values = TRUE)$values[1:10] #time consuming
+```
+
+## Chi-squared Distribution: Definition
+
+-   The simplest chi-squared distributed random variable can be obtained by squaring a $N(0,1)$ random variable. In other words, if $Z\sim N(0,1)$, then $Z^2 \sim \chi_1^2$.
+-   Suppose $\mathbf Z \sim N(\mathbf 0, \mathbf I)$ and the length of $\mathbf Z$ is k. Then $\mathbf Z^T \mathbf Z = \sum_{i=1}^k Z_i^2 \sim \chi_k^2$ based on a definition of $\chi_{df}^2$.
+
+## Construct Chi-squared Random Variables from Quadratic Forms
+
+-   Let $P$ be a projection matrix with rank $df$. Then $$
+    \mathbf Z^T P \mathbf Z = \mathbf Z^T \Gamma \begin{pmatrix}
+    \mathbf I_{df} & \mathbf 0\\
+    \mathbf 0 & \mathbf 0
+    \end{pmatrix}
+    \Gamma^T\mathbf Z
+    $$
+    -   "Once normal always normal" indicates that $\Gamma^T \mathbf Z \sim N(\mathbf 0, \Gamma^T \Gamma) \sim N(\mathbf 0, \mathbf I)$ because $\Gamma$ s.t. $\Gamma\Gamma^T=\mathbf I$. 
+    -   If we let $\tilde {\mathbf Z} = \Gamma^T \mathbf Z$. We have $\tilde {\mathbf Z}\sim N(\mathbf 0, \mathbf I)$; in other words, $(\tilde Z_1, \cdots, \tilde Z_n)$ are iid $N(0,1)$. Also
+
+$$
+\mathbf Z^T P \mathbf Z = \tilde {\mathbf Z}^T \Gamma \begin{pmatrix}
+  \mathbf I_{df} & \mathbf 0\\
+  \mathbf 0 & \mathbf 0
+  \end{pmatrix}
+  \tilde {\mathbf Z} = \sum_{i=1}^{df} \tilde Z_i^2 \sim \chi_{df}^2
+$$
+
+## Chi-squared Random Variables in Linear Models
+
+-   Recall that $\mathbf Y - \mathbf X \boldsymbol \beta \sim N(\mathbf 0, \sigma^2 \mathbf I)$; therefore, $$\frac{1}{\sigma}(\mathbf Y - \mathbf X \boldsymbol \beta) \sim N(\mathbf 0,\mathbf I)$$
+
+-   Let $P=\mathbf I-\mathbf H$, the rank of which is $n-p$. (why? A property of trace needs to be used to find the rank of a projection matrix easily)
+
+-   We have $\frac{1}{\sigma^2}(\mathbf Y - \mathbf X \boldsymbol \beta)^T (\mathbf I -\mathbf H) (\mathbf Y - \mathbf X \boldsymbol \beta) \sim \chi_{n-p}^2$.
+
+-   Recall that $e=(\mathbf I -\mathbf H) (\mathbf Y - \mathbf X \boldsymbol \beta)$ and $RSS=\sum_{i=1}^n e_i^2 = e^T e$. The result above indicates that $$\frac{RSS}{\sigma^2}\sim \chi_{n-p}^2 $$
+
+## Chi-squared Random Variables in Linear Models
+
+-   Recall that $\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) \sim N(\mathbf 0, \mathbf I_p)$. We have 
+$$[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) ]^T[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) ]\sim \chi_p^2$$ 
+-   It can be simplified to $$(\hat{\boldsymbol \beta}-\boldsymbol \beta)^T (\mathbf X^T \mathbf X) (\hat{\boldsymbol \beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_p^2$$
+-   In most situations, we are not interested in all the $p$ elements of $\boldsymbol \beta$
+-   Let $A$ be a $q\times p$ matrix with rank $q$. Then $A\boldsymbol\beta$ produces $q$ linearly independent (i.e., non-redundant) linear functions of $\boldsymbol \beta$. How to construct a chi-squared random variable that involving $A\boldsymbol \beta$?
+
+## Chi-squared Random Variables in Linear Models
+
+-   Recall that $(\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 (\mathbf X^T \mathbf X)^{-1})$.
+-   "Once normal always normal" implies that $$A(\hat{\boldsymbol\beta}-\boldsymbol \beta)  \sim N(0, \sigma^2 A(\mathbf X^T \mathbf X)^{-1}A^T)$$
+-   Use "once normal always normal" again, we have $$(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)  \sim N(0, \mathbf I_{q})$$
+-   The quadratic form $$[(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)]^T[(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)]\sim \chi_q^2$$ which can be simplified to $$(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_q^2$$
+
+## F-statistic
+
+-   Having constructed two chi-square distributed random variables, we only need one more ingredient: independence
+-   In $RSS$, the only random part is $(\mathbf I-\mathbf H)\mathbf Y$; in the other one, the only random part is $\hat{\boldsymbol \beta} = (\mathbf X^T \mathbf X)^{-1} \mathbf X^T \mathbf Y$.
+-   It can be verified that $cov((\mathbf I-\mathbf H)\mathbf Y, \hat{\boldsymbol\beta})=\mathbf 0$, indicating independence, which further implies that the two quadratic forms are independent.
+-   We now have all the ingredients we need to bake and F-statistic
+    -   $$(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_q^2$$
+    -   $$RSS/\sigma^2 \sim \chi_{n-p}^2$$
+    -   They are independent.
+
+## F-statistic
+
+-   Because an F-distributed random variable can be constructed using two independent chi-square distributed random variables, we have $$
+    \begin{aligned}
+    F=\dfrac{\frac{1}{\sigma^2}(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/q}{\frac{1}{\sigma^2}RSS/(n-p)} \sim F_{q,n-p}
+    \end{aligned}
+    $$
+
+-   $F$ can be simplified to $$
+    F=\dfrac{(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/q}{RSS/(n-p)}$$
+
+## t-statistic
+
+-   Consider $a^T \boldsymbol\beta$. We have shown that $(\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 (\mathbf X^T \mathbf X)^{-1})$
+-   By "once normal always normal", we have $$a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a)$$
+-   Scale the LHS, we have $$\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)} {\sqrt{\sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a}} \sim N(0,1)$$
+-   Finally, $$t=\frac{\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)} {\sqrt{\sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a}}}{\sqrt{\frac{RSS}{\sigma^2}/(n-p)}} \sim t_{n-p}$$
+-   The LHS can be simplified to $$t=\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)}{\sqrt{s^2a^T(\mathbf X^T \mathbf X)^{-1}a }}$$ where $s^2=\frac{RSS}{n-p}$.
+-   Note, $\sqrt{s^2a^T(\mathbf X^T \mathbf X)^{-1}a }=se(a^T\boldsymbol \beta)$.
+
+## A Final Note
+
+-   Most of questions of interested can be expressed into $H_0: a^T\boldsymbol \beta=c$ or $H_0: A\boldsymbol \beta=C$
+-   F or t-tests can be used.
+-   We discussed LSE of $\boldsymbol \beta$. With the assumption of MVN, we can show that the MLE and LSE of $\boldsymbol\beta$ are the same.

@@ -1,0 +1,215 @@
+---
+title: "Changing Variables"
+execute:
+  echo: true
+subtitle: "ISI-BUDS 2023"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    title-slide-attributes: 
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+library(janitor)
+options(scipen = 999)
+```
+
+
+# Review
+
+How many panes have you seen in RStudio and what is the purpose of each pane?
+
+##
+
+Which of the following files is a markdown file?
+
+a. `example.R`  
+b. `example.md`  
+c. `example.Rmd`  
+
+##
+
+Which of the following is a valid order of actions when starting a project using git and GitHub?
+
+a. clone, commit, push, 
+
+b. push, commit, clone
+
+c. commit, clone, push
+
+d. clone, push, commit
+
+##
+
+Which R functions have we learned together?
+
+##
+
+What is the formula for variance?
+
+##
+
+You are given a data frame called `registrar`. There are two variables you are interested in `class_year` which represents whether someone is a first year, sophomore, junior, or senior and `gpa` which represents GPA. 
+
+How would you find the average GPA for each class rank?
+
+# Changing Variables
+
+
+Download and read in the [Arthritis data](https://www.causeweb.org/tshs/arthritis-treatment/) in Excel format.
+
+
+```{r echo = FALSE, message = FALSE}
+arthritis <- readr::read_csv("https://raw.githubusercontent.com/cosmos-uci-dshs/data/main/RheumArth_Tx_AgeComparisons.csv") 
+```
+
+Edward Gracely, “Arthritis Treatment Dataset”, TSHS Resources Portal (2020)
+
+##
+
+```{r}
+glimpse(arthritis)
+```
+
+
+##
+
+`clean_names()` makes variable names in tidy style.
+
+```{r}
+
+arthritis <- clean_names(arthritis)
+glimpse(arthritis)
+```
+
+
+##
+
+**Goal**: 
+
+Create a new variable called `age_months` that represents `age` in months.
+
+##
+
+
+```{r}
+arthritis %>% 
+  mutate(age_months = age*12)
+```
+
+##
+
+```{r}
+glimpse(arthritis)
+```
+
+##
+
+**Goal**: 
+
+Create a new variable called `das_level` which has the following categories based on `das_28` scores. 
+
+remission < 2.6  
+2.6 $\leq$ low disease activity $\leq$ 3.2  
+3.2 < moderate disease activity $leq$ 5.1
+
+high disease activity > 5.1
+
+
+##
+
+
+```{r}
+arthritis %>% 
+  mutate(das_level = case_when(
+    das_28 < 2.6 ~ "remission", 
+    das_28 >= 2.6 & das_28 <= 3.2 ~ "low disease activity",
+    das_28 > 3.2 & das_28 <= 5.1 ~ "moderate disease activity",
+    das_28 > 5.1 ~ "high disease activity")) 
+```
+
+
+
+## (Some) Variable Types in R
+
+`character`: takes string values (e.g. a person's name, address)  
+`integer`: integer (single precision)  
+`double`: floating decimal (double precision)  
+`numeric`: integer or double  
+`factor`: categorical variables with different levels  
+`logical`: TRUE (1), FALSE (0)  
+
+##
+
+```{r}
+glimpse(arthritis)
+```
+
+**Goal**: 
+
+Change `das_28_yn` and `age_gp` to appropriate variable types. 
+
+
+##
+
+```{r}
+arthritis %>% 
+  mutate(das28_yn = as.factor(das28_yn),
+         age_gp = as.factor(age_gp)) 
+```
+
+##
+
+`as.factor()` - makes a vector factor  
+`as.numeric()` - makes a vector numeric  
+`as.integer()` - makes a vector integer  
+`as.double()` - makes a vector double  
+`as.character()` - makes a vector character  
+
+##
+
+
+In your lecture notes, you can do all the changes in this lecture in one long set of piped code. That's the beauty of piping!
+
+```{r eval = FALSE}
+arthritis <- 
+  arthritis %>% 
+  clean_names() %>% 
+    mutate(das_level = case_when(
+    das_28 < 2.6 ~ "remission", 
+    das_28 >= 2.6 & das_28 <= 3.2 ~ "low disease activity",
+    das_28 > 3.2 & das_28 <= 5.1 ~ "moderate disease activity",
+    das_28 > 5.1 ~ "high disease activity")) %>% 
+  mutate(das28_yn = as.factor(das28_yn),
+         age_gp = as.factor(age_gp)) 
+```
+
+
+
+## Word of caution
+
+The functions `clean_names()`, and `mutate()` all take a data frame as the first argument. Even though we do not see it, the data frame is piped through from the previous step of code at each step. 
+When we use these functions without the `%>%` we have to include the data frame explicitly.
+
+
+
+Data frame is used as the first argument
+```{r}
+clean_names(arthritis)
+```
+
+
+
+##
+
+Data frame is piped
+
+```{r}
+arthritis %>% 
+  clean_names()
+```
+

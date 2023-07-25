@@ -1,0 +1,223 @@
+---
+title: "Subsetting Data"
+execute:
+  echo: true
+subtitle: "ISI-BUDS 2023"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    title-slide-attributes: 
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+```{r}
+#| echo: false
+library(tidyverse)
+ca_covid_hosp <- readr::read_csv("../data/covid19hospitalbycounty.csv")
+```
+
+
+##
+
+
+```{r}
+glimpse(ca_covid_hosp)
+```
+
+
+## subsetting variables/columns
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/data-wrangle.001.jpeg")
+```
+
+. . .
+
+`select()`
+
+
+
+## subsetting observations/rows
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/data-wrangle.002.jpeg")
+```
+
+`slice()` and `filter()` 
+
+##
+
+`select` is used to select certain variables in the data frame. 
+
+
+
+```{r}
+select(ca_covid_hosp, county, todays_date,
+       hospitalized_covid_confirmed_patients)
+```
+
+
+. . .
+
+##
+
+```{r}
+
+ca_covid_hosp %>% 
+  select(county, todays_date,
+       hospitalized_covid_confirmed_patients)
+```
+
+
+##
+
+`select` can also be used to drop certain variables if used with a negative sign.
+
+```{r}
+select(ca_covid_hosp, -all_hospital_beds,
+       -icu_available_beds)
+```
+
+
+
+## Selection helpers
+
+`starts_with()`  
+`ends_with()`  
+`contains()`  
+
+##
+
+```{r}
+select(ca_covid_hosp, starts_with("hospitalized"))
+```
+
+##
+
+```{r}
+select(ca_covid_hosp, ends_with("covid_confirmed_patients"))
+```
+
+##
+
+```{r}
+select(ca_covid_hosp, contains("suspected"))
+
+```
+
+
+
+## subsetting variables/columns
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/data-wrangle.001.jpeg")
+```
+
+. . .
+
+`select()`
+
+
+
+## subsetting observations/rows
+
+```{r echo = FALSE, out.width="80%"}
+knitr::include_graphics("img/data-wrangle.002.jpeg")
+```
+
+`slice()` and `filter()` 
+
+##
+
+
+`slice()` subsetting rows based on a row number.
+
+The data below include all the rows from third to seventh. Including third and seventh.
+
+```{r}
+slice(ca_covid_hosp, 3:7)
+```
+
+
+
+
+##
+
+`filter()` subsetting rows based on a condition.
+
+The data below includes rows corresponding to Orange county.
+
+
+```{r}
+filter(ca_covid_hosp, county == "Orange")
+```
+
+
+## Relational Operators in R
+
+
+| Operator | Description              |
+|----------|--------------------------|
+| <        | Less than                |
+| >        | Greater than             |
+| <=       | Less than or equal to    |
+| >=       | Greater than or equal to |
+| ==       | Equal to                 |
+| !=       | Not equal to             |
+
+
+
+## Logical Operators in R
+
+| Operator | Description |
+|----------|-------------|
+| &        | and         |
+| &#124;   | or          |
+
+##
+
+Q. On which days the total number of hospitalized confirmed COVID patients in Orange county exceeded 2000?
+
+##
+
+```{r}
+ca_covid_hosp %>% 
+  filter(county == "Orange" & 
+           hospitalized_covid_confirmed_patients > 2200)
+```
+
+
+##
+
+```{r}
+ca_covid_hosp %>% 
+  filter(county=="Orange" & 
+           hospitalized_covid_confirmed_patients>2200) %>% 
+  nrow()
+```
+
+##
+
+Q. On which days the total number of hospitalized confirmed COVID patients in Orange county exceeded 2000 and the total number of confirmed COVID patients in ICU exceeded 500?
+
+## 
+
+```{r}
+ca_covid_hosp %>% 
+  filter(county == "Orange" & 
+           hospitalized_covid_confirmed_patients > 2200 &
+           icu_covid_confirmed_patients >500)
+```
+
+##
+
+We have done all sorts of selections, slicing, filtering on `ca_covid_hosp` but it has not changed at all. Why do you think so?
+
+```{r}
+glimpse(ca_covid_hosp)
+
+```
+
+

@@ -1,0 +1,368 @@
+---
+title: "Day 9 lab LMs and GLMs Solutions"
+format: 
+  html:
+    toc: true
+    code-overflow: wrap
+theme: cerulean
+editor: visual
+---
+
+## Organizing our knowledge
+
+### 1
+
+Fill in the table below to organize what we have learned about linear and generalized linear models.
+
++------------------------------------+---------------------------------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Data scenario                      | Model name                            | Model equation (with 1 predictor)                      | Interpretation of predictor coefficient                                                                                      |
+|                                    |                                       |                                                        |                                                                                                                              |
+|                                    | (and model class)                     |                                                        |                                                                                                                              |
++====================================+=======================================+========================================================+==============================================================================================================================+
+| Continuous response variable       | Linear model                          | $E[Y_i] = \beta_0 + \beta_1 X_i$                       | $\beta_1$ is the expected change in $Y$ for a one unit increase in $X$.                                                      |
+|                                    |                                       |                                                        |                                                                                                                              |
+|                                    | (LM)                                  |                                                        |                                                                                                                              |
++------------------------------------+---------------------------------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Binary response variable           | Logistic regression (GLM)             | $log(\frac{\pi_i}{1 - \pi_i}) = \beta_0 + \beta_1 X_i$ | $\beta_1$ is the change in log odds for a one unit increase in $X$.                                                          |
+|                                    |                                       |                                                        |                                                                                                                              |
+|                                    |                                       |                                                        | $e^{\beta_1}$ is the odds ratio for a one unit increase in $X$.                                                              |
+|                                    |                                       |                                                        |                                                                                                                              |
+|                                    |                                       |                                                        | $e^{\beta_1} -1$ is the percent increase/decrease in odds for a one unit increase in $X$.                                    |
++------------------------------------+---------------------------------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Count data as response variable    | Poisson regression (GLM)              | $\log(\lambda_i) = \beta_0 + \beta_1 X$                | $\beta_1$ is the log rate ratio (or relative risk or multiplicative change in risk) for a one unit increase in $X$.          |
+|                                    |                                       |                                                        |                                                                                                                              |
+|                                    |                                       |                                                        | $e^{\beta_1}$ is the rate ratio for a one unit increase in $X$.                                                              |
++------------------------------------+---------------------------------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+| Categorical (3+) response variable | Multinomial logistic regression (GLM) | Let's not worry about it...                            | Each category level of the model is interpreted as if it is a logistic regression, with respect to the same reference group. |
++------------------------------------+---------------------------------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+Comments about Multionomial logistic regression:
+
+-   "Multinomial logistic regression for a response with J + 1 categories is analogous to simultaneously fitting J logistic regressions with the same reference group
+
+-   Although the choice of reference is arbitrary (models with different reference groups are simply reparameterizations of one another), it is usually easiest to choose the most common outcome as the reference group
+
+-   In general, simultaneous estimation will lead to a more efficient model than the separate logistic regressions" - Bin Nan
+
+### 2
+
+What test can we use to compare two nested models (i.e. One model has a subset of the covariates of the other model)?
+
+**Solution**
+
+We can do this with the likelihood ratio test.
+
+## Logistic regression
+
+If we made an alzheimer diagnosis variable `alzh` then we have a binary response variable.
+
+```{r}
+library(tidyverse)
+
+alzheimer_og <- read_csv("alzheimer_data.csv", show_col_types = FALSE)
+
+#glimpse(alzheimer)
+
+alzheimer <- alzheimer_og %>% 
+  mutate(alzh = ifelse(diagnosis > 0, yes = 1, no = 0))
+```
+
+We can fit a linear model and we won't get an error (even though linear model assumption are violated), but does it provide any useful information?
+
+```{r}
+alzheimer_lm <- lm(alzh ~ age + female +  educ + lhippo + rhippo, data = alzheimer)
+
+alzheimer %>% 
+  mutate(alzh_lm_prediction = predict(alzheimer_lm)) %>% 
+  ggplot(aes(x = alzh, y = alzh_lm_prediction)) +
+  geom_point() +
+  geom_hline(yintercept = c(0, 1), color = "red") +
+  theme_bw()
+```
+
+**Solution**
+
+An assumption of the linear model is that the errors, and therefore the response variable is normally distributed, so the possible values range from $(-\infty, \infty)$. Here the expected value of our response variable is the probability of having Alzheimers, which is bounded between 0 and 1, so the linear model will predict impossible values.
+
+### 1
+
+Instead let's fit a logistic model since we have a binary response variable. Fit the logistic model with `alzh` as the response variable and the same covariates as the linear model fit above. Save the model fit into a variable named `alzheimer_glm`.
+
+**Solution**
+
+```{r}
+alzheimer_glm <- glm(alzh ~ age + female + educ + lhippo, family = binomial, data = alzheimer)
+```
+
+Run this code to produce a plot of the predicted values after you have fit the model.
+
+```{r}
+alzheimer %>% 
+  mutate(alzh_glm_prediction = predict(alzheimer_glm, type = "response")) %>% 
+  ggplot(aes(x = alzh, y = alzh_glm_prediction)) +
+  geom_point() +
+  geom_hline(yintercept = c(0, 1), color = "red") +
+  theme_bw()
+```
+
+### 2a
+
+Provide an interpretation in context for the coefficient of `age` in the logistic model. Also, compute the 95% confidence interval for this coefficient.
+
+**Solution**
+
+You can look at the model summary for the necessary information
+
+```{r}
+alzheimer_glm_summary <- summary(alzheimer_glm)
+# alzheimer_glm_summary
+
+age_coeff_est <- alzheimer_glm_summary$coefficients["age", "Estimate"]
+```
+
+For people with common sex, education, and left hippocampus volume, we estimate a one year increase in age to be associated with a \*\*log odds ratio\* of having Alzheimers of `r round(age_coeff_est, 4)`.
+
+Now, let's compute the confidence interval. I suggest doing this manually (i.e. not using a function, so you are clear on how it is calculated).
+
+```{r}
+age_coeff_std_error <- alzheimer_glm_summary$coefficients["age", "Std. Error"]
+
+age_coeff_ci <- c(
+  age_coeff_est - 1.96*age_coeff_std_error, 
+  age_coeff_est + 1.96*age_coeff_std_error
+)
+```
+
+We estimate the **log odds ratio** of having Alzheimers associated with an increase of one year of age to be between `r round(age_coeff_ci[1], 4)` and `r round(age_coeff_ci[2], 4)` with 95% confidence, when controlling for sex, education, and left hippocampus volume.
+
+### 2b
+
+Provide an interpretation in context for the **exponentiated** coefficient of `age` in the logistic model. Also, compute the 95% confidence interval for this coefficient.
+
+**Solution**
+
+```{r}
+exp_age_coeff_est <- exp(age_coeff_est)
+exp_age_coeff_ci <- exp(age_coeff_ci)
+```
+
+For people with common sex, education, and left hippocampus volume, we estimate a one year increase in age to be associated with a an **odds ratio** of having Alzheimers of `r round(exp_age_coeff_est, 4)`. We estimate this value to be between `r round(exp_age_coeff_ci[1], 4)` and `r round(exp_age_coeff_ci[2], 4)` with 95% confidence.
+
+### 2c
+
+Calculate the estimate and 95% confidence interval for the percent change in odds associated with a 1 year difference in age, controlling for the other predictors.
+
+**Solution**
+
+```{r}
+per_inc_age_coeff_est <- (exp(age_coeff_est) - 1) * 100
+per_inc_age_coeff_ci <- (exp(age_coeff_ci) -1 ) * 100
+```
+
+For people with common sex, education, and left hippocampus volume, we estimate a one year increase in age to be associated with a `r round(per_inc_age_coeff_est, 4)`% **increase in the odds** of having Alzheimers. We estimate this value to be between `r round(per_inc_age_coeff_ci[1], 4)`% and `r round(per_inc_age_coeff_ci[2], 4)`% with 95% confidence.
+
+### 2d
+
+Which transformation of the estimate of the coefficient of `age` is most interpretable to you?
+
+**Solution**
+
+The interpretation from 2c would be most interpretable to someone who does not know statistics and therefore does not know what an odds ratio is.
+
+### 3a
+
+Provide an interpretation in context for the coefficient of `female` in the logistic model. Also, compute the 95% confidence interval for this coefficient.
+
+**Solution**
+
+```{r}
+female_coeff_est <- alzheimer_glm_summary$coefficients["female", "Estimate"]
+
+female_coeff_std_error <- alzheimer_glm_summary$coefficients["female", "Std. Error"]
+
+female_coeff_ci <- c(
+  female_coeff_est - 1.96 * female_coeff_std_error,
+  female_coeff_est + 1.96 * female_coeff_std_error
+)
+```
+
+For people with common age, education, and left hippocampus volume, we estimate that females, compared to males, are associated with a **log odds ratio** of having Alzheimers of `r round(female_coeff_est, 4)`. We estimate this quantity to be between `r round(female_coeff_ci[1], 4)` and `r round(female_coeff_ci[2], 4)` with 95% confidence.
+
+
+### 3b
+
+Provide an interpretation in context for the exponentiated coefficient of `female` in the logistic model. Also, compute the 95% confidence interval for this coefficient.
+
+**Solution**
+```{r}
+exp_female_coeff_est <- exp(female_coeff_est)
+exp_female_coeff_ci <- exp(female_coeff_ci)
+```
+
+For people with common age, education, and left hippocampus volume, we estimate that females, compared to males, are associated with an ** odds ratio** of having Alzheimers of `r round(exp_female_coeff_est, 4)`. We estimate this quantity to be between `r round(exp_female_coeff_ci[1], 4)` and `r round(exp_female_coeff_ci[2], 4)` with 95% confidence.
+
+Even more interpretable:
+```{r}
+per_dec_female_coeff_est <- (1 - exp(female_coeff_est)) * 100
+per_dec_female_coeff_ci <- (1 - exp(female_coeff_ci)) * 100
+```
+
+For people with common age, education, and left hippocampus volume, we estimate that females have a `r round(per_dec_female_coeff_est, 4)`% decrease in odds of having Alzheimers, relative to males. We estimate this quantity to be between `r round(per_dec_female_coeff_ci[1], 4)` and `r round(per_dec_female_coeff_ci[2], 4)` with 95% confidence. 
+
+
+## Poisson regression
+
+Read in the neuron data from lecture.
+
+```{r}
+chosen_neuron_data_og <- read_csv(
+  "https://www.ics.uci.edu/~zhaoxia/Data/chosen_neuron_data.csv",
+  show_col_types = FALSE
+)
+
+chosen_neuron_data <- chosen_neuron_data_og %>% 
+  select(trial_number, n_spikes, image_categ)
+
+#glimpse(chosen_neuron_data)
+```
+
+### 1a
+
+Fit generalized linear model regressing number of spikes on image category without an intercept (add "-1" to regression equation to remove intercept). Save your regression into a variable named `poisson_fit`.
+
+```{r}
+# Fit generalized linear model
+# Poisson GLM with the default log link function
+poisson_fit <- glm(
+  n_spikes ~ image_categ - 1,
+  data = chosen_neuron_data,
+  family = poisson(link="log")
+)
+```
+
+Tabulate the coefficient estimates using the code below.
+
+```{r}
+poisson_neuron_table <- summary(poisson_fit)$coefficients
+
+row.names(poisson_neuron_table) <- c("Animal", "Fruit",
+"Kids", "Military", "Space")
+
+poisson_neuron_table
+```
+
+### 1b
+
+Provide an interpretation of the coefficient for `animal`.
+
+**Solution**
+
+Interpretation here is actually easier than in the other example since we do not have an intercept and only have a categorical predictor.
+
+Full model: 
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = x_i]) = \beta_0 * I(x_i = \text{Animal}) + \beta_1 * I(x_i = \text{Fruit}) + \beta_2 * I(x_i = \text{Kids}) + \beta_3 * I(x_i = \text{Military}) + \beta_4 * I(x_i = \text{Space})$$
+
+Specific case where the image is animal:
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = \text{Animal}]) = \beta_0 * 1 + \beta_1 * 0 + \beta_2 * 0 + \beta_3 * 0 + \beta_3 * 0 = \beta_0$$
+
+*Recall:* An indicator function has value 1 if the condition is true, and has value 0 if the condition is false.
+
+This means $\beta_1$ is log neuron rate associated with being shown an image of an animal.
+
+```{r}
+animal_coeff_est <- poisson_neuron_table["Animal", "Estimate"] 
+
+animal_coeff_std_error <- poisson_neuron_table["Animal", "Std. Error"]
+
+animal_coeff_ci <- c(
+  animal_coeff_est - 1.96 * animal_coeff_std_error,
+  animal_coeff_est + 1.96 * animal_coeff_std_error
+)
+```
+
+Let's use the exponentiated version of the coefficient for better interpretability.
+```{r}
+exp_animal_coeff_est <- exp(animal_coeff_est)
+exp_animal_coeff_ci <- exp(animal_coeff_ci)
+```
+
+
+We estimate the neuron rate to be between `r `round(exp_animal_coeff_est, 3)` for people shown an image of an animal. We are 95% confidence the rate is between `r `round(exp_animal_coeff_ci[1], 3)` and `r `round(exp_animal_coeff_ci[2], 3)`.
+
+### 1c
+
+What would be the interpretation of the coefficient for `animal` if there was an intercept?
+
+**Solution**
+
+If we had an intercept, then one level of our categorical predictor would have to be the reference group to avoid multicolinearity.
+
+Here we have two different possible scenarios, where animal is the reference group and when it is not.
+
+#### Animal as reference group
+
+Full model: 
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = x_i]) = \beta_0 + \beta_1 * I(x_i = \text{Fruit}) + \beta_2 * I(x_i = \text{Kids}) + \beta_3 * I(x_i = \text{Military}) + \beta_4 * I(x_i = \text{Space})$$
+```{r}
+# Fit generalized linear model
+# Poisson GLM with the default log link function
+poisson_fit <- glm(
+  n_spikes ~ image_categ,
+  data = chosen_neuron_data,
+  family = poisson(link="log")
+)
+
+summary(poisson_fit)
+```
+
+Animal was made the reference group by default since it is the first category present.
+
+Specific case where the image is animal:
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = x_i]) = \beta_0 + \beta_1 * 0 + \beta_2 * 0 + \beta_3 * 0 + \beta_4 * 0 = \beta_0$$
+
+Notice the intercept in this model is equivalent to the first coefficient in the previous mode.
+
+#### Animal not reference group
+
+There is no obvious image to make the reference group in this case so I will arbitrarily pick Fruit to be the reference group.
+
+Full model: 
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = x_i]) = \beta_0 + \beta_1 * I(x_i = \text{Fruit}) + \beta_2 * I(x_i = \text{Kids}) + \beta_3 * I(x_i = \text{Military}) + \beta_4 * I(x_i = \text{Space})$$
+
+In this model, since we have a reference group, $\beta_1$ is the log rate ratio for people shown an animal image compared to those shown a fruit image.
+
+```{r}
+# Start by manually specifying the category order 
+# The first is the reference group
+chosen_neuron_data_releveled <- chosen_neuron_data %>% 
+  mutate(image_categ = factor(
+    image_categ,
+    levels = c("Fruit", "Animal", "Kids", "Military", "Space")
+  ))
+
+poisson_fit <- glm(
+  n_spikes ~ image_categ,
+  data = chosen_neuron_data_releveled,
+  family = poisson(link="log")
+)
+
+(poisson_fit_summary <- summary(poisson_fit))
+```
+
+Specific case where the image is animal:
+
+$$\log(E[ \text{Number of Neurons}_i | \text{Image} = x_i]) = \beta_0 + \beta_1 * 1 + \beta_2 * 0 + \beta_3 * 0 + \beta_4 * 0 = \beta_0 + \beta_1$$
+
+To get the estimate for the rate for people shown an animal (not relative to a reference group) we would add the coefficients $\beta_0$ and $\beta_1$.
+
+```{r}
+(beta0 <- poisson_fit_summary$coefficients["(Intercept)", "Estimate"])
+(animal_coeff <- poisson_fit_summary$coefficients["image_categAnimal", "Estimate"])
+
+neuron_rate_animal_image <- beta0 + animal_coeff
+```

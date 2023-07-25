@@ -1,0 +1,2054 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="LinearModels_files/libs/clipboard/clipboard.min.js"></script>
+<script src="LinearModels_files/libs/quarto-html/tabby.min.js"></script>
+<script src="LinearModels_files/libs/quarto-html/popper.min.js"></script>
+<script src="LinearModels_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="LinearModels_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="LinearModels_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="LinearModels_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.2.269">
+
+  <meta name="author" content="Zhaoxia Yu">
+  <title>Linear Models</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="LinearModels_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="LinearModels_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="LinearModels_files/libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="LinearModels_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="LinearModels_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="LinearModels_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="LinearModels_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Linear Models</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Zhaoxia Yu 
+</div>
+</div>
+</div>
+
+</section>
+<section id="learning-objectives" class="title-slide slide level1 center">
+<h1>Learning Objectives</h1>
+<ul>
+<li><p>Simple linear regression</p>
+<ul>
+<li><p>Interpretation of (estimated) parameters</p></li>
+<li><p>Outliers</p></li>
+</ul></li>
+<li><p>Multiple linear regression</p></li>
+<li><p>Design matrices</p></li>
+<li><p>Theory of Linear Models</p></li>
+</ul>
+</section>
+
+<section>
+<section id="simple-linear-regression" class="title-slide slide level1 center">
+<h1>Simple Linear Regression</h1>
+
+</section>
+<section id="simple-linear-regression-1" class="slide level2">
+<h2>Simple Linear Regression</h2>
+<ul>
+<li><p>Simple linear regression is the regression model with only one explanatory variable.</p></li>
+<li><p>It can be used to assess the linear relationship between two variables. Example, age and hippocampus volume in healthy subjects</p></li>
+</ul>
+
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<section id="simple-linear-regression-2" class="slide level2">
+<h2>Simple Linear Regression</h2>
+<ul>
+<li><p><span class="math inline">\(y_i=\beta_0 + \beta_1 x_i + \epsilon_i, i=1, \cdots, n\)</span></p>
+<ul>
+<li><p><span class="math inline">\(\beta_0\)</span> is the intercept. It is the expected value when <span class="math inline">\(x=0\)</span>.</p></li>
+<li><p><span class="math inline">\(\beta_1\)</span> is the slope. It is the expected change of the response variable when <span class="math inline">\(x\)</span> increases by 1 (unit).</p></li>
+<li><p><span class="math inline">\(\epsilon_i\)</span> is assumed to have mean 0.</p></li>
+</ul></li>
+<li><p>The least squares fit minimizes the sum of squared errors, i.e., <span class="math inline">\(\hat\beta_0\)</span> and <span class="math inline">\(\hat\beta_1\)</span> are obtained by minimizing</p>
+<p><span class="math display">\[\sum_{i=1}^n (y_i - \beta_0 -\beta_1 x_i)^2\]</span></p></li>
+</ul>
+</section>
+<section id="the-fitted-line-using-least-squares-estimate" class="slide level2">
+<h2>The Fitted Line Using Least Squares Estimate</h2>
+<ul>
+<li>The LSE of <span class="math inline">\(\beta_0, \beta_1\)</span> is:
+<ul>
+<li><span class="math inline">\(b_0=\hat\beta_0=\bar{y}-b_1\bar{x}\)</span></li>
+<li><span class="math inline">\(b_1=\hat\beta_1=\dfrac{\sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y})}{\sum_{i=1}^{n}(x_i-\bar{x})^2}\)</span></li>
+</ul></li>
+<li>There are alternative ways to express <span class="math inline">\(\hat\beta_1\)</span>. Please verify the following
+<ul>
+<li><span class="math inline">\(\hat\beta_1=\dfrac{\sum_{i=1}^{n}x_i y_i - n \bar x \bar y}{\sum_{i=1}^n x_i^2 - n\bar x^2}=r_{xy}\dfrac{s_y}{s_x}\)</span> where</li>
+<li><span class="math inline">\(r_{x,y}\)</span> is the sample correlation coefficient between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> , <span class="math inline">\(s_x\)</span> and <span class="math inline">\(s_y\)</span> are the sample standard deviation</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-lse-and-the-fitted-line" class="slide level2">
+<h2>Example: LSE and the Fitted Line</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(hippo<span class="sc">~</span>age, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">coef</span>(obj) <span class="co">#alternatively: obj$coefficients</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)         age 
+ 8.29252018 -0.02732632 </code></pre>
+</div>
+</div>
+
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch quarto-figure-center"><p>The fitted line is <span class="math inline">\(hippo = 8.29 - 0.027 \times age\)</span></p>
+<p>For each added year, the hippocampus size decreased by 0.027 (cc)</p>
+</section>
+<section id="model-assumptions" class="slide level2">
+<h2>Model Assumptions</h2>
+<ul>
+<li><span class="math inline">\(y_i=\beta_0 + \beta_1 x_i + \epsilon_i, i=1, \cdots, n\)</span></li>
+<li><span class="math inline">\(E(\epsilon_i)=0\)</span></li>
+<li>The <span class="math inline">\(n\)</span> observations are independent</li>
+<li>Reasonally large <span class="math inline">\(n\)</span> or normality assumption: <span class="math inline">\(\epsilon_i \sim N(0, \sigma^2)\)</span></li>
+</ul>
+</section>
+<section id="residuals" class="slide level2">
+<h2>Residuals</h2>
+<ul>
+<li><span class="math inline">\(e_i = y_i - \hat y_i\)</span> where <span class="math inline">\(\hat y_i = \hat\beta_0 + \hat \beta_1 x_i\)</span></li>
+<li>Residual sum of squares (RSS): <span class="math inline">\(RSS=\sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i -\hat y_i)^2\)</span></li>
+<li>An unbiased estimate of <span class="math inline">\(\sigma^2\)</span> is <span class="math inline">\(s^2\)</span>: <span class="math display">\[s^2= \frac{RSS}{n-2}\]</span></li>
+</ul>
+</section>
+<section id="standard-error-and-confidence-interval" class="slide level2">
+<h2>Standard Error and Confidence Interval</h2>
+<ul>
+<li><p>The standard error of <span class="math inline">\(\hat\beta_1\)</span> is <span class="math display">\[se(\hat \beta_1)=\frac{\sqrt{s^2}}{\sqrt{\sum (x_i - \bar{x})^2}}\]</span></p></li>
+<li><p>A <span class="math inline">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math inline">\(\beta_1\)</span> is <span class="math display">\[\hat\beta_1 \pm t_{\alpha / 2, n - 2} se(\hat\beta_1)\]</span></p></li>
+</ul>
+</section>
+<section id="t-and-p-value" class="slide level2">
+<h2>t and p-value</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">summary</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ age, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.64965 -0.48857 -0.01641  0.48528  2.73487 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  8.292520   0.118318   70.09   &lt;2e-16 ***
+age         -0.027326   0.001712  -15.96   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7157 on 1507 degrees of freedom
+Multiple R-squared:  0.1446,    Adjusted R-squared:  0.1441 
+F-statistic: 254.8 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">confint</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  2.5 %      97.5 %
+(Intercept)  8.06043571  8.52460464
+age         -0.03068437 -0.02396827</code></pre>
+</div>
+</div>
+</section>
+<section id="estimation-vs-prediction" class="slide level2">
+<h2>Estimation vs Prediction</h2>
+<ul>
+<li>Estimate <span class="math inline">\(E(y|x=x_h)=\beta_0 + \beta_1 x_h\)</span>
+<ul>
+<li>The estimate is <span class="math inline">\(\hat\beta_0 + \hat\beta_1 x_h\)</span></li>
+<li>Confidence interval:</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[\hat{y}_h \pm t_{\alpha / 2, n - 2} \sqrt{s^2 \left(\frac{1}{n} + \frac{(x_h - \bar{x})^2}{\sum(x_i - \bar{x}^2)} \right)}\]</span></p>
+<ul>
+<li>Predict the response value when <span class="math inline">\(x=x_h\)</span>
+<ul>
+<li>The prediction is <span class="math inline">\(\hat y_h = \hat\beta_0 + \hat\beta_1 x_h\)</span></li>
+<li>Prediction interval: <span class="math display">\[\hat{y}_h \pm t_{\alpha / 2, n - 2} \sqrt{s^2 \left(1 + \frac{1}{n} + \frac{(x_h - \bar{x})^2}{\sum(x_i - \bar{x}^2)} \right)}\]</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="example-estimation-vs-prediction" class="slide level2">
+<h2>Example: Estimation vs Prediction</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">predict</span>(obj, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="dv">44</span>), <span class="at">interval =</span> <span class="st">'confidence'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 7.090162 7.001009 7.179315</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">predict</span>(obj, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">age=</span><span class="dv">44</span>), <span class="at">interval =</span> <span class="st">'predict'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       fit      lwr      upr
+1 7.090162 5.683368 8.496956</code></pre>
+</div>
+</div>
+</section>
+<section id="outliers" class="slide level2">
+<h2>Outliers</h2>
+<p><strong>Outliers</strong> are points that do not follow the general pattern of the majority of the data.</p>
+<ul>
+<li><p><strong>Leverage points</strong> are also called x-outliers.</p></li>
+<li><p><strong>Influential Outliers:</strong> These are data points that, when removed, lead to a significant change in the regression model. They can drastically affect the slope and intercept of the regression line.</p></li>
+<li><p>Residuals (<span class="math inline">\(e_i=y_i - \hat y_i, i=1, \cdots, n\)</span>) and their standardized versions are often used to visually inspect assumptions.</p></li>
+<li><p><strong>Outliers</strong> often have large residuals. Residual plots can be used to visually detect these outliers. An observation with a residual significantly larger or smaller than the other residuals may be an outlier.</p></li>
+</ul>
+</section>
+<section id="outliers-examples" class="slide level2">
+<h2>Outliers: Examples</h2>
+
+<img data-src="images/image-1452328645.png" class="r-stretch"></section>
+<section id="model-diagnostics" class="slide level2">
+<h2>Model Diagnostics</h2>
+<ul>
+<li><strong>Linearity</strong>: The relationship between predictors and response is linear. Violation seen when residuals display a systematic pattern.</li>
+<li><strong>Independence</strong>: The residuals are independent. Violation seen when residuals display trends over time or space.</li>
+<li><strong>Homoscedasticity</strong>: The variance of the residuals is constant. Violation seen when residuals show a “funnel” shape pattern.</li>
+<li><strong>Normality</strong>: The residuals are normally distributed. Violation seen when residuals don’t follow a bell-shaped pattern in a histogram or a straight line on a Q-Q plot.</li>
+</ul>
+</section></section>
+<section>
+<section id="multiple-linear-regression" class="title-slide slide level1 center">
+<h1>Multiple Linear Regression</h1>
+
+</section>
+<section id="motivating-example" class="slide level2">
+<h2>Motivating Example</h2>
+<ul>
+<li>Are healthy men and women differ in hippocampus volume?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">ggplot</span>(alzheimer0, <span class="fu">aes</span>(<span class="at">x=</span>female, <span class="at">y=</span>hippo, <span class="at">color=</span>female)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"gender"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hippo<span class="sc">~</span>female, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.51650 -0.49828 -0.01098  0.54050  2.83082 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.74828    0.03247  207.84   &lt;2e-16 ***
+female1     -0.48879    0.04005  -12.21   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7383 on 1507 degrees of freedom
+Multiple R-squared:  0.08997,   Adjusted R-squared:  0.08936 
+F-statistic:   149 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="can-the-difference-be-explained-by-height" class="slide level2">
+<h2>Can the difference be explained by height?</h2>
+<ul>
+<li>Men have larger hippocampus volume</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(alzheimer0, <span class="fu">aes</span>(<span class="at">x=</span>height, <span class="at">y=</span>hippo, <span class="at">color=</span>female))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hippo <span class="sc">~</span> height <span class="sc">+</span> female, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ height + female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.30992 -0.46918  0.01402  0.50658  2.62898 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.896543   0.461747   4.107 4.22e-05 ***
+height       0.070189   0.006665  10.532  &lt; 2e-16 ***
+female1     -0.102456   0.053294  -1.922   0.0547 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7127 on 1506 degrees of freedom
+Multiple R-squared:  0.1524,    Adjusted R-squared:  0.1513 
+F-statistic: 135.4 on 2 and 1506 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch"><ul>
+<li>The <strong>adjusted</strong> difference between men and women is much smaller</li>
+</ul>
+</section>
+<section id="do-men-and-women-have-the-same-hippoheight-relationship" class="slide level2">
+<h2>Do Men and Women have the same hippo~height relationship?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">ggplot</span>(alzheimer0, <span class="fu">aes</span>(<span class="at">x=</span>height, <span class="at">y=</span>hippo, <span class="at">color=</span>female))<span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+</div>
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="do-men-and-women-have-the-same-hippoheight-relationship-1" class="slide level2">
+<h2>Do Men and Women have the same hippo~height relationship?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hippo <span class="sc">~</span> height<span class="sc">*</span> female, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ height * female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.30535 -0.46769  0.00966  0.50828  2.62261 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     1.743321   0.783010   2.226   0.0261 *  
+height          0.072405   0.011318   6.397 2.11e-10 ***
+female1         0.125680   0.942902   0.133   0.8940    
+height:female1 -0.003394   0.014006  -0.242   0.8086    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7129 on 1505 degrees of freedom
+Multiple R-squared:  0.1524,    Adjusted R-squared:  0.1507 
+F-statistic: 90.22 on 3 and 1505 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="compare-two-linear-models" class="slide level2">
+<h2>Compare two Linear Models</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>obj0<span class="ot">=</span><span class="fu">lm</span>(hippo <span class="sc">~</span> height, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb20-2"><a href="#cb20-2"></a>obj1<span class="ot">=</span><span class="fu">lm</span>(hippo <span class="sc">~</span> height<span class="sc">*</span> female, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">anova</span>(obj0, obj1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Model 1: hippo ~ height
+Model 2: hippo ~ height * female
+  Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+1   1507 766.89                           
+2   1505 764.98  2    1.9072 1.8761 0.1535</code></pre>
+</div>
+</div>
+</section>
+<section id="interpret-interactions" class="slide level2">
+<h2>Interpret Interactions</h2>
+<ul>
+<li>Do men and women shrink brain in the same speed?</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">ggplot</span>(alzheimer0, <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>hippo, <span class="at">color=</span>female))<span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se=</span>F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+
+</div>
+<img data-src="LinearModels_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="interpret-interactions-1" class="slide level2">
+<h2>Interpret Interactions</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(lhippo<span class="sc">~</span> age<span class="sc">*</span>female, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lhippo ~ age * female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.38031 -0.23026 -0.00833  0.25027  1.24240 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  4.532691   0.103765  43.682  &lt; 2e-16 ***
+age         -0.017258   0.001489 -11.590  &lt; 2e-16 ***
+female1     -0.587113   0.125421  -4.681 3.11e-06 ***
+age:female1  0.004712   0.001807   2.608   0.0092 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.3524 on 1505 degrees of freedom
+Multiple R-squared:  0.2325,    Adjusted R-squared:  0.231 
+F-statistic:   152 on 3 and 1505 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="interpret-interactions-2" class="slide level2">
+<h2>Interpret Interactions</h2>
+<ul>
+<li>The estimated brain shrinking speed for men is 0.017cc per year</li>
+<li>The estimated brain shrinking speed for women is 0.013cc per year</li>
+<li>The result about the interaction item indicates that the difference in brain shrinking speed between men and women is 0.005cc per year and it is statistically significant</li>
+</ul>
+</section>
+<section id="interpret-transformed-data" class="slide level2">
+<h2>Interpret transformed data</h2>
+<ul>
+<li>Weight is a little bit skewed. Regress hippocampus volume on log(weight). How to interpret the results?</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co">#plot(log(alzheimer0$weight), alzheimer0$hippo, xlab="weight", ylab="log(weight)")</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hippo<span class="sc">~</span><span class="fu">log</span>(weight), <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ log(weight), data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.43292 -0.53018 -0.00561  0.51543  2.75324 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.25174    0.46350   2.701    0.007 ** 
+log(weight)  1.01324    0.09067  11.175   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7437 on 1507 degrees of freedom
+Multiple R-squared:  0.07653,   Adjusted R-squared:  0.07591 
+F-statistic: 124.9 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="interpret-transformed-data-1" class="slide level2">
+<h2>Interpret transformed data</h2>
+<ul>
+<li>Regress log(weight) on height. How to interpret the results?</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co">#plot(alzheimer0$height, log(alzheimer0$weight), xlab="height", ylab="log(weight)")</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="fu">summary</span>(<span class="fu">lm</span>(<span class="fu">log</span>(weight)<span class="sc">~</span>height, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(weight) ~ height, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.52837 -0.12566 -0.01422  0.11537  0.58745 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 3.184590   0.079885   39.87   &lt;2e-16 ***
+height      0.029356   0.001217   24.11   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1795 on 1507 degrees of freedom
+Multiple R-squared:  0.2784,    Adjusted R-squared:  0.2779 
+F-statistic: 581.4 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="linear-models-are-a-unified-tool" class="title-slide slide level1 center">
+<h1>Linear Models Are a Unified Tool</h1>
+
+</section>
+<section id="conduct-t-test-using-lm" class="slide level2">
+<h2>Conduct t-test Using LM</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="fu">t.test</span>(hippo<span class="sc">~</span>female, <span class="at">data=</span>alzheimer0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  hippo by female
+t = 11.786, df = 950.08, p-value &lt; 2.2e-16
+alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+95 percent confidence interval:
+ 0.4074032 0.5701731
+sample estimates:
+mean in group 0 mean in group 1 
+       6.748284        6.259496 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(hippo<span class="sc">~</span>female, <span class="at">data=</span>alzheimer0))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.51650 -0.49828 -0.01098  0.54050  2.83082 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.74828    0.03247  207.84   &lt;2e-16 ***
+female1     -0.48879    0.04005  -12.21   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7383 on 1507 degrees of freedom
+Multiple R-squared:  0.08997,   Adjusted R-squared:  0.08936 
+F-statistic:   149 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="conduct-anova-using-lm" class="slide level2">
+<h2>Conduct ANOVA Using LM</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(lhippo<span class="sc">~</span>diagnosis, <span class="at">data=</span>alzheimer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+diagnosis      2  100.5   50.27   247.1 &lt;2e-16 ***
+Residuals   2697  548.6    0.20                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(lhippo<span class="sc">~</span>diagnosis, <span class="at">data=</span>alzheimer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lhippo ~ diagnosis, data = alzheimer)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.14029 -0.30148 -0.00139  0.30199  1.85171 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.18148    0.01152  276.29   &lt;2e-16 ***
+diagnosis1  -0.29680    0.02155  -13.77   &lt;2e-16 ***
+diagnosis2  -0.46009    0.02237  -20.57   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.451 on 2697 degrees of freedom
+Multiple R-squared:  0.1549,    Adjusted R-squared:  0.1543 
+F-statistic: 247.1 on 2 and 2697 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co">#anova(lm(lhippo~diagnosis, data=alzheimer))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section></section>
+<section>
+<section id="design-matrix" class="title-slide slide level1 center">
+<h1>Design Matrix</h1>
+<ul>
+<li><p>Definition: The design matrix, often denoted as <span class="math inline">\(\mathbf X\)</span>, is a matrix of observed data in which each row represents an observation, and each column corresponds to a predictor or independent variable in the linear model.</p></li>
+<li><p>Matrix format: <span class="math inline">\(\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\mathbf Y\)</span> is the <span class="math inline">\(n\times 1\)</span> response vector.</li>
+<li><span class="math inline">\(\mathbf X\)</span> is the <span class="math inline">\(n\times p\)</span> design matrix.</li>
+<li><span class="math inline">\(\boldsymbol{\beta}\)</span> is the <span class="math inline">\(p\times 1\)</span> vector of coefficients.</li>
+<li><span class="math inline">\(\boldsymbol{\varepsilon}\)</span> is the <span class="math inline">\(n\times 1\)</span> vector of error terms.</li>
+</ul></li>
+</ul>
+</section>
+<section id="design-matrix-example-1" class="slide level2">
+<h2>Design Matrix: Example 1</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(hippo<span class="sc">~</span>age, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="fu">dim</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1509    2</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) age
+1           1  74
+2           1  56
+3           1  77
+4           1  74
+6           1  72
+7           1  64</code></pre>
+</div>
+</div>
+</section>
+<section id="design-matrix-example-1-1" class="slide level2">
+<h2>Design Matrix: Example 1</h2>
+<ul>
+<li>The model in Example 1 is <span class="math display">\[Y_i = \beta_0 + \beta_1 x_i + \varepsilon, i=1,\dots,n\]</span></li>
+<li>Align the <span class="math inline">\(n\)</span> equations vertically, <span class="math display">\[\begin{pmatrix}
+Y_1\\ Y_2\\ \vdots\\ Y_n
+\end{pmatrix} =
+\begin{pmatrix}
+1&amp;x_1\\ 1&amp;x_2\\ \vdots\\ 1&amp;x_n
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0\\ \beta_1 \end{pmatrix}  +
+\begin{pmatrix}
+\varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n
+\end{pmatrix}\]</span></li>
+<li>The matrix format is <span class="math inline">\(\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}\)</span></li>
+</ul>
+</section>
+<section id="design-matrix-example-2" class="slide level2">
+<h2>Design Matrix: Example 2</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(hippo<span class="sc">~</span>female, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="fu">dim</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1509    2</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) female1
+1           1       0
+2           1       1
+3           1       1
+4           1       1
+6           1       1
+7           1       1</code></pre>
+</div>
+</div>
+</section>
+<section id="design-matrix-example-2-1" class="slide level2">
+<h2>Design Matrix: Example 2</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(hippo<span class="sc">~</span>female, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="fu">summary</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ female, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.51650 -0.49828 -0.01098  0.54050  2.83082 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  6.74828    0.03247  207.84   &lt;2e-16 ***
+female1     -0.48879    0.04005  -12.21   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7383 on 1507 degrees of freedom
+Multiple R-squared:  0.08997,   Adjusted R-squared:  0.08936 
+F-statistic:   149 on 1 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>How to interpret the results?</li>
+</ul>
+</section>
+<section id="design-matrix-example-2-2" class="slide level2">
+<h2>Design Matrix: Example 2</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = hippo ~ female - 1, data = alzheimer0)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.51650 -0.49828 -0.01098  0.54050  2.83082 
+
+Coefficients:
+        Estimate Std. Error t value Pr(&gt;|t|)    
+female0  6.74828    0.03247   207.8   &lt;2e-16 ***
+female1  6.25950    0.02344   267.0   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7383 on 1507 degrees of freedom
+Multiple R-squared:  0.987, Adjusted R-squared:  0.987 
+F-statistic: 5.726e+04 on 2 and 1507 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  female0 female1
+1       1       0
+2       0       1
+3       0       1
+4       0       1
+6       0       1
+7       0       1</code></pre>
+</div>
+</div>
+</section>
+<section id="design-matrix-example-3" class="slide level2">
+<h2>Design Matrix: Example 3</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(lhippo<span class="sc">~</span>diagnosis, <span class="at">data=</span>alzheimer)</span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="fu">dim</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2700    3</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="fu">head</span>(<span class="fu">model.matrix</span>(obj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (Intercept) diagnosis1 diagnosis2
+1           1          0          0
+2           1          0          0
+3           1          0          0
+4           1          0          0
+5           1          1          0
+6           1          0          0</code></pre>
+</div>
+</div>
+<ul>
+<li>According to the design matrix, which diagnosis group is used as the reference group?</li>
+</ul>
+</section>
+<section id="design-matrix-example-3-1" class="slide level2">
+<h2>Design Matrix: Example 3</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(lhippo<span class="sc">~</span>diagnosis, <span class="at">data=</span>alzheimer)</span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="fu">summary</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lhippo ~ diagnosis, data = alzheimer)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.14029 -0.30148 -0.00139  0.30199  1.85171 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.18148    0.01152  276.29   &lt;2e-16 ***
+diagnosis1  -0.29680    0.02155  -13.77   &lt;2e-16 ***
+diagnosis2  -0.46009    0.02237  -20.57   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.451 on 2697 degrees of freedom
+Multiple R-squared:  0.1549,    Adjusted R-squared:  0.1543 
+F-statistic: 247.1 on 2 and 2697 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>How to interpret the results?</li>
+</ul>
+</section>
+<section id="design-matrix-example-3-2" class="slide level2">
+<h2>Design Matrix: Example 3</h2>
+<ul>
+<li>Let’s remove the intercept</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(lhippo<span class="sc">~</span>diagnosis<span class="dv">-1</span>, <span class="at">data=</span>alzheimer)</span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="co">#obj=lm(lhippo~diagnosis+0, data=alzheimer) #also works</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="fu">summary</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lhippo ~ diagnosis - 1, data = alzheimer)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.14029 -0.30148 -0.00139  0.30199  1.85171 
+
+Coefficients:
+           Estimate Std. Error t value Pr(&gt;|t|)    
+diagnosis0  3.18148    0.01152   276.3   &lt;2e-16 ***
+diagnosis1  2.88468    0.01822   158.4   &lt;2e-16 ***
+diagnosis2  2.72139    0.01918   141.9   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.451 on 2697 degrees of freedom
+Multiple R-squared:  0.9783,    Adjusted R-squared:  0.9783 
+F-statistic: 4.052e+04 on 3 and 2697 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>How to interpret the results?</li>
+</ul>
+</section>
+<section id="design-matrix-example-3-3" class="slide level2">
+<h2>Design Matrix: Example 3</h2>
+<ul>
+<li>We can also change the reference group</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(lhippo<span class="sc">~</span><span class="fu">relevel</span>(diagnosis, <span class="at">ref=</span><span class="st">"1"</span>), <span class="at">data=</span>alzheimer)</span>
+<span id="cb58-2"><a href="#cb58-2"></a><span class="fu">summary</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = lhippo ~ relevel(diagnosis, ref = "1"), data = alzheimer)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.14029 -0.30148 -0.00139  0.30199  1.85171 
+
+Coefficients:
+                               Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                     2.88468    0.01822 158.360  &lt; 2e-16 ***
+relevel(diagnosis, ref = "1")0  0.29680    0.02155  13.772  &lt; 2e-16 ***
+relevel(diagnosis, ref = "1")2 -0.16329    0.02645  -6.173 7.69e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.451 on 2697 degrees of freedom
+Multiple R-squared:  0.1549,    Adjusted R-squared:  0.1543 
+F-statistic: 247.1 on 2 and 2697 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<ul>
+<li>How to interpret the results?</li>
+</ul>
+</section>
+<section id="inference-of-a-linear-combination" class="slide level2">
+<h2>Inference of A Linear Combination</h2>
+<ul>
+<li>The lm function in R produces not only estimates but also the variance-covariance matrix</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>obj<span class="ot">=</span><span class="fu">lm</span>(lhippo<span class="sc">~</span>diagnosis<span class="dv">-1</span>, <span class="at">data=</span>alzheimer)</span>
+<span id="cb60-2"><a href="#cb60-2"></a><span class="fu">coef</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>diagnosis0 diagnosis1 diagnosis2 
+  3.181481   2.884682   2.721390 </code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="fu">vcov</span>(obj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             diagnosis0   diagnosis1   diagnosis2
+diagnosis0 0.0001325996 0.0000000000 0.0000000000
+diagnosis1 0.0000000000 0.0003318234 0.0000000000
+diagnosis2 0.0000000000 0.0000000000 0.0003678259</code></pre>
+</div>
+</div>
+<ul>
+<li>What if we are interested in a specific linear combination of the coefficients, say <span class="math inline">\(\frac{\beta_1 +\beta_2}{2} - \beta_0\)</span></li>
+</ul>
+</section>
+<section id="inference-of-a-linear-combination-1" class="slide level2">
+<h2>Inference of A Linear Combination</h2>
+<ul>
+<li><p>Note that <span class="math inline">\(\frac{\beta_1 +\beta_2}{2} - \beta_0 = (-1, \frac{1}{2}, \frac{1}{2}) \begin{pmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \end{pmatrix}\)</span></p></li>
+<li><p><span class="math inline">\(cov(a^T \hat {\boldsymbol{\beta}})=a^T cov(\hat {\boldsymbol{\beta}}) a\)</span></p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>a<span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.5</span>), <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb64-2"><a href="#cb64-2"></a><span class="fu">print</span>(<span class="st">"estimate"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "estimate"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a>a<span class="sc">%*%</span><span class="fu">as.matrix</span>(<span class="fu">coef</span>(obj), <span class="dv">3</span>, <span class="dv">1</span>) <span class="co">#estimate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] -0.3784448</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="fu">print</span>(<span class="st">"standard error"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "standard error"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="fu">sqrt</span>(a<span class="sc">%*%</span> <span class="fu">vcov</span>(obj) <span class="sc">%*%</span> <span class="fu">t</span>(a)) <span class="co">#se</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>           [,1]
+[1,] 0.01753602</code></pre>
+</div>
+</div>
+</section>
+<section id="inference-of-a-linear-combination-2" class="slide level2">
+<h2>Inference of A Linear Combination</h2>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>t.stat<span class="ot">=</span>a<span class="sc">%*%</span><span class="fu">as.matrix</span>(<span class="fu">coef</span>(obj), <span class="dv">3</span>, <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(a<span class="sc">%*%</span> <span class="fu">vcov</span>(obj) <span class="sc">%*%</span> <span class="fu">t</span>(a))</span>
+<span id="cb72-2"><a href="#cb72-2"></a><span class="fu">print</span>(t.stat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        [,1]
+[1,] -21.581</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a>df<span class="ot">=</span><span class="fu">df.residual</span>(obj)</span>
+<span id="cb74-2"><a href="#cb74-2"></a><span class="fu">print</span>(<span class="st">"p-value"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "p-value"</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fu">abs</span>(t.stat), <span class="at">df=</span>df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,]    0</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="theory-of-linear-models" class="title-slide slide level1 center">
+<h1>Theory of Linear Models</h1>
+
+</section>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
+<ul>
+<li>Warning: due to limited time, we cannot review everything needed to establish all the results. The goal of this one-hour lecture is to get the big picture. To fully understand everything, we need 10+ lectures.</li>
+<li>The normal equation and LSE</li>
+<li>The Gauss-Markov theorem</li>
+<li>Multivariate normal distributions</li>
+<li>Chi-squared distributions</li>
+<li>F-test and t-test</li>
+</ul>
+</section>
+<section id="least-squares-estimate-an-optimization-problem" class="slide level2">
+<h2>Least Squares Estimate: An Optimization Problem</h2>
+<ul>
+<li><p>Suppose <span class="math inline">\(\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\varepsilon}\)</span>. The LSE is obtained by minimizing the sum of squared errors <span class="math display">\[Q(\boldsymbol\beta)= ||\mathbf Y - \mathbf{X}\boldsymbol{\beta}||^2 = (\mathbf Y - \mathbf{X}\boldsymbol{\beta})^T (\mathbf Y - \mathbf{X}\boldsymbol{\beta})\]</span></p></li>
+<li><p>Differentiation with respect to a vector of parameters. Let <span class="math inline">\(f(\boldsymbol \beta)\)</span> be a scaluar-valued function of a vector <span class="math inline">\(\boldsymbol \beta\)</span>. The differentiation with respect to (wrt) the vector <span class="math inline">\(\boldsymbol \beta\)</span> is defined as <span class="math display">\[\dfrac{d}{d \boldsymbol \beta}f(\boldsymbol \beta) =
+\begin{pmatrix}
+\frac{\partial f}{\partial \beta_0} \\
+\frac{\partial f}{\partial \beta_1} \\
+\cdots\\
+\frac{\partial f}{\partial \beta_{p-1}}
+\end{pmatrix}\]</span></p></li>
+<li><p>Note. This is known as the gradient of <span class="math inline">\(f(\boldsymbol \beta)\)</span></p></li>
+</ul>
+</section>
+<section id="least-squares-estimate-derivation-for-simple-linear-regression" class="slide level2">
+<h2>Least Squares Estimate: Derivation for Simple Linear Regression</h2>
+<ul>
+<li><span class="math inline">\(Q(\boldsymbol \beta)=Q(\beta_0, \beta_1)=\sum_{i=1}^n (y_i - \beta_0 - \beta_1)^2\)</span></li>
+</ul>
+<p><span class="math display">\[\dfrac{d}{d \boldsymbol \beta}f(\boldsymbol \beta) =
+\begin{pmatrix}
+\frac{\partial f}{\partial \beta_0} \\
+\frac{\partial f}{\partial \beta_1}
+\end{pmatrix} = \begin{pmatrix}
+-2\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)\\
+2 \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)x_i
+\end{pmatrix}\]</span></p>
+<ul>
+<li><p>Set them to zero, we have <span class="math display">\[\begin{aligned}
+\beta_0 + \beta_1 \bar x &amp; =  \bar y \\
+\sum_{i=1}^n x_i^2 \beta_1 +  \beta_0 n \bar x &amp;=\sum_{i=1}^n x_i y_i
+\end{aligned}\]</span></p></li>
+<li><p>It follows immediately that <span class="math display">\[\hat\beta_1=\frac{\sum_{i=1}^n x_i y_i  - n \bar x \bar y}{\sum_{i=1}^n x_i^2 - n\bar x^2}, \hat \beta_0 = \bar y - \hat\beta_1 \bar x \]</span></p></li>
+</ul>
+</section>
+<section id="least-squares-estimate-derivation-for-multiple-linear-regression" class="slide level2">
+<h2>Least Squares Estimate: Derivation for Multiple Linear Regression</h2>
+<ul>
+<li>The same principal applies but knowledge of matrix theory is needed to understand the derivation.</li>
+<li>Don’t know or cannot remember results of matrix algebra? Not a big deal. Just search “<a href="https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf">the matrix cookbook</a>” <span class="math display">\[Q(\boldsymbol \beta)=||\mathbf Y - \mathbf{X}\boldsymbol{\beta}||^2 = \mathbf Y ^T \mathbf Y - 2 \mathbf Y^T \mathbf X \boldsymbol \beta + \boldsymbol \beta^T \mathbf X^T \mathbf X \boldsymbol \beta\]</span></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+\frac{d }{d \boldsymbol \beta}\mathbf Y^T \mathbf X \boldsymbol \beta &amp;= \mathbf X^T \mathbf Y\\
+\frac{d }{d \boldsymbol \beta} \boldsymbol \beta^T \mathbf X^T \mathbf X \boldsymbol \beta &amp; = 2 \mathbf X^T \mathbf X \boldsymbol \beta
+\end{aligned}
+\]</span></p>
+<ul>
+<li>Thus, <span class="math inline">\(0=\frac{d}{d \boldsymbol \beta}Q(\boldsymbol \beta)\)</span> gives the so called <strong>normal equation</strong> <span class="math display">\[\mathbf X^T \mathbf X \boldsymbol \beta = \mathbf X ^T \mathbf Y\]</span></li>
+</ul>
+</section>
+<section id="the-normal-equation" class="slide level2">
+<h2>The Normal Equation</h2>
+<ul>
+<li><p>The normal equation is <span class="math display">\[\mathbf X^T \mathbf X \boldsymbol \beta = \mathbf X ^T \mathbf Y\]</span></p></li>
+<li><p>The normal equation includes a list of equations. A solution to it is an LSE of <span class="math inline">\(\boldsymbol \beta\)</span>.</p></li>
+<li><p>LSE exists but might not be unique.</p></li>
+<li><p>When <span class="math inline">\(rank(\mathbf X_{n\times p})=p\)</span>, <span class="math inline">\(\mathbf X^T \mathbf X\)</span> is invertible and the LSE is unique</p></li>
+</ul>
+<p><span class="math display">\[\hat {\boldsymbol \beta} = (\mathbf X^T \mathbf X)^{-1}\mathbf X ^T \mathbf Y\]</span></p>
+</section>
+<section id="the-normal-equation-example" class="slide level2">
+<h2>The Normal Equation: Example</h2>
+<ul>
+<li>Use the lm function in R</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>obj1<span class="ot">=</span><span class="fu">lm</span>(hippo <span class="sc">~</span> height<span class="sc">*</span> female, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb78-2"><a href="#cb78-2"></a><span class="fu">coef</span>(obj1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   (Intercept)         height        female1 height:female1 
+   1.743321211    0.072405185    0.125679857   -0.003394123 </code></pre>
+</div>
+</div>
+<ul>
+<li>Use the LSE formula in the previous slide:</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>X<span class="ot">=</span><span class="fu">model.matrix</span>(obj1)</span>
+<span id="cb80-2"><a href="#cb80-2"></a>Y<span class="ot">=</span><span class="fu">as.matrix</span>(alzheimer0<span class="sc">$</span>hippo, <span class="fu">dim</span>(alzheimer0)[<span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb80-3"><a href="#cb80-3"></a><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> Y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                       [,1]
+(Intercept)     1.743321211
+height          0.072405185
+female1         0.125679857
+height:female1 -0.003394123</code></pre>
+</div>
+</div>
+<ul>
+<li>Note, R and other software do not calculate the inverse of <span class="math inline">\(\mathbf X^T \mathbf X\)</span> directly; they use more efficient matrix decomposition methods</li>
+</ul>
+</section>
+<section id="gauss-markov-theorem" class="slide level2">
+<h2>Gauss-Markov Theorem</h2>
+<ul>
+<li>The LSE is optimal (minimum variance among all linear unbiased estimators) when
+<ul>
+<li><span class="math inline">\(\boldsymbol{\varepsilon}=\mathbf 0\)</span></li>
+<li><span class="math inline">\(cov(\boldsymbol{\varepsilon})=\sigma^2 \mathbf I\)</span></li>
+</ul></li>
+<li>This result is know as Gauss-Markov theorem: the LSE is the Best Linear Unbiased Estimator (BLUE) when the two above conditions hold.</li>
+<li>When the covariance assumption is violated, the LSE is still unbiased but it does not attain the minimum variance
+<ul>
+<li>Transform the response variable</li>
+<li>Use Generalized Least Squares Estimate (GLSE).</li>
+<li>Use GLM if it applies</li>
+</ul></li>
+</ul>
+</section>
+<section id="gauss-markov-theorem-1" class="slide level2">
+<h2>Gauss-Markov Theorem</h2>
+<ul>
+<li>Suppose that <span class="math inline">\(cov(\boldsymbol{\varepsilon})=\boldsymbol \Sigma\)</span>. Note <span class="math inline">\(cov(\mathbf Y) =\boldsymbol \Sigma\)</span>.</li>
+<li>If <span class="math inline">\(\boldsymbol \Sigma\)</span> is known, we can model <span class="math inline">\(\boldsymbol \Sigma^{-1/2}\mathbf Y\)</span> on <span class="math inline">\(\boldsymbol \Sigma^{-1/2}\mathbf X\)</span> and find its LSE. This is because the transformed data <span class="math inline">\(\boldsymbol \Sigma^{-1/2}\mathbf Y\)</span> has covariance <span class="math inline">\(\mathbf I\)</span>.</li>
+<li>A more practical situation is when <span class="math inline">\(cov(\boldsymbol{\varepsilon})\propto \boldsymbol \Sigma\)</span>. The above strategy still works.</li>
+<li>Example <span class="math display">\[cov(\boldsymbol{\varepsilon})=\sigma^2 \begin{bmatrix}
+n_1 &amp;  &amp;  &amp; \\
+&amp; n_2 &amp;  &amp; \\
+&amp;  &amp;  \ddots &amp; \\
+&amp;  &amp;   &amp; n_K
+\end{bmatrix}
+\]</span></li>
+</ul>
+</section>
+<section id="pdf-of-normal-distributions" class="slide level2">
+<h2>PDF of Normal Distributions</h2>
+<ul>
+<li><p>Univariate normal distribution: <span class="math display">\[
+  f(y) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{ -\frac{(y - \mu)^2}{2\sigma^2} }
+  \]</span></p></li>
+<li><p>Bivariate normal distribution: <span class="math display">\[
+  f(y_1, y_2) = \frac{1}{2\pi\sigma_1\sigma_2\sqrt{1-\rho^2}} e^{ -\frac{1}{2(1-\rho^2)} \left(\frac{(y_1 - \mu_1)^2}{\sigma_1^2} + \frac{(y_2 - \mu_2)^2}{\sigma_2^2} - 2\rho\frac{(y_1 - \mu_1)(y_2 - \mu_2)}{\sigma_1\sigma_2} \right)}
+  \]</span> The formula for a <span class="math inline">\(p\ge 3\)</span>-dimensional multivariate normal distribution is much messier, so we use a compact way:</p></li>
+<li><p>Multivariate normal distribution: <span class="math display">\[
+  f(\mathbf{Y}) = \frac{1}{\sqrt{(2\pi)^p|\boldsymbol\Sigma|}} e^{ -\frac{1}{2} (\mathbf{Y
+} - \boldsymbol\mu)^T \boldsymbol\Sigma^{-1} (\mathbf{Y} - \boldsymbol\mu)}
+  \]</span></p></li>
+</ul>
+</section>
+<section id="once-normal-always-normal" class="slide level2">
+<h2>Once Normal, Always Normal</h2>
+<ul>
+<li>Of course this cannot be true!</li>
+<li>What it means is that if we start from a random vector following a MVN, then any linear function of it follows a normal distribution</li>
+<li>Let <span class="math inline">\(\mathbf Y \sim N(\boldsymbol\mu, \boldsymbol \Sigma)\)</span>, then using a tool called moment generating function (MGF), one can show that
+<ul>
+<li><span class="math inline">\(\mathbf Y -\mathbf M \sim N(\boldsymbol \mu -\mathbf M, \boldsymbol\Sigma)\)</span></li>
+<li><span class="math inline">\(a^T \mathbf Y \sim N(a^T\boldsymbol\mu, a^T \boldsymbol \Sigma a)\)</span>, where <span class="math inline">\(a\)</span> is a column vector</li>
+<li><span class="math inline">\(A \mathbf Y \sim N(A \boldsymbol\mu, A \boldsymbol \Sigma A^T)\)</span>, where <span class="math inline">\(A\)</span> is a matrix</li>
+<li><span class="math inline">\(A\mathbf Y \perp B \mathbf Y \iff A\boldsymbol \Sigma B^T = 0\)</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="once-normal-always-normal-example-1-the-lse" class="slide level2">
+<h2>Once Normal, Always Normal: Example 1 (the LSE)</h2>
+<ul>
+<li>Suppose that <span class="math inline">\(\mathbf Y \sim N(\mathbf X \boldsymbol \beta, \sigma^2 \mathbf I)\)</span>. <span class="math inline">\(\hat{\boldsymbol \beta}\)</span> is a linear function of <span class="math inline">\(\mathbf Y\)</span>. Therefore, <span class="math display">\[\begin{aligned}
+\hat{\boldsymbol \beta} &amp;=  \color{red}{(\mathbf X^T \mathbf X)^{-1}\mathbf X^T}  \mathbf Y \\
+&amp;\sim N(\color{red}{(\mathbf X^T \mathbf X)^{-1}\mathbf X^T}  \mathbf X \boldsymbol \beta, \sigma^2 \color{red}{(\mathbf X^T \mathbf X)^{-1} \mathbf X^T \mathbf X (\mathbf X^T \mathbf X)^{-1} }) \\
+&amp;\sim N(\boldsymbol \beta, \sigma^2 (\mathbf X^T \mathbf X)^{-1})
+\end{aligned}
+\]</span></li>
+<li><span class="math inline">\(\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\hat{\boldsymbol \beta}\)</span> is a linear function of <span class="math inline">\(\hat{\boldsymbol \beta}\)</span>. Therefore,</li>
+</ul>
+<p><span class="math display">\[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\hat{\boldsymbol \beta} \sim N(\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}\boldsymbol \beta, \mathbf I)\]</span></p>
+<ul>
+<li>We can also center it, leading to <span class="math display">\[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) \sim N(\mathbf 0, \mathbf I)\]</span></li>
+</ul>
+</section>
+<section id="once-normal-always-normal-example-2-the-residuals" class="slide level2">
+<h2>Once Normal, Always Normal: Example 2 (the Residuals)</h2>
+<ul>
+<li><p>The vector of residuals is <span class="math display">\[\begin{aligned}
+\mathbf e &amp;= \mathbf Y - \hat{\mathbf Y} = \mathbf Y - \mathbf X  \hat{\boldsymbol \beta} = \mathbf Y - \mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T \mathbf Y \\
+&amp;=[\mathbf I - \mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T ]\mathbf Y
+\end{aligned}\]</span></p></li>
+<li><p>The matrix <span class="math inline">\(\mathbf H=\mathbf X (\mathbf X^T \mathbf X)^{-1}\mathbf X^T\)</span> is the so-called Hat matrix because <span class="math inline">\(\mathbf H \mathbf Y = \hat {\mathbf Y}\)</span>.</p></li>
+<li><p>It is easy to verify that <span class="math inline">\(\mathbf H\)</span> satisfies two conditions</p>
+<ul>
+<li>symmetric: <span class="math inline">\(\mathbf H = \mathbf H^T\)</span></li>
+<li>idempotent: <span class="math inline">\(\mathbf H^2 = \mathbf H\)</span>.</li>
+</ul></li>
+<li><p>A matrix that is both symmetric and idepotent is a projection matrix.</p></li>
+<li><p>You can verify that <span class="math inline">\(\mathbf I - \mathbf H\)</span> is also a projection matrix.</p></li>
+</ul>
+</section>
+<section id="once-normal-always-normal-example-2-the-residuals-1" class="slide level2">
+<h2>Once Normal, Always Normal: Example 2 (the Residuals)</h2>
+<ul>
+<li><span class="math inline">\(\mathbf e\)</span> is linear in <span class="math inline">\(\mathbf Y\)</span> because <span class="math inline">\(\mathbf e = \color{red}{(\mathbf I-\mathbf H)}\mathbf Y\)</span>. It is not difficult to verify that <span class="math display">\[(\mathbf I - \mathbf H) \mathbf X \boldsymbol \beta = \mathbf 0\]</span></li>
+<li>Therefore <span class="math display">\[\mathbf e = \color{red}{(\mathbf I-\mathbf H)}(\mathbf Y - \mathbf X \boldsymbol \beta)\]</span></li>
+</ul>
+</section>
+<section id="projection-matrices" class="slide level2">
+<h2>Projection Matrices</h2>
+<ul>
+<li>As stated earlier, a projection matrix is both symmetric and idempotent.</li>
+<li>An imporant and useful property is that if <span class="math inline">\(P\)</span> is a projection matrix, then
+<ul>
+<li><span class="math inline">\(rank(P) = trace(P)\)</span></li>
+<li>Spectral decomposition: <span class="math display">\[P=\Gamma
+\begin{pmatrix}
+\mathbf I_r &amp; \mathbf 0\\
+\mathbf 0 &amp; \mathbf 0
+\end{pmatrix}
+\Gamma^T\]</span> where <span class="math inline">\(\Gamma\)</span> is an orthogonal matrix, i.e., <span class="math inline">\(\Gamma\Gamma^T=\Gamma^T \Gamma=\mathbf I\)</span>.</li>
+</ul></li>
+<li>Example</li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a>obj1<span class="ot">=</span><span class="fu">lm</span>(hippo <span class="sc">~</span> height<span class="sc">*</span> female, <span class="at">data=</span>alzheimer0)</span>
+<span id="cb82-2"><a href="#cb82-2"></a>X<span class="ot">=</span><span class="fu">model.matrix</span>(obj1)</span>
+<span id="cb82-3"><a href="#cb82-3"></a>Y<span class="ot">=</span><span class="fu">as.matrix</span>(alzheimer0<span class="sc">$</span>hippo, <span class="fu">dim</span>(alzheimer0)[<span class="dv">1</span>], <span class="dv">1</span>)</span>
+<span id="cb82-4"><a href="#cb82-4"></a>H<span class="ot">=</span>X<span class="sc">%*%</span><span class="fu">solve</span>(<span class="fu">t</span>(X)<span class="sc">%*%</span>X)<span class="sc">%*%</span> <span class="fu">t</span>(X)</span>
+<span id="cb82-5"><a href="#cb82-5"></a><span class="fu">sum</span>(<span class="fu">diag</span>(H))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="co">#eigen(H, only.values = TRUE)$values[1:10] #time consuming</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="chi-squared-distribution-definition" class="slide level2">
+<h2>Chi-squared Distribution: Definition</h2>
+<ul>
+<li>The simplest chi-squared distributed random variable can be obtained by squaring a <span class="math inline">\(N(0,1)\)</span> random variable. In other words, if <span class="math inline">\(Z\sim N(0,1)\)</span>, then <span class="math inline">\(Z^2 \sim \chi_1^2\)</span>.</li>
+<li>Suppose <span class="math inline">\(\mathbf Z \sim N(\mathbf 0, \mathbf I)\)</span> and the length of <span class="math inline">\(\mathbf Z\)</span> is k. Then <span class="math inline">\(\mathbf Z^T \mathbf Z = \sum_{i=1}^k Z_i^2 \sim \chi_k^2\)</span> based on a definition of <span class="math inline">\(\chi_{df}^2\)</span>.</li>
+</ul>
+</section>
+<section id="construct-chi-squared-random-variables-from-quadratic-forms" class="slide level2">
+<h2>Construct Chi-squared Random Variables from Quadratic Forms</h2>
+<ul>
+<li>Let <span class="math inline">\(P\)</span> be a projection matrix with rank <span class="math inline">\(df\)</span>. Then <span class="math display">\[
+\mathbf Z^T P \mathbf Z = \mathbf Z^T \Gamma \begin{pmatrix}
+\mathbf I_{df} &amp; \mathbf 0\\
+\mathbf 0 &amp; \mathbf 0
+\end{pmatrix}
+\Gamma^T\mathbf Z
+\]</span>
+<ul>
+<li>“Once normal always normal” indicates that <span class="math inline">\(\Gamma^T \mathbf Z \sim N(\mathbf 0, \Gamma^T \Gamma) \sim N(\mathbf 0, \mathbf I)\)</span> because <span class="math inline">\(\Gamma\)</span> s.t. <span class="math inline">\(\Gamma\Gamma^T=\mathbf I\)</span>.</li>
+<li>If we let <span class="math inline">\(\tilde {\mathbf Z} = \Gamma^T \mathbf Z\)</span>. We have <span class="math inline">\(\tilde {\mathbf Z}\sim N(\mathbf 0, \mathbf I)\)</span>; in other words, <span class="math inline">\((\tilde Z_1, \cdots, \tilde Z_n)\)</span> are iid <span class="math inline">\(N(0,1)\)</span>. Also</li>
+</ul></li>
+</ul>
+<p><span class="math display">\[
+\mathbf Z^T P \mathbf Z = \tilde {\mathbf Z}^T \Gamma \begin{pmatrix}
+  \mathbf I_{df} &amp; \mathbf 0\\
+  \mathbf 0 &amp; \mathbf 0
+  \end{pmatrix}
+  \tilde {\mathbf Z} = \sum_{i=1}^{df} \tilde Z_i^2 \sim \chi_{df}^2
+\]</span></p>
+</section>
+<section id="chi-squared-random-variables-in-linear-models" class="slide level2">
+<h2>Chi-squared Random Variables in Linear Models</h2>
+<ul>
+<li><p>Recall that <span class="math inline">\(\mathbf Y - \mathbf X \boldsymbol \beta \sim N(\mathbf 0, \sigma^2 \mathbf I)\)</span>; therefore, <span class="math display">\[\frac{1}{\sigma}(\mathbf Y - \mathbf X \boldsymbol \beta) \sim N(\mathbf 0,\mathbf I)\]</span></p></li>
+<li><p>Let <span class="math inline">\(P=\mathbf I-\mathbf H\)</span>, the rank of which is <span class="math inline">\(n-p\)</span>. (why? A property of trace needs to be used to find the rank of a projection matrix easily)</p></li>
+<li><p>We have <span class="math inline">\(\frac{1}{\sigma^2}(\mathbf Y - \mathbf X \boldsymbol \beta)^T (\mathbf I -\mathbf H) (\mathbf Y - \mathbf X \boldsymbol \beta) \sim \chi_{n-p}^2\)</span>.</p></li>
+<li><p>Recall that <span class="math inline">\(e=(\mathbf I -\mathbf H) (\mathbf Y - \mathbf X \boldsymbol \beta)\)</span> and <span class="math inline">\(RSS=\sum_{i=1}^n e_i^2 = e^T e\)</span>. The result above indicates that <span class="math display">\[\frac{RSS}{\sigma^2}\sim \chi_{n-p}^2 \]</span></p></li>
+</ul>
+</section>
+<section id="chi-squared-random-variables-in-linear-models-1" class="slide level2">
+<h2>Chi-squared Random Variables in Linear Models</h2>
+<ul>
+<li>Recall that <span class="math inline">\(\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) \sim N(\mathbf 0, \mathbf I_p)\)</span>. We have <span class="math display">\[[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) ]^T[\frac{1}{\sigma}(\mathbf X^T \mathbf X)^{1/2}(\hat{\boldsymbol \beta}-\boldsymbol \beta) ]\sim \chi_p^2\]</span></li>
+<li>It can be simplified to <span class="math display">\[(\hat{\boldsymbol \beta}-\boldsymbol \beta)^T (\mathbf X^T \mathbf X) (\hat{\boldsymbol \beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_p^2\]</span></li>
+<li>In most situations, we are not interested in all the <span class="math inline">\(p\)</span> elements of <span class="math inline">\(\boldsymbol \beta\)</span></li>
+<li>Let <span class="math inline">\(A\)</span> be a <span class="math inline">\(q\times p\)</span> matrix with rank <span class="math inline">\(q\)</span>. Then <span class="math inline">\(A\boldsymbol\beta\)</span> produces <span class="math inline">\(q\)</span> linearly independent (i.e., non-redundant) linear functions of <span class="math inline">\(\boldsymbol \beta\)</span>. How to construct a chi-squared random variable that involving <span class="math inline">\(A\boldsymbol \beta\)</span>?</li>
+</ul>
+</section>
+<section id="chi-squared-random-variables-in-linear-models-2" class="slide level2">
+<h2>Chi-squared Random Variables in Linear Models</h2>
+<ul>
+<li>Recall that <span class="math inline">\((\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 (\mathbf X^T \mathbf X)^{-1})\)</span>.</li>
+<li>“Once normal always normal” implies that <span class="math display">\[A(\hat{\boldsymbol\beta}-\boldsymbol \beta)  \sim N(0, \sigma^2 A(\mathbf X^T \mathbf X)^{-1}A^T)\]</span></li>
+<li>Use “once normal always normal” again, we have <span class="math display">\[(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)  \sim N(0, \mathbf I_{q})\]</span></li>
+<li>The quadratic form <span class="math display">\[[(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)]^T[(\sigma^2 A(\mathbf X^T \mathbf X)^{-1})A^T)^{-1/2}A(\hat{\boldsymbol\beta}-\boldsymbol \beta)]\sim \chi_q^2\]</span> which can be simplified to <span class="math display">\[(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_q^2\]</span></li>
+</ul>
+</section>
+<section id="f-statistic" class="slide level2">
+<h2>F-statistic</h2>
+<ul>
+<li>Having constructed two chi-square distributed random variables, we only need one more ingredient: independence</li>
+<li>In <span class="math inline">\(RSS\)</span>, the only random part is <span class="math inline">\((\mathbf I-\mathbf H)\mathbf Y\)</span>; in the other one, the only random part is <span class="math inline">\(\hat{\boldsymbol \beta} = (\mathbf X^T \mathbf X)^{-1} \mathbf X^T \mathbf Y\)</span>.</li>
+<li>It can be verified that <span class="math inline">\(cov((\mathbf I-\mathbf H)\mathbf Y, \hat{\boldsymbol\beta})=\mathbf 0\)</span>, indicating independence, which further implies that the two quadratic forms are independent.</li>
+<li>We now have all the ingredients we need to bake and F-statistic
+<ul>
+<li><span class="math display">\[(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/\sigma^2 \sim \chi_q^2\]</span></li>
+<li><span class="math display">\[RSS/\sigma^2 \sim \chi_{n-p}^2\]</span></li>
+<li>They are independent.</li>
+</ul></li>
+</ul>
+</section>
+<section id="f-statistic-1" class="slide level2">
+<h2>F-statistic</h2>
+<ul>
+<li><p>Because an F-distributed random variable can be constructed using two independent chi-square distributed random variables, we have <span class="math display">\[
+\begin{aligned}
+F=\dfrac{\frac{1}{\sigma^2}(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/q}{\frac{1}{\sigma^2}RSS/(n-p)} \sim F_{q,n-p}
+\end{aligned}
+\]</span></p></li>
+<li><p><span class="math inline">\(F\)</span> can be simplified to <span class="math display">\[
+F=\dfrac{(\hat{\boldsymbol\beta}-\boldsymbol \beta)^T[A(\mathbf X^T \mathbf X)^{-1}A^T]^{-1}(\hat{\boldsymbol\beta}-\boldsymbol \beta)/q}{RSS/(n-p)}\]</span></p></li>
+</ul>
+</section>
+<section id="t-statistic" class="slide level2">
+<h2>t-statistic</h2>
+<ul>
+<li>Consider <span class="math inline">\(a^T \boldsymbol\beta\)</span>. We have shown that <span class="math inline">\((\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 (\mathbf X^T \mathbf X)^{-1})\)</span></li>
+<li>By “once normal always normal”, we have <span class="math display">\[a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta) \sim N(0, \sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a)\]</span></li>
+<li>Scale the LHS, we have <span class="math display">\[\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)} {\sqrt{\sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a}} \sim N(0,1)\]</span></li>
+<li>Finally, <span class="math display">\[t=\frac{\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)} {\sqrt{\sigma^2 a^T(\mathbf X^T \mathbf X)^{-1}a}}}{\sqrt{\frac{RSS}{\sigma^2}/(n-p)}} \sim t_{n-p}\]</span></li>
+<li>The LHS can be simplified to <span class="math display">\[t=\frac{a^T(\hat{\boldsymbol\beta}-\boldsymbol \beta)}{\sqrt{s^2a^T(\mathbf X^T \mathbf X)^{-1}a }}\]</span> where <span class="math inline">\(s^2=\frac{RSS}{n-p}\)</span>.</li>
+<li>Note, <span class="math inline">\(\sqrt{s^2a^T(\mathbf X^T \mathbf X)^{-1}a }=se(a^T\boldsymbol \beta)\)</span>.</li>
+</ul>
+</section>
+<section id="a-final-note" class="slide level2">
+<h2>A Final Note</h2>
+<ul>
+<li>Most of questions of interested can be expressed into <span class="math inline">\(H_0: a^T\boldsymbol \beta=c\)</span> or <span class="math inline">\(H_0: A\boldsymbol \beta=C\)</span></li>
+<li>F or t-tests can be used.</li>
+<li>We discussed LSE of <span class="math inline">\(\boldsymbol \beta\)</span>. With the assumption of MVN, we can show that the MLE and LSE of <span class="math inline">\(\boldsymbol\beta\)</span> are the same.</li>
+</ul>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="LinearModels_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="LinearModels_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="LinearModels_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="LinearModels_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"right","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"slide-number":"c/t","show-slide-number":"all"},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

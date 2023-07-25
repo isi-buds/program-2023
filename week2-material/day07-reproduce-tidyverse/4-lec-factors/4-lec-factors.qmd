@@ -1,0 +1,181 @@
+---
+title: "Working with Factors"
+execute:
+  echo: true
+subtitle: "ISI-BUDS 2023"
+format: 
+  revealjs:
+    slide-number: true
+    incremental: true
+    title-slide-attributes: 
+      data-background-size: 12%
+      data-background-position: 50% 75%
+---
+
+
+```{r echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+
+
+```{r echo = FALSE, fig.align='center', out.width="30%"}
+knitr::include_graphics("img/forcats-logo.png")
+```
+
+
+Functions have the form `fct_something()`
+
+. . .
+
+Most of the examples in this lecture is from the `forcats` packages documentation.
+
+##
+
+```{r}
+glimpse(gss_cat)
+```
+
+
+
+
+# Collapsing factors
+
+##
+
+```{r}
+str(gss_cat$partyid)
+```
+
+##
+
+```{r}
+count(gss_cat, partyid)
+```
+
+##
+
+```{r}
+partyid2 <- fct_collapse(gss_cat$partyid,
+                         missing = c("No answer", "Don't know"),
+                         other = "Other party",
+                         rep = c("Strong republican", "Not str republican"),
+                         ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+                         dem = c("Not str democrat", "Strong democrat")
+                         )
+```
+
+
+##
+
+```{r}
+partyid2
+```
+
+##
+
+```{r}
+gss_cat %>% 
+  mutate(partyid2 = 
+           fct_collapse(partyid,
+                        missing = c("No answer", "Don't know"),
+                        other = "Other party",
+                        rep = c("Strong republican", "Not str republican"),
+                        ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+                        dem = c("Not str democrat", "Strong democrat")))
+```
+
+
+
+
+# Dropping levels
+
+##
+
+```{r}
+year <- factor(c("sophomore", "sophomore", "first-year", "sophomore"), 
+            levels = c("first-year", "sophomore", "junior", "senior"))
+year
+
+```
+
+. . .
+
+```{r}
+fct_drop(year)
+```
+
+. . .
+
+```{r}
+fct_drop(year, only = "senior")
+```
+
+
+
+# Matching
+
+##
+
+```{r}
+fct_match(gss_cat$marital, "Married")
+```
+
+##
+
+```{r}
+fct_match(gss_cat$marital, c("Married", "Divorced"))
+```
+
+##
+
+We can use these functions along with other data wrangling functions.
+
+```{r}
+gss_cat %>% 
+  mutate(married_divorced = fct_match(marital, c("Married", "Divorced")))
+```
+
+
+
+
+# Recoding levels
+
+##
+
+```{r}
+places <- factor(c("Irvine", 
+                   "Los Angeles", 
+                   "Albany", 
+                   "New York City"))
+places
+
+```
+
+##
+
+```{r}
+fct_recode(places, 
+           California = "Irvine", 
+           California = "Los Angeles") 
+```
+
+
+##
+
+```{r}
+fct_recode(places, 
+           California = "Irvine", 
+           California = "Los Angeles")
+```
+
+##
+
+```{r warning = TRUE, error=TRUE}
+fct_recode(places, 
+           California = "Irvinnne", 
+           California = "Los Angeles")
+```
+
+##
+
+[forcats cheatsheet](http://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf)

@@ -1,0 +1,149 @@
+---
+title: "Day 9 Lab Data Wrangling Solutions"
+format: html
+editor: visual
+---
+
+Today we are going to work with COVID hospital data available at [https://data.ca.gov/dataset/covid-19-hospital-data1](https://data.ca.gov/dataset/covid-19-hospital-data1).
+
+Make sure to practice using functions taught in lecture from packages such as tidyverse instead of base R functions.
+
+# Data wrangling
+
+Begin by reading in the data
+
+```{r}
+library(tidyverse)
+
+hosp_data <- read_csv("covid19hospitalbycounty.csv")
+```
+
+Use `glimpse()` to get a preview of the data and view the columns.
+
+```{r}
+glimpse(hosp_data)
+```
+
+How many observations and variables are in this data set? Which variables are categorical and which are numeric?
+
+Let's learn some information about this data.
+
+What is the date range for this data?
+
+```{r}
+range(hosp_data$todays_date)
+```
+
+This data ranges from March 27, 2020 to July 8, 2023.
+
+How many counties are in this data and which counties are there? (It's fine to just print output here)
+
+```{r}
+unique(hosp_data$county)
+```
+
+There are 56 counties in this data.
+
+Say we want to compare average and median number of COVID confirmed hospitalizations for the counties of Los Angeles, Orange, San Francisco, Sonoma, and San Diego. (You may find it helpful to use the function `%in%`)
+
+```{r}
+hosp_data %>% 
+  filter(county %in% c("Los Angeles", "Orange", "San Francisco", "Sonoma", "San Diego")) %>% 
+  group_by(county) %>% 
+  summarize(
+    ave_covid_hosp = mean(hospitalized_covid_confirmed_patients),
+    median_covid_hosp = median(hospitalized_covid_confirmed_patients)
+  )
+```
+
+::: callout-note
+## Trouble with filter
+
+There are some other packages with functions named `filter()` or `select()` and if those packages are loaded most recently then sometimes you can get problems. In the future when you are doing data cleaning if `filter()` or `select()` are not working but you are confident you have called them corretly, check to make sure `tidyverse` is your most recently loaded package.
+:::
+
+It does not necessarily make sense to compare raw counts because these counties do not have similar populations. Load in the county population data and join it with the hospital data. (I recommend you do not save over you data, instead make a new data frame for the combined data)
+
+```{r}
+county_pop <- read_csv("county-pop.csv") %>% 
+  rename(county = County, population = Population)
+
+comb_hosp_pop <- full_join(x = hosp_data, y = county_pop)
+```
+
+When you join data you always want to check that your joined data set has the expected number of rows and columns, if not, you may have used the wrong join function or your data may be missing values or have extra values.
+
+```{r}
+dim(hosp_data)
+dim(county_pop)
+glimpse(comb_hosp_pop)
+```
+
+Here we care about the COVID hospital data, and are using the county population data to add info. There are more counties present in the county population data than the COVID hospital data. We only want to keep the info for the counties present in the COVID hosptial data. Consider which join is most appropriate for this, and change your join function accordingly.
+
+```{r}
+comb_hosp_pop <- left_join(x = hosp_data, y = county_pop)
+```
+
+Now that our data is joined, make a new variable which records daily percent of the population that is covid confirmed in the hospital for each county.
+
+```{r}
+comb_hosp_pop <- comb_hosp_pop %>% 
+  mutate(per_hosp_covid_cofirmed = 100 * hospitalized_covid_confirmed_patients / population)
+```
+
+Compute average daily percent of the county with COVID confirmed hospitalizations for the counties of Los Angeles, Orange, San Francisco, Sonoma, and San Diego.
+
+```{r}
+comb_hosp_pop %>% 
+  filter(county %in% c("Los Angeles", "Orange", "San Francisco", "Sonoma", "San Diego")) %>% 
+  group_by(county) %>% 
+  summarize(
+    ave_per_covid_hosp = mean(per_hosp_covid_cofirmed)
+  )
+```
+
+This data has a wide date range, let's narrow it down to look at the previously computed averages specifically for records between December 2020 and February 2021.
+
+```{r}
+comb_hosp_pop %>% 
+  filter(county %in% c("Los Angeles", "Orange", "San Francisco", "Sonoma", "San Diego")) %>% 
+  filter(
+    todays_date >= as.Date("2020-12-01") & todays_date <= as.Date("2021-02-01")
+  ) %>% 
+  group_by(county) %>% 
+  summarize(
+    ave_per_covid_hosp = mean(per_hosp_covid_cofirmed)
+  )
+```
+
+What do you notice when you compare the average daily percent hospitalized with confirmed covid for the entire time range with that for the selected few months?
+
+# Visualizing our data
+
+```{r}
+#| label: visualize hospitalization trends of all counties
+
+ca_covid_hosp_data <- read_csv("covid19hospitalbycounty.csv")
+  
+ca_covid_hosp_data %>% 
+  ggplot(aes(fill = county, x = todays_date, y = hospitalized_covid_confirmed_patients)) +
+  geom_bar(position="stack", stat="identity")
+```
+
+The above plot tells us something about CA trends, but prevents us from comparing trends among counties, in addition to being absolutely hideous. Let's focus on just five counties.
+
+```{r}
+#| label: visualize hospitalization trends for 5 counties
+
+ca_five_county_covid_hosp_data <- ca_covid_hosp_data %>%
+  filter(county %in% c("Los Angeles", "Orange", "Sacramento", "Santa Clara", "San Francisco"))
+
+ca_five_county_covid_hosp_data  %>% 
+  ggplot(aes(fill = county, x = todays_date, y = hospitalized_covid_confirmed_patients)) +
+  geom_bar(position = "stack", stat = "identity")
+```
+
+## Your task
+
+The 5 county graph is more readable than the first graph, but still has tons of problems if one really wants to compare COVID-19 hospitalization trends across CA counties. Create your own visualization of the 5 county data, remembering best practices that we talked about in the lecture. There are more than one way of doing this, so don't be inhibited by trying to think of "the right" solution. Also, depending on what information you want to convey with your plot, you may consider making and plotting a new variable scaled by population of the county.

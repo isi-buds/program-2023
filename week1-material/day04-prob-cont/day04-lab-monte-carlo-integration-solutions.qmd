@@ -1,0 +1,296 @@
+---
+title: "Day 4 Lab Solutions"
+format: 
+  html:
+    toc: true
+    toc-expand: true
+    toc-depth: 2
+editor: visual
+execute:
+  echo: fenced
+---
+
+# Monte Carlo integration
+
+```{r}
+set.seed(5172013)
+```
+
+## Example 1: integral of $e^{x^4 - x^2}$ over \[0,1\]
+
+Define an integrand
+
+```{r}
+integrand_function <- function(x){
+  return(exp(x^4 - x^2))
+}
+```
+
+Plot the integrand on the interval \[0,1\]
+
+```{r}
+x_values <- c(0:100) / 100
+
+plot(x_values, integrand_function(x_values), type = "l", lwd = 2, xlab = "x", ylab = "y", cex.lab = 1.3, col = "red")
+text(0.6, 0.95, expression(y == e^{x^4 - x^2}), cex = 2)
+```
+
+See `?plotmath` for more info on plotting math in R
+
+### Deterministic numerical integration from 0 to 1 
+
+Notice that we are passing function `integrand_function` as an argument Also the integral can be seen as $E(e^{U^4 - U^2})$, where $U \sim Uniform(0, 1)$
+
+```{r}
+det_int <- integrate(integrand_function, lower = 0, upper = 1)
+```
+
+The unction `integrate()` returns an object, not a value to find out what is in the object, type `names(det_int)`
+
+```{r}
+names(det_int)
+
+det_int$value
+det_int$message
+```
+
+### Monte Carlo integration
+
+By default `runif()` defines uniform distribution on \[0,1\]
+
+```{r}
+mcarlo_iterations <- 1000
+
+unif_sample <- runif(mcarlo_iterations)
+```
+
+artihmetic average
+```{r}
+(mcarlo_int = mean(integrand_function(unif_sample)))
+```
+
+Monte Carlo error
+```{r}
+(mcarlo_error = sd(integrand_function(unif_sample))/sqrt(mcarlo_iterations))
+```
+
+Monte Carlo 95% confidence interval
+```{r}
+(c(mcarlo_int - 1.96*mcarlo_error, mcarlo_int + 1.96*mcarlo_error))
+```
+
+Compare to the deterministic numerical integration
+```{r}
+(det_int)
+```
+
+## Example 2: second moment of the Beta distribution $X \sim Beta(\alpha, \beta)$
+
+```{r}
+alpha <- 2
+beta <- 2
+```
+
+a. theory tells us that $E(X^2) = \frac{\alpha(\alpha + 1)}{(\alpha + \beta + 1)(\alpha + \beta)}$
+```{r}
+(beta_2nd_moment_theory <- alpha * (alpha + 1) / ((alpha + beta + 1) * (alpha + beta)))
+```
+
+b. deterministic integration
+```{r}
+beta_integrand <- function(x){
+  return(x^2 * dbeta(x, shape1 = alpha, shape2 = beta))
+}
+
+(beta_2nd_moment_det <- integrate(beta_integrand, lower = 0, upper = 1))
+```
+
+c. Monte Carlo integration
+```{r}
+beta_mcarlo_iterations <- 1000
+
+beta_sample <- rbeta(beta_mcarlo_iterations, shape1=alpha, shape2=beta)
+
+(beta_2nd_moment_mc <- mean(beta_sample^2))
+```
+
+Monte Carlo errors
+```{r}
+(beta_mcarlo_error <- sd(beta_sample^2) / sqrt(beta_mcarlo_iterations))
+```
+
+Monte Carlo 95% confidence intervals
+```{r}
+c(
+  beta_2nd_moment_mc - 1.96 * beta_mcarlo_error, 
+  beta_2nd_moment_mc + 1.96 * beta_mcarlo_error
+)
+```
+
+Compare the three answers
+```{r}
+beta_2nd_moment_theory
+beta_2nd_moment_det
+beta_2nd_moment_mc
+
+c(
+  beta_2nd_moment_mc - 1.96 * beta_mcarlo_error, 
+  beta_2nd_moment_mc + 1.96 * beta_mcarlo_error
+)
+```
+
+## Exercise 1 
+
+Use:
+
+a. deterministic  
+
+b. Monte Carlo integration to find the 4th moment of a beta distribution with parameters alpha = 2, beta = 5
+
+c. Compute Monte Carlo error and confidence intervals of your estimate(s) from part b.
+
+## Exercise 1 solution
+
+```{r}
+alpha <- 2
+beta <- 5
+```
+
+a. deterministic integration
+```{r}
+beta_integrand <- function(x){
+  return(x^4 * dbeta(x, shape1 = alpha, shape2 = beta))
+}
+
+(beta_4th_moment_det <- integrate(beta_integrand, lower = 0, upper = 1))
+```
+
+b. Monte Carlo integration
+```{r}
+beta_mcarlo_iterations <- 1000
+
+beta_sample <- rbeta(beta_mcarlo_iterations, shape1 = alpha, shape2 = beta)
+
+(beta_4th_moment_mc <- mean(beta_sample^4))
+```
+
+c. Monte Carlo error and 95% confidence intervals
+
+```{r}
+(beta_mcarlo_error <- sd(beta_sample^4) / sqrt(beta_mcarlo_iterations))
+
+c(
+  beta_4th_moment_mc - 1.96*beta_mcarlo_error, 
+  beta_4th_moment_mc + 1.96*beta_mcarlo_error
+)
+```
+
+Compare the two answers
+```{r}
+beta_4th_moment_det
+beta_4th_moment_mc
+
+c(
+  beta_4th_moment_mc - 1.96*beta_mcarlo_error, 
+  beta_4th_moment_mc + 1.96*beta_mcarlo_error
+)
+```
+
+## Exercise 2
+
+Use:
+
+a. deterministic integration
+
+b. Monte Carlo integration to approximate integral of $\exp(-x^5)$ on $[0, \infty]$. Hint: Uniform sampling won't work, because uniform distribution is not defined on $[0, \infty]$, use exponential distribution samples instead -- think about how to write the desired integral in terms of expectation
+
+c. compute Monte Carlo error and confidence intervals of your estimate(s) from part b
+
+d. compare Monte Carlo error of the procedure using two different rates of the exponential distribution
+
+## Exercise 2 Solutions
+
+Define function
+```{r}
+integrand_function2 <- function(x){
+  return(exp(-x^5))
+}
+```
+
+Deterministic integration
+```{r}
+(det_int2 <- integrate(integrand_function2, lower = 0, upper = Inf))
+```
+
+Monte Carlo
+```{r}
+mcarlo_iterations2 <- 1000000
+exp_rate <- 0.6
+exp_sample <- rexp(mcarlo_iterations2, rate = exp_rate)
+
+#artihmetic average
+(mcarlo_int2 <- mean(integrand_function2(exp_sample) / dexp(exp_sample, rate = exp_rate)))
+```
+
+Monte Carlo error
+```{r}
+(mcarlo_error2 = sd(integrand_function2(exp_sample) / dexp(exp_sample, rate = exp_rate)) / sqrt(mcarlo_iterations2))
+```
+
+Monte Carlo 95% confidence interval
+```{r}
+c(mcarlo_int2 - 1.96 * mcarlo_error2, mcarlo_int2 + 1.96 * mcarlo_error2)
+```
+
+Compare to the deterministic numerical integration
+```{r}
+det_int2
+```
+
+# Importance sampling
+
+Define a threshold value and number of Monte Carlo samples
+```{r}
+my_const <- 4.5
+sim_size <- 1000000
+```
+
+true probability of interest
+```{r}
+(true_prob <- pnorm(my_const, lower.tail = FALSE))
+```
+
+naive Monte Carlo estimate
+```{r}
+naive_samples <- ifelse(rnorm(sim_size) > my_const, yes = 1, no = 0)
+(naive_est <- mean(naive_samples))
+```
+
+importance sampling estimate
+```{r}
+shift_exp <- rexp(sim_size, rate = 1) + my_const
+is_samples <- dnorm(shift_exp) / exp(-(shift_exp - my_const))
+(is_est <- mean(is_samples))
+```
+
+```{r}
+print(true_prob)
+print(naive_est)
+print(is_est)
+```
+
+Computing Monte Carlo variances
+```{r}
+(naive_var_mc <- var(naive_samples) / sim_size)
+(is_var_mc <- var(is_samples) / sim_size)
+```
+
+Computing Monte Carlo confidence intervals
+```{r}
+# Naive (not very useful, usually variance estimate is degenerate):
+c(naive_est - 1.96 * sqrt(naive_var_mc), naive_est + 1.96 * sqrt(naive_var_mc))
+
+# Importance Sampling:
+c(is_est - 1.96 * sqrt(is_var_mc), is_est + 1.96 * sqrt(is_var_mc))
+```
+
