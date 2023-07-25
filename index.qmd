@@ -21,7 +21,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 1 - July 10, 2023
 
 | Topic                                                 | Materials                                                                                                                                                                                                                          |
-|:------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:----------------|:------------------------------------------------------|
 | Happy Git and GitHub for the useR installation manual | [`r fa(name = "link")`](https://happygitwithr.com/)                                                                                                                                                                                |
 | GitHub Username Survey                                | [`r fa(name = "link")`](https://forms.gle/Ux79QFztgxjTdZP88)                                                                                                                                                                       |
 | Setup                                                 | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/0-setup/0-setup.html)                                                                                                        |
@@ -33,7 +33,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 2 - July 11
 
 | Topic                        | Materials                                                                                                                                                                                |
-|:-----------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:--------------|:--------------------------------------------------------|
 | Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html)                                                                          |
 | Principles of visualization  | [`r fa(name = "desktop")`](week1-material/day02-ggplot/day02-slides_dataviz_principles.pdf)                                                                                              |
 | Lab: plotting with ggplot    | Solution HTML file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.html) (Qmd file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.qmd)) |
@@ -41,21 +41,21 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 3 - July 12
 
 | Topic                   | Materials                                                                                                                                                                                                              |
-|:------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-------------|:---------------------------------------------------------|
 | Intro to probability    | [`r fa(name = "desktop")`](week1-material/day03-into-prob/day03_prob_lecture.pdf)                                                                                                                                      |
 | Lab: inverse CDF method | Solution HTML file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.qmd)) |
 
 ## Day 4 - July 13
 
 | Topic                                        | Materials                                                                                                                                                                                                                                        |
-|:---------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:---------------|:-------------------------------------------------------|
 | More probability and Monte Carlo Integration | [`r fa(name = "desktop")`](week1-material/day04-prob-cont/day04_mc_lecture.pdf)                                                                                                                                                                  |
 | Lab: Monte Carlo Integration                 | Solution HTML file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.qmd)) |
 
 ## Day 5 - July 14
 
 | Topic                                | Materials                                                                                                                                                                                                                    |
-|:-------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:--------------|:--------------------------------------------------------|
 | Likelihood and Monte Carlo Inference |                                                                                                                                                                                                                              |
 | Lab: Monte Carlo Integration         | Solution HTML file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.qmd)) |
 | Project 1 intro                      |                                                                                                                                                                                                                              |
@@ -63,7 +63,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 6 - July 17
 
 | Topic               | Materials                                                                                                                                                                                                                          |
-|:--------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:------------|:----------------------------------------------------------|
 | Summarizing Data    | [`r fa(name = "desktop")`](week2-material/day06-wrangle/1-lec-summarizing-data/1-lec-summarizing-data.html)                                                                                                                        |
 | Changing Variables  | [`r fa(name = "desktop")`](week2-material/day06-wrangle/2-lec-change-variables/2-lec-change-variables.html)                                                                                                                        |
 | Subsetting Data     | [`r fa(name = "desktop")`](week2-material/day06-wrangle/3-lec-subsetting-data/3-lec-subsetting-data.html)                                                                                                                          |
@@ -73,7 +73,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 7 - July 18
 
 | Topic                   | Materials                                                                                                                                                                                                                                                    |
-|:------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:------------|:----------------------------------------------------------|
 | Good Workflow Practices | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/1-lec-reproducible-workflow/1-lec-reproducible-workflow.html)                                                                                                                            |
 | Working with Dates      | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/2-lec-dates/2-lec-dates.html)                                                                                                                                                            |
 | Working with Strings    | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/3-lec-strings/3-lec-strings.html)                                                                                                                                                        |
@@ -83,20 +83,20 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 8 - July 19
 
 | Topic         | Materials                                                                       |
-|:--------------|:--------------------------------------------------------------------------------|
+|:--------------|:-------------------------------------------------------|
 | Linear Models | [`r fa(name = "desktop")`](week2-material/day08-linear-models/LinearModels.pdf) |
 
 ## Day 9 - July 20
 
 | Topic                          | Materials                                                                                                                                                                                                  |
-|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:--------------|:--------------------------------------------------------|
 | Generalized Linear Models      | [`r fa(name = "desktop")`](week2-material/day09-glm/day09-GLM.pdf)                                                                                                                                         |
 | Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.qmd)) |
 
 ## Day 10 - July 21
 
 | Topic                          | Materials                                                                                                                                                                                                                                |
-|:-------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|:-------------|:---------------------------------------------------------|
 | Mixed Effect Models            | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/day10-mixedeffects.pdf)                                                                                                                                                    |
 | Project 3 intro                | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/Introduction%20to%20Project%203_%20Colorectal%20Cancer%20and%20Serum%20Metabolic%20Profiling.pdf)                                                                          |
 | Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.html) (Qmd file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.qmd)) |
@@ -104,9 +104,15 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 ## Day 11 - July 24
 
 | Topic                  | Materials                                                                                         |
-|:-----------------------|:--------------------------------------------------------------------------------------------------|
+|:----------------|:------------------------------------------------------|
 | Goals of Statistics    | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture1_RoleOfStatistics.pdf) |
-| Covariate Adjustment   | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture2_adjustment.pdf)       |
-| FEV data               | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/fev.raw)                          |
-| FEV R Script           | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/ISI_BUDS_Adjustment_FEV.R)        |
 | Data analysis plab lab | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/ISIBUDS_UWSalaryLab.pdf)          |
+
+## Day 12 - July 25
+
+| Topic                  | Materials                                                                                         |
+|:----------------|:------------------------------------------------------|
+| Covariate Adjustment   | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture2_adjustment.pdf)       |
+| FEV data               | [`r fa(name = "file")`](week3-material/day12-adjustment/fev.raw)                          |
+| FEV R Script           | [`r fa(name = "file")`](week3-material/day12-adjustment/ISI_BUDS_Adjustment_FEV.R)        |
+| Prediction    | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture3_Prediction_Pt1.pdf) |
