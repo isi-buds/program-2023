@@ -2,7 +2,7 @@
 
 ## Baseline predictors of improvements in HIV and nutritional outcomes among women living with HIV in India: Secondary longitudinal analysis of the ASHA-Nutrition Trial data
 
-### Mentors:	
+### Mentoring Team	
 - Sanghyuk Shin, Associate Professor of Nursing, UCI
 - Volodymyr Minin, Professor of Statistics, UCI
 - Isaac Goldstein, Statistics PhD Student, UCI
@@ -24,3 +24,26 @@ Nutritional programs are now an integral part of HIV care in India. While the tr
 1. Nyamathi AM, Shin SS, Sinha S, Carpenter CL, Garfin DR, Ramakrishnan P, et al. Sustained Effect of a Community-based Behavioral and Nutrition Intervention on HIV-related Outcomes Among Women Living With HIV in Rural India: A Quasi-experimental Trial. JAIDS Journal of Acquired Immune Deficiency Syndromes, 81(4):429–38, 2019.
 2. Mothi S, Lala M, Tappuni A. HIV/AIDS in women and children in India. Oral Diseases, 22(S1):19–24, 2016.
 3. Paudel V, Baral KP. Women living with HIV/AIDS (WLHA), battling stigma, discrimination and denial and the role of support groups as a coping strategy: a review of literature. Reproductive Health, 2;12(1):53, 2015.
+
+## Serum Metabolic Profiling For Early Screening of Colorectal Cancer
+
+### Mentoring Team
+- Min Zhang, Professor of Epidemiology and Biostatistics, UCI
+- Zhaoxia Yu, Professor of Statistics, UCI
+- Thanasi Bakis, Statistics PhD student, UCI
+
+### Background
+
+Colorectal cancer (CRC) is one of the most prevalent and fatal malignancies globally, ranking as the second most common cancer in women and the third most common in men. Its widespread impact on human health and life makes it a significant public health concern. Despite substantial advances in cancer research and treatment, there remains an urgent demand for reliable biomarkers to enhance CRC screening, surveillance, and therapy monitoring. Traditional diagnostic methods have limitations in sensitivity and specificity, underscoring the need for novel approaches. Notably, cancer patients frequently exhibit altered or abnormal metabolism, indicating the potential utility of metabolic biomarkers for CRC. The link between cancer and altered metabolism has been a subject of intense scientific interest, and studying metabolic biomarkers for CRC could lead to new insights applicable to broader cancer research.
+
+### Study Design and Data
+
+A study measured 158 targeted metabolites from 25 potentially significant metabolic pathways in 234 serum samples (Chen et al. 2017). These samples were collected from three groups: 66 CRC patients, 76 polyp patients (polyp is a benign status), and 92 healthy controls. In addition, some clinical or demographic variables were collected such as age, gender, weight, height, smoking, and alcohol status.
+
+### Objectives
+
+The primary objective of this research project is to explore the utility of metabolic profiling in differentiating colorectal cancer patients from healthy controls. While initial analyses have shown promise, the complexity of metabolic data analysis poses significant challenges. Two critical issues arise: (1) the presence of outliers and undetected levels, and (2) the inherently high-dimensional and multivariate nature of metabolic data, which may be confounded by demographic factors affecting colorectal cancer risk. This study aims to investigate the impact of these practical issues on the interpretation of metabolic measurements in the context of colorectal cancer, and how to address these issues in statistically and scientifically meaningful ways. Additionally, the research aims to explore how targeted multivariate analysis of metabolic pathways can enhance the efficiency of statistical modeling, potentially leading to more accurate and reliable diagnostic and prognostic tools for colorectal cancer.
+
+### References
+1. Chen, Chen, G. A. Nagana Gowda, Jiangjiang Zhu, Lingli Deng, Haiwei Gu, E. Gabriela Chiorean, Mohammad Abu Zaid, et al. 2017. “Altered Metabolite Levels and Correlations in Patients with Colorectal Cancer and Polyps Detected Using Seemingly Unrelated Regression Analysis.” Metabolomics 13 (11). https://doi.org/10.1007/s11306-017-1265-0.
+
