@@ -1,0 +1,59 @@
+  %&program=latex
+\documentclass{article}
+\usepackage{epsfig,alltt,xspace, subfigure}
+\usepackage{amsmath}
+\addtolength{\oddsidemargin}{-1in}
+\addtolength{\evensidemargin}{-1in}
+\addtolength{\textwidth}{2in}
+\addtolength{\textheight}{1.4in}
+\addtolength{\topmargin}{-1in}
+\newenvironment{stataize}
+	{\begin{footnotesize} \begin{alltt}}
+	{\end{alltt} \end{footnotesize} }
+
+\newenvironment{stataizesmall}
+	{\begin{scriptsize} \begin{alltt}}
+	{\end{alltt} \end{scriptsize}}
+
+\begin{document}
+
+\begin{center}
+Statistical Methods II\\
+Statistics 211\\
+
+Example Tables Using R Functions \texttt{table1$\_$latex()} and \texttt{glm$\_$est$\_$latex()}
+
+\end{center}
+
+
+\begin{table}[h!]
+\caption{Example 1.}
+\begin{center}
+\input{Table1_Ex1.tex}
+\end{center}
+\end{table}
+
+
+\begin{center}
+\begin{table}
+\caption{Example 2.}
+\begin{center}
+\input{Table1_Ex2.tex}
+\end{center}
+\end{table}
+\end{center}
+
+
+\begin{center}
+\begin{table}
+\caption{GLM table.}
+\begin{center}
+\input{glmEst_Ex.tex}
+\end{center}
+\end{table}
+\end{center}
+
+
+
+
+\end{document}

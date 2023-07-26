@@ -126,3 +126,5 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | King County data   | [`r fa(name = "file")`](week3-material/day13-prediction/KingCounty2001_data.txt) |
 | Prediction assessment functions   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredCrit.R) |
 | Prediction assessment examples   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredictionAssessment_Birthweight.R) |
+| Data analysis lab writeup | [`r fa(name = "file")`](week3-material/day13-prediction/lab/salary_writeup_full.pdf) |
+| Table 1 code | [`r fa(name = "file")`](week3-material/day13-prediction/lab/LatexTables.R) |
