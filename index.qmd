@@ -116,4 +116,13 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | FEV data               | [`r fa(name = "file")`](week3-material/day12-adjustment/fev.raw)                          |
 | FEV R Script           | [`r fa(name = "file")`](week3-material/day12-adjustment/ISI_BUDS_Adjustment_FEV.R)        |
 | Prediction    | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture3_Prediction_Pt1.pdf) |
-| Data analysis lab data | [`r fa(name = "file")`](week3-material/day12-adjustment/salary95.txt)          
+| Data analysis lab data | [`r fa(name = "file")`](week3-material/day12-adjustment/salary95.txt)
+
+## Day 13 - July 26
+
+| Topic                  | Materials                                                                                         |
+|:----------------|:------------------------------------------------------|
+| Prediction continued   | [`r fa(name = "desktop")`](week3-material/day13-prediction/lecture4_Prediction_Pt2.pdf)       |
+| King County data   | [`r fa(name = "file")`](week3-material/day13-prediction/KingCounty2001_data.txt) |
+| Prediction assessment functions   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredCrit.R) |
+| Prediction assessment examples   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredictionAssessment_Birthweight.R) |
