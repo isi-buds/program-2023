@@ -138,4 +138,7 @@ Introduction to Bayesian Thinking| [`r fa(name = "desktop")`](week3-material/day
 Probability Review| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/2-prob-review/2-prob-review.html)       |
 Bayes' Rule for Events| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/3-bayes-events/3-bayes-events.html)       |
 Bayes' Rule for Random Variables| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/4-bayes-rv/4-bayes-rv.html)       |
+The Beta Prior Model| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/5-beta-prior/5-beta-prior.html)       |
+The Beta Binomial Model| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/6-beta-binomial/6-beta-binomial.html)       |
+
 
