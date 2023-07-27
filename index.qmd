@@ -134,7 +134,7 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | Topic                  | Materials                                                                                         |
 |:----------------|:------------------------------------------------------|
 | 
-Introduction to Bayesian Thinking| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/4-bayes-rv/4-bayes-rv.html)       |
+Introduction to Bayesian Thinking| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/1-intro-bayes/1-intro-bayes.html)       |
 Probability Review| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/2-prob-review/2-prob-review.html)       |
 Bayes' Rule for Events| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/3-bayes-events/3-bayes-events.html)       |
 Bayes' Rule for Random Variables| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/4-bayes-rv/4-bayes-rv.html)       |
