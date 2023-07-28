@@ -47,3 +47,27 @@ The primary objective of this research project is to explore the utility of meta
 ### References
 1. Chen, Chen, G. A. Nagana Gowda, Jiangjiang Zhu, Lingli Deng, Haiwei Gu, E. Gabriela Chiorean, Mohammad Abu Zaid, et al. 2017. “Altered Metabolite Levels and Correlations in Patients with Colorectal Cancer and Polyps Detected Using Seemingly Unrelated Regression Analysis.” Metabolomics 13 (11). https://doi.org/10.1007/s11306-017-1265-0.
 
+## Choroid Plexus-based biomarkers and the risk of Alzheimer’s disease 
+
+### Mentoring Team
+- Ed Monuki, Warren L. Bostick Chair of Pathology, UCI
+- Brett Johnson, Assistant Researcher of Neurobiology and Behavior, UCI
+- Michael Neel, Experimental Pathology PhD student, UCI
+- Dan Gillen, Chancellor's Professor and Chair of Statistics, UCI
+- Christina Monsserat Magana-Ramirez, Statistics PhD student, UCI
+
+### Description
+The choroid plexus regulates the production and composition of cerebrospinal fluid (CSF), that provides the protective buoyancy for the brain. CSF acts as a medium for the glymphatic filtration system that facilitates the removal of metabolic waste from the brain.  CSF is also where two of the most commonly measured biomarkers for Alzheimer’s disease (AD), amyloid beta and phosphorylated tau, can be measured. Given the close connection to CSF and role that the choroid plexus plays in producing CSF the team has hypothesized that components of the choroid plexus, including measures of inflammation and cirrhosis (scarring), may be early biomarkers of AD progression.  Using post-mortem brain samples from approximately 150 UCI Alzheimer’s disease research center (ADRC) participants, we will consider the associations between choroid plexus-based biomarkers and dementia diagnosis at death as well as the life course of dementia.  We will also consider the correlation between biomarkers with the choroid plexus.  Statistically, we will likely be employing linear models, multinomial logistic regression models, and censored time-to-event (survival analysis) models.  The project will also require careful thinking about the ability to use post-mortem measurements to assess dementia events during the life course.
+
+
+## Assessment and comparison of research attitudes between Down’s syndrome caregivers and early Alzheimer’s disease caregivers 
+
+### Mentoring Team
+- Josh Grill, Professor of Psychiatry & Human Behavior and Neurobiology and Behavior, UCI
+- Ira Lott, Professor Emeritus of Pediatrics, UCI
+- Eric Doran, Study Coordinator, UCI
+- Dan Gillen, Chancellor's Professor and Chair of Statistics, UCI
+- Thuy Lu, Statistics PhD student, UCI
+
+### Description
+The study of any new interventions require active consent of participants to enroll in a clinical trial.  In the case of Down’s syndrome (DS) and Alzheimer’s disease (AD), a study partner (often parent or sibling in DS, spouse or child in AD) serve as the consenting party for research participation.  One of the barriers to our ability to assess new therapies and interventions is low recruitment of participants into research studies and our ability to retain them. This is, at least partially, driven by suboptimal recruitment and education strategies that better address of the concerns of potential study participants and their caregivers.  The Research Attitudes Questionnaire (RAQ) is a validated instrument that utilizing 7 questions, each on a 5-point Likert scale, to assess a participant or caregivers attitudes toward the benefit, safety, and trust in clinical research. An understanding of RAQ factors that drive one’s attitude towards research participation is key to being able to better assess recruitment and education strategies.  To date, there is little known about the RAQ among caregivers in the DS and AD populations and how these groups may differ.  It is important to understand these similarities and differences since DS patients have a high propensity to develop AD during their life course and therefore are soon to be candidates for AD trials.  This project will use data on the RAQ from DSConnect, a research registry of DS patients, and a large phase III clinical trial in the setting of sporadic AD, to quantify similarities and differences between these populations.  Statistically, the project will likely utilize linear models as well as propensity score matching to make comparisons between the populations.  In addition, there is likely to be a prediction component to identify and assess those factors most likely associated with high or low RAQ score.
