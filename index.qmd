@@ -142,3 +142,11 @@ The Beta Prior Model| [`r fa(name = "desktop")`](week3-material/day14-intro-baye
 The Beta Binomial Model| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/6-beta-binomial/6-beta-binomial.html)       |
 
 
+## Day 15 - July 28
+
+| Topic                  | Materials                                                                                         |
+|:----------------|:------------------------------------------------------|
+| 
+Frequentist vs. Bayesian Inference| [`r fa(name = "desktop")`](week3-material/day15-frequentist-bayesian/1-posterior-inference/1-inference.html)       |
+Learning to learn independently|  |
+Diversity, Equity, and Inclusion in Biostatistics Panel | [Dr. Paloma Rojas Saunero](https://paloma-rojas-saunero.netlify.app/es/) <br>[Dr. Volodymyr Minin](https://www.stat.uci.edu/faculty/vladimir-minin/) <br>[Kyle Conniff](https://www.ics.uci.edu/~krconnif/index.html)<br>Moderator: [Catalina Medina](https://catalinamedina.github.io/)|
