@@ -18,10 +18,10 @@ The program meets daily from 9 am - 3:30 pm in DBH 2011, unless otherwise specif
 
 Make sure to join our **Slack workspace**, you should have received an email. You may want to download the Slack app because we will be using this for communication throughout the program. Make sure notifications are on.
 
-## Day 1 - July 10, 2023
+## Day 1, July 10, 2023
 
 | Topic                                                 | Materials                                                                                                                                                                                                                          |
-|:----------------|:------------------------------------------------------|
+|:------------------|:----------------------------------------------------|
 | Happy Git and GitHub for the useR installation manual | [`r fa(name = "link")`](https://happygitwithr.com/)                                                                                                                                                                                |
 | GitHub Username Survey                                | [`r fa(name = "link")`](https://forms.gle/Ux79QFztgxjTdZP88)                                                                                                                                                                       |
 | Setup                                                 | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/0-setup/0-setup.html)                                                                                                        |
@@ -30,123 +30,182 @@ Make sure to join our **Slack workspace**, you should have received an email. Yo
 | GitHub                                                | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day01-prerequisites/3-lec-github/3-lec-github.html)                                                                                              |
 | Lab: practice reproducible reports                    | Solution HTML file: [`r fa(name = "file")`](week1-material/day01-prerequisites/day01-lab-coding-intro-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day01-prerequisites/day01-lab-coding-intro-solutions.qmd)) |
 
-## Day 2 - July 11
+## Day 2, July 11
 
 | Topic                        | Materials                                                                                                                                                                                |
-|:--------------|:--------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Visualizing data with ggplot | [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/week1-material/day02-ggplot/lec-ggplot.html)                                                                          |
 | Principles of visualization  | [`r fa(name = "desktop")`](week1-material/day02-ggplot/day02-slides_dataviz_principles.pdf)                                                                                              |
 | Lab: plotting with ggplot    | Solution HTML file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.html) (Qmd file: [`r fa(name = "file")`](week1-material/day02-ggplot/day02-lab-solution.qmd)) |
 
-## Day 3 - July 12
+## Day 3, July 12
 
 | Topic                   | Materials                                                                                                                                                                                                              |
-|:-------------|:---------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Intro to probability    | [`r fa(name = "desktop")`](week1-material/day03-into-prob/day03_prob_lecture.pdf)                                                                                                                                      |
 | Lab: inverse CDF method | Solution HTML file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day03-into-prob/day03-lab-prob-intro-solutions.qmd)) |
 
-## Day 4 - July 13
+## Day 4, July 13
 
 | Topic                                        | Materials                                                                                                                                                                                                                                        |
-|:---------------|:-------------------------------------------------------|
+|:------------------|:----------------------------------------------------|
 | More probability and Monte Carlo Integration | [`r fa(name = "desktop")`](week1-material/day04-prob-cont/day04_mc_lecture.pdf)                                                                                                                                                                  |
 | Lab: Monte Carlo Integration                 | Solution HTML file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day04-prob-cont/day04-lab-monte-carlo-integration-solutions.qmd)) |
 
-## Day 5 - July 14
+## Day 5, July 14
 
 | Topic                                | Materials                                                                                                                                                                                                                    |
-|:--------------|:--------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Likelihood and Monte Carlo Inference |                                                                                                                                                                                                                              |
 | Lab: Monte Carlo Integration         | Solution HTML file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.html) (Qmd file: [`r fa(name = "file")`](week1-material/day05-likelihood/day05-lab-mc-inference-solutions.qmd)) |
 | Project 1 intro                      |                                                                                                                                                                                                                              |
 
-## Day 6 - July 17
+## Day 6, July 17
 
 | Topic               | Materials                                                                                                                                                                                                                          |
-|:------------|:----------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Summarizing Data    | [`r fa(name = "desktop")`](week2-material/day06-wrangle/1-lec-summarizing-data/1-lec-summarizing-data.html)                                                                                                                        |
 | Changing Variables  | [`r fa(name = "desktop")`](week2-material/day06-wrangle/2-lec-change-variables/2-lec-change-variables.html)                                                                                                                        |
 | Subsetting Data     | [`r fa(name = "desktop")`](week2-material/day06-wrangle/3-lec-subsetting-data/3-lec-subsetting-data.html)                                                                                                                          |
 | Joining Data        | [`r fa(name = "desktop")`](week2-material/day06-wrangle/4-lec-joining-data/4-lec-joining-data.html)                                                                                                                                |
 | Lab: Data Wrangling | Solution HTML file: [`r fa(name = "file")`](week2-material/day06-wrangle/lab/day06-lab-data-wrangling-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day06-wrangle/lab/day06-lab-data-wrangling-solutions.qmd)) |
 
-## Day 7 - July 18
+## Day 7, July 18
 
 | Topic                   | Materials                                                                                                                                                                                                                                                    |
-|:------------|:----------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Good Workflow Practices | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/1-lec-reproducible-workflow/1-lec-reproducible-workflow.html)                                                                                                                            |
 | Working with Dates      | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/2-lec-dates/2-lec-dates.html)                                                                                                                                                            |
 | Working with Strings    | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/3-lec-strings/3-lec-strings.html)                                                                                                                                                        |
 | Working with Factors    | [`r fa(name = "desktop")`](week2-material/day07-reproduce-tidyverse/4-lec-factors/4-lec-factors.html)                                                                                                                                                        |
 | Lab: Data Wrangling 2   | Solution HTML file: [`r fa(name = "file")`](week2-material/day07-reproduce-tidyverse/lab/day07-lab-data-wrangling2-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day07-reproduce-tidyverse/lab/day07-lab-data-wrangling2-solutions.qmd)) |
 
-## Day 8 - July 19
+## Day 8, July 19
 
 | Topic         | Materials                                                                       |
-|:--------------|:-------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Linear Models | [`r fa(name = "desktop")`](week2-material/day08-linear-models/LinearModels.pdf) |
 
-## Day 9 - July 20
+## Day 9, July 20
 
 | Topic                          | Materials                                                                                                                                                                                                  |
-|:--------------|:--------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Generalized Linear Models      | [`r fa(name = "desktop")`](week2-material/day09-glm/day09-GLM.pdf)                                                                                                                                         |
 | Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.html) (Qmd file: [`r fa(name = "file")`](week2-material/day09-glm/lab/day09-lab-lm-glm-solutions.qmd)) |
 
-## Day 10 - July 21
+## Day 10, July 21
 
 | Topic                          | Materials                                                                                                                                                                                                                                |
-|:-------------|:---------------------------------------------------------|
+|:-----------------|:-----------------------------------------------------|
 | Mixed Effect Models            | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/day10-mixedeffects.pdf)                                                                                                                                                    |
 | Project 3 intro                | [`r fa(name = "desktop")`](week2-material/day10-mixed-effects/Introduction%20to%20Project%203_%20Colorectal%20Cancer%20and%20Serum%20Metabolic%20Profiling.pdf)                                                                          |
 | Lab: generalized linear models | Solution HTML file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.html) (Qmd file: [`r fa(name = "file")`](week2-material/day10-mixed-effects/lab/day10-lab-mixed-effect-solution.qmd)) |
 
-## Day 11 - July 24
+## Day 11, July 24
 
 | Topic                  | Materials                                                                                         |
-|:----------------|:------------------------------------------------------|
+|:------------------|:----------------------------------------------------|
 | Goals of Statistics    | [`r fa(name = "desktop")`](week3-material/day11-role-of-statistics/lecture1_RoleOfStatistics.pdf) |
 | Data analysis plan lab | [`r fa(name = "file")`](week3-material/day11-role-of-statistics/ISIBUDS_UWSalaryLab.pdf)          |
 
-## Day 12 - July 25
+## Day 12, July 25
 
-| Topic                  | Materials                                                                                         |
-|:----------------|:------------------------------------------------------|
-| Covariate Adjustment   | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture2_adjustment.pdf)       |
-| FEV data               | [`r fa(name = "file")`](week3-material/day12-adjustment/fev.raw)                          |
-| FEV R Script           | [`r fa(name = "file")`](week3-material/day12-adjustment/ISI_BUDS_Adjustment_FEV.R)        |
-| Prediction    | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture3_Prediction_Pt1.pdf) |
-| Data analysis lab data | [`r fa(name = "file")`](week3-material/day12-adjustment/salary95.txt)
+| Topic                  | Materials                                                                               |
+|:------------------|:----------------------------------------------------|
+| Covariate Adjustment   | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture2_adjustment.pdf)     |
+| FEV data               | [`r fa(name = "file")`](week3-material/day12-adjustment/fev.raw)                        |
+| FEV R Script           | [`r fa(name = "file")`](week3-material/day12-adjustment/ISI_BUDS_Adjustment_FEV.R)      |
+| Prediction             | [`r fa(name = "desktop")`](week3-material/day12-adjustment/lecture3_Prediction_Pt1.pdf) |
+| Data analysis lab data | [`r fa(name = "file")`](week3-material/day12-adjustment/salary95.txt)                   |
 
-## Day 13 - July 26
+## Day 13, July 26
 
-| Topic                  | Materials                                                                                         |
-|:----------------|:------------------------------------------------------|
-| Prediction continued   | [`r fa(name = "desktop")`](week3-material/day13-prediction/lecture4_Prediction_Pt2.pdf)       |
-| King County data   | [`r fa(name = "file")`](week3-material/day13-prediction/KingCounty2001_data.txt) |
-| Prediction assessment functions   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredCrit.R) |
-| Prediction assessment examples   | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredictionAssessment_Birthweight.R) |
-| Data analysis lab writeup | [`r fa(name = "file")`](week3-material/day13-prediction/lab/salary_writeup_full.pdf) |
-| Table 1 code | [`r fa(name = "file")`](week3-material/day13-prediction/lab/LatexTables.R) |
+| Topic                           | Materials                                                                                            |
+|:------------------|:----------------------------------------------------|
+| Prediction continued            | [`r fa(name = "desktop")`](week3-material/day13-prediction/lecture4_Prediction_Pt2.pdf)              |
+| King County data                | [`r fa(name = "file")`](week3-material/day13-prediction/KingCounty2001_data.txt)                     |
+| Prediction assessment functions | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredCrit.R)                         |
+| Prediction assessment examples  | [`r fa(name = "file")`](week3-material/day13-prediction/ISI_BUDS_PredictionAssessment_Birthweight.R) |
+| Data analysis lab writeup       | [`r fa(name = "file")`](week3-material/day13-prediction/lab/salary_writeup_full.pdf)                 |
+| Table 1 code                    | [`r fa(name = "file")`](week3-material/day13-prediction/lab/LatexTables.R)                           |
 
-## Day 14 - July 27
+## Day 14, July 27
 
-| Topic                  | Materials                                                                                         |
-|:----------------|:------------------------------------------------------|
-| 
-Introduction to Bayesian Thinking| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/1-intro-bayes/1-intro-bayes.html)       |
-Probability Review| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/2-prob-review/2-prob-review.html)       |
-Bayes' Rule for Events| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/3-bayes-events/3-bayes-events.html)       |
-Bayes' Rule for Random Variables| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/4-bayes-rv/4-bayes-rv.html)       |
-The Beta Prior Model| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/5-beta-prior/5-beta-prior.html)       |
-The Beta Binomial Model| [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/6-beta-binomial/6-beta-binomial.html)       |
+| Topic                             | Materials                                                                                         |
+|:------------------|:----------------------------------------------------|
+|                                   |                                                                                                   |
+| Introduction to Bayesian Thinking | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/1-intro-bayes/1-intro-bayes.html)     |
+| Probability Review                | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/2-prob-review/2-prob-review.html)     |
+| Bayes' Rule for Events            | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/3-bayes-events/3-bayes-events.html)   |
+| Bayes' Rule for Random Variables  | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/4-bayes-rv/4-bayes-rv.html)           |
+| The Beta Prior Model              | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/5-beta-prior/5-beta-prior.html)       |
+| The Beta Binomial Model           | [`r fa(name = "desktop")`](week3-material/day14-intro-bayes/6-beta-binomial/6-beta-binomial.html) |
 
+## Day 15, July 28
 
-## Day 15 - July 28
+| Topic                                                   | Materials                                                                                                                                                                                                                                                                                |
+|:------------------|:----------------------------------------------------|
+|                                                         |                                                                                                                                                                                                                                                                                          |
+| Frequentist vs. Bayesian Inference                      | [`r fa(name = "desktop")`](week3-material/day15-frequentist-bayesian/1-posterior-inference/1-inference.html)                                                                                                                                                                             |
+| Learning to learn independently                         |                                                                                                                                                                                                                                                                                          |
+| Diversity, Equity, and Inclusion in Biostatistics Panel | [Dr. Paloma Rojas Saunero](https://paloma-rojas-saunero.netlify.app/es/) <br>[Dr. Volodymyr Minin](https://www.stat.uci.edu/faculty/vladimir-minin/) <br>[Kyle Conniff](https://www.ics.uci.edu/~krconnif/index.html)<br>Moderator: [Catalina Medina](https://catalinamedina.github.io/) |
 
-| Topic                  | Materials                                                                                         |
-|:----------------|:------------------------------------------------------|
-| 
-Frequentist vs. Bayesian Inference| [`r fa(name = "desktop")`](week3-material/day15-frequentist-bayesian/1-posterior-inference/1-inference.html)       |
-Learning to learn independently|  |
-Diversity, Equity, and Inclusion in Biostatistics Panel | [Dr. Paloma Rojas Saunero](https://paloma-rojas-saunero.netlify.app/es/) <br>[Dr. Volodymyr Minin](https://www.stat.uci.edu/faculty/vladimir-minin/) <br>[Kyle Conniff](https://www.ics.uci.edu/~krconnif/index.html)<br>Moderator: [Catalina Medina](https://catalinamedina.github.io/)|
+## Day 16, July 31
+
+All day: Research in teams, office hours by faculty and student mentors
+
+## Day 17, August 1
+
+All day: Research in teams, office hours by faculty and student mentors
+
+## Day 18, August 2
+
+All day: Research in teams, office hours by faculty and student mentors
+
+| Topic                                                | Materials |
+|------------------------------------------------------|-----------|
+| (10 am - noon) SoCal Data Science Research Symposium |           |
+
+## Day 19, August 3
+
+All day: Research in teams, office hours by faculty and student mentors
+
+| Topic                                              | Materials |
+|----------------------------------------------------|-----------|
+| (1:30 - 3:30 pm) Writing Workshop lead by Federica |           |
+
+## Day 20, August 4
+
+All day: Research in teams, office hours by faculty and student mentors
+
+| Topic                                              | Materials |
+|----------------------------------------------------|-----------|
+| (1:30 - 3:30 pm) Biostatistics Career Panel |           |
+
+## Day 21, August 7 - Day 24, August 10
+
+All day: Research in teams, office hours by faculty and student mentors
+
+## Day 25, August 11
+
+All day: Research in teams, office hours by faculty and student mentors
+
+| Topic                                              | Materials |
+|----------------------------------------------------|-----------|
+| (1:30 - 3:30 pm) Giving a scientific talk workshop lead by Bri |           |
+
+## Day 26, August 14
+
+All day: Research in teams, office hours by faculty and student mentors
+
+| Topic                                              | Materials |
+|----------------------------------------------------|-----------|
+| (1:30 - 3:30 pm) Graduate school panel |           |
+
+## Day 27, August 15 - Day 29, August 17
+
+All day: Research in teams, office hours by faculty and student mentors
+
+## Day 30, August 18
+
+**All day: closing symposium, keynote speaker: Ji-Hyun Lee (U Florida)**
