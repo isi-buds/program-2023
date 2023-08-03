@@ -679,13 +679,16 @@ In the `template` folder in your repo.
 
 ## Your Feedback for me {{< fa handshake >}}
 
-::: columns
+::: {.columns .v-center-container}
 ::: {.column width="50%"}
-Link: [bit.ly/isi-buds-writers]{.medium-green}
+### Link
+<br>
+<br>
+[bit.ly/isi-buds-writers](bit.ly/isi-buds-writers)
 :::
 
 ::: {.column width="50%"}
-## QR code:
+### QR code
 
 ![](figures/feedback-qr-code.jpeg){width="536"}
 :::

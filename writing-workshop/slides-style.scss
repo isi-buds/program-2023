@@ -118,3 +118,9 @@ $data-background-image: "logo.png";
 .font150{font-size:150px}
 
 
+.v-center-container {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+}
