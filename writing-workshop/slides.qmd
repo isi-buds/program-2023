@@ -26,7 +26,7 @@ On the website with the **ISI-BUDS Summer 2023 Schedule**
 
 ### GitHub
 
-Look for your research team repo `writing-workshop-teamXX` and clone it
+Look for your research team repo `writing-workshop-team-XX` and clone it
 
 <br>
 
