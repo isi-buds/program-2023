@@ -650,6 +650,8 @@ In the `template` folder in your research-team workshop repo.
 
 -   Zotero [+]{.maroon} Quarto
 
+# DA Report: *USRESP*
+
 ## USRESP
 
 <br>
@@ -670,9 +672,9 @@ In the `template` folder in your research-team workshop repo.
 
 ![](figures/survey-submit-usresp.jpg){width="536"}
 
-# DA Report: *Feedback*
+# DA Report: *Other remarks*
 
-## 
+## Feedback
 
 -   **Give others** feedback
 
@@ -693,6 +695,24 @@ In the `template` folder in your research-team workshop repo.
     -   Someone took time to read your work and tell you what they thought of it. You get the chance to see how your work reads in someone else's hands. Your goal is to understand from them what you could improve, e.g. make more clear.
 
     -   Sometimes we receive "bad" feedback (non-constructive, perhaps even offensive). Try and feel grateful anyways (see point above). Don't lose all your confidence, but also interrogate yourself. Say thank you anyways and ask follow up questions.
+    
+## How do you become a better writer?
+
+<br>
+
+- [Read]{.medium-green} good reports. 
+  
+<br>
+
+- [Develop a critical eye]{.medium-green}: ask yourself 
+
+    - why do you like what you are reading? what makes it good?
+    
+    - what could be improved? how would you improve it?
+
+<br>
+
+- Learn more tools, e.g. [tables]{.medium-green} in Quarto: check out [kable and kable extra vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
 
 ## Questions?
 
