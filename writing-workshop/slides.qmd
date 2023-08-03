@@ -16,29 +16,23 @@ format:
 
 ## 
 
-::: columns
-::: {.column width="33%"}
 ### Link to slides
 
 On the website with the **ISI-BUDS Summer 2023 Schedule**
 
+![](figures/link-to-slides.jpg){width="300"}
 
-:::
+<br>
 
-::: {.column width="33%"}
 ### GitHub
 
 Look for your research team repo `writing-workshop-teamXX` and clone it
 
-:::
+<br>
 
-::: {.column width="33%"}
 ### Set up
 
 Sit close to your research team members
-
-:::
-:::
 
 ## About Me
 
@@ -78,7 +72,9 @@ MS in Economics (Bocconi, Milan)
 
 ## About you: DA structure familiarity
 
-![](figures/survey-familiar-structure.jpg){width="536"} \## About you: DA writing experience
+![](figures/survey-familiar-structure.jpg){width="536"}
+
+## About you: DA writing experience
 
 ![](figures/survey-ever-written.jpg){width="536"}
 
@@ -645,7 +641,7 @@ In the `template` folder in your repo.
 
 # DA Report: *Feedback*
 
-##    
+## 
 
 -   **Give others** feedback
 
@@ -689,7 +685,7 @@ Link: [bit.ly/isi-buds-writers]{.medium-green}
 :::
 
 ::: {.column width="50%"}
-## QR code: 
+## QR code:
 
 ![](figures/feedback-qr-code.jpeg){width="536"}
 :::
