@@ -18,7 +18,7 @@ format:
 
 ### Link to slides
 
-On the website with the **ISI-BUDS Summer 2023 Schedule**
+On the website with the [ISI-BUDS Summer 2023 Schedule](https://isi-buds.github.io/program-2023/)
 
 ![](figures/link-to-slides.jpg){width="300"}
 
@@ -26,13 +26,14 @@ On the website with the **ISI-BUDS Summer 2023 Schedule**
 
 ### GitHub
 
-Look for your research team repo `writing-workshop-team-XX` and clone it
+In the [isi-buds organization](https://github.com/isi-buds) on GitHub, find and clone your research-team repo\
+  `writing-workshop-team-X`
 
 <br>
 
 ### Set up
 
-Sit close to your research team members
+Sit close to your research-team members
 
 ## About Me
 
@@ -54,15 +55,15 @@ Sit close to your research team members
 
 ### Interests
 
-Network data, Bayesian nonparametrics, Statistics education
+Network data, Bayesian nonparametrics, Stats edu
 
 <br>
 
 ### Background
 
-BS in Management for Arts, Culture and Communication (Bocconi, Milan)
+BS in Management for Arts, Culture and Communication (Bocconi University, Milan)
 
-MS in Economics (Bocconi, Milan)
+MS in Economics (Bocconi University, Milan)
 :::
 :::
 
@@ -80,11 +81,15 @@ MS in Economics (Bocconi, Milan)
 
 ## About you: what you may [like]{.medium-green} about writing
 
--   *I have written data analysis reports for school projects and assignments, but not in the format of an actual data analysis report. Based on the example above, I really liked how the report was **structured** because it makes it easier to read and understand. I also liked how the **charts and tables are included too to refer to** when reading the report.*
+<br>
 
 -   ***making** the analyzed data to **look easy**.*
 
+<br>
+
 -   *I liked the puzzle of structuring the report and figuring out the best way to **tell a story***
+
+<br>
 
 -   *It's satisfying to be able to present research to others. There isn't much **point to research** without sharing it.*
 
@@ -92,13 +97,13 @@ MS in Economics (Bocconi, Milan)
 
 -   *Not sure what is important, and which one is not. What to include or not*
 
+<br>
+
 -   *Figuring out where to start and formatting*
 
+<br>
+
 -   *I don't think I'm very good at writing, and thus I can sometimes iterate too many times over my work and obsess over making it better*
-
-## About you: submitting to USRESP
-
-![](figures/survey-submit-usresp.jpg){width="536"}
 
 ## About this workshop
 
@@ -639,6 +644,26 @@ In the `template` folder in your repo.
 
 -   Zotero [+]{.maroon} Quarto
 
+## USRESP
+
+<br>
+
+- **Next deadline:** [December 20th, 2023]{.maroon}
+
+<br>
+
+- **Everything** from USRESP shown today is on their website!
+
+    - [General Information](https://www.causeweb.org/usproc/usresp)
+    
+    - [Template and evaluation criteria](https://www.causeweb.org/usproc/report-template-USRESP)
+    
+    - [Past winners and honorable mentions](https://www.causeweb.org/usproc/projects/winners)
+
+## About you: submitting to USRESP
+
+![](figures/survey-submit-usresp.jpg){width="536"}
+
 # DA Report: *Feedback*
 
 ## 
@@ -677,6 +702,14 @@ In the `template` folder in your repo.
 
 .. something else you're curious about
 
+<br>
+
+. . .
+
+For the source code of the slides, on the `isi-buds` GitHub organization:\
+
+  [program-2023 --> writing-workshop --> slides.qmd ](https://github.com/isi-buds/program-2023/blob/main/writing-workshop/slides.qmd)
+
 ## Your Feedback for me {{< fa handshake >}}
 
 ::: {.columns .v-center-container}
@@ -693,3 +726,5 @@ In the `template` folder in your repo.
 ![](figures/feedback-qr-code.jpeg){width="536"}
 :::
 :::
+
+# Thank you! <br> *Reach out to me for any questions*
