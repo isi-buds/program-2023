@@ -172,7 +172,7 @@ All day: Research in teams, office hours by faculty and student mentors
 
 | Topic                                              | Materials |
 |----------------------------------------------------|-----------|
-| (1:30 - 3:30 pm) Writing Workshop lead by Federica |  [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/writing-workshop/slides.html) |
+| (1:30 - 3:30 pm) Writing Workshop lead by [Federica Zoe Ricci](https://federicazoe.github.io/) |  [`r fa(name = "desktop")`](https://isi-buds.github.io/program-2023/writing-workshop/slides.html) |
 
 ## Day 20, August 4
 
