@@ -1,0 +1,696 @@
+---
+format: 
+  revealjs:
+    width: 1600
+    height: 900    
+    slide-number: true
+    incremental: true 
+    theme: ["slides-style.scss"]
+---
+
+# [Writing a Data Analysis]{.white} <br> [report]{.white} {background-image="figures/patrick-fore-typewriter.jpg" background-size="cover"}
+
+<h2>[ISI-BUDS 2023]{.light-blue}</h2>
+
+<h3>[Federica Zoe Ricci]{.light-green}</h3>
+
+## 
+
+::: columns
+::: {.column width="33%"}
+### Link to slides
+
+On the website with the **ISI-BUDS Summer 2023 Schedule**
+
+
+:::
+
+::: {.column width="33%"}
+### GitHub
+
+Look for your research team repo `writing-workshop-teamXX` and clone it
+
+:::
+
+::: {.column width="33%"}
+### Set up
+
+Sit close to your research team members
+
+:::
+:::
+
+## About Me
+
+::: columns
+::: {.column width="50%"}
+![](figures/federica-photo.jpg){width="536"}
+:::
+
+::: {.column width="50%"}
+**Federica Zoe Ricci**
+
+4th Year PhD student in Statistics at UC Irvine
+
+[{{< fa link >}} Website](https://federicazoe.github.io)
+
+[{{< fa file-lines >}} Publications](https://federicazoe.github.io/research.html)
+
+<br>
+
+### Interests
+
+Network data, Bayesian nonparametrics, Statistics education
+
+<br>
+
+### Background
+
+BS in Management for Arts, Culture and Communication (Bocconi, Milan)
+
+MS in Economics (Bocconi, Milan)
+:::
+:::
+
+## About you: DA reading experience
+
+![](figures/survey-ever-read.jpg){width="536"}
+
+## About you: DA structure familiarity
+
+![](figures/survey-familiar-structure.jpg){width="536"} \## About you: DA writing experience
+
+![](figures/survey-ever-written.jpg){width="536"}
+
+## About you: what you may [like]{.medium-green} about writing
+
+-   *I have written data analysis reports for school projects and assignments, but not in the format of an actual data analysis report. Based on the example above, I really liked how the report was **structured** because it makes it easier to read and understand. I also liked how the **charts and tables are included too to refer to** when reading the report.*
+
+-   ***making** the analyzed data to **look easy**.*
+
+-   *I liked the puzzle of structuring the report and figuring out the best way to **tell a story***
+
+-   *It's satisfying to be able to present research to others. There isn't much **point to research** without sharing it.*
+
+## About you: what you may [dislike]{.maroon} about writing
+
+-   *Not sure what is important, and which one is not. What to include or not*
+
+-   *Figuring out where to start and formatting*
+
+-   *I don't think I'm very good at writing, and thus I can sometimes iterate too many times over my work and obsess over making it better*
+
+## About you: submitting to USRESP
+
+![](figures/survey-submit-usresp.jpg){width="536"}
+
+## About this workshop
+
+-   **What we will learn**: writing a data analysis (DA) report
+
+    -   USRESP competition guidelines
+
+    -   writing papers in RStudio + references management
+
+-   **How we will learn**\
+
+    {{< fa circle-question >}} Asking ourselves questions (e.g. why we like/dislike a title)
+
+    {{< fa eye >}} Examples
+
+    {{< fa feather >}} Practice
+
+    {{< fa comments >}} Learn from each other
+
+# DA Report: *Big* picture
+
+## DA report [VS.]{.maroon} Creative Writing
+
+. . .
+
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+How is a DA report different from creative writing?
+:::
+
+-   There is a lot of **structure**
+
+. . .
+
+> *"It felt very straight forward \[...\] as in there seemed to be a set of common things people did in data analysis reports that you just needed to do"*
+>
+> (From one of your responses to *What did you like of writing the report?*)
+
+-   There are **bricks** to build with
+    -   They are determined by your research project. e.g., figures, tables, previous research findings
+
+. . .
+
+{{< fa smile >}} You don't really start from a blank page
+
+. . .
+
+{{< fa meh >}} Not a ton of room for creativity\
+*"The writing in data analysis reports often feels very clinical and boring"*
+
+## Types of DA report
+
+USRESP identifies 2 main types of projects:
+
+-   [application]{.medium-green} focused
+
+-   [methodology]{.orange} focused (i.e. focused on the properties of a statistical method)
+
+. . .
+
+> Some submissions to USRESP are applied research projects using existing statistical/analytical techniques to solve real world problems, while others are methodological research involving statistical applications or simulation studies evaluating different techniques.
+
+. . .
+
+::: {.callout-tip icon="false"}
+## [{{< fa feather >}} Practice]{.black}
+
+Can you tell the type from the title of past USRESP submissions?
+
+-   *Performance of LDA And QDA On Non-Normally Distributed Predictors*
+
+    -   [methodology]{.orange}
+
+-   *Spatial Modeling Of Bird Populations Using Citizen Science Data*
+
+    -   [application]{.medium-green}
+
+-   *Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota*
+
+    -   [application]{.medium-green}
+
+-   *An Evaluation Of Regularization Methods: When There Are More Predictors Than Observations*
+
+    -   [methodology]{.orange}
+:::
+
+## A good DA report
+
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+What makes for a good DA report?
+:::
+
+-   It is clear and easy to read
+
+-   It tells an interesting story
+
+-   It makes a good statistical analysis and explains the results well
+
+. . .
+
+From *Assessment of the USRESP projects* on [causeweb.org/usproc/usresp](https://www.causeweb.org/usproc/usresp)
+
+. . .
+
+> Some **general criteria** that the judges may use include:
+>
+> 1.  Overall [clarity]{.maroon} and [presentation]{.maroon}
+> 2.  [Originality, creativity]{.maroon}, and [significance]{.maroon} of the study
+> 3.  [Accuracy]{.maroon} of data analysis, conclusions, and discussion
+
+. . .
+
+> *Each project will be judged by multiple judges. The judges have expertise in statistics but do not necessarily have expertise in the applied domain of your paper. Therefore, you should construct a paper that is [understandable to a reader with little knowledge of any applied domains]{.maroon} that relate to your paper.*
+
+## A good DA report: [clarity and presentation]{.maroon}
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+**Make notation concrete**
+
+From *An Evaluation Of Regularization Methods: When There Are More Predictors Than Observations* (Kenny Chen, honorable mention at 2021 Fall USRESP)
+
+![](figures/example-clarity-1.png){fig-align="center"}
+:::
+
+## A good DA report: [clarity and presentation]{.maroon}
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+**Design visualizations that help digest complicated methods + Write clear figure captions**
+
+From *Storm Chasers: Synthesizing New England Weather Data On A Dashboard For Emergency Response Workers* (Irene Foster, Sunshine Schneider, Caitlin Timmons, Katelyn Diaz,winner at 2022 Fall USRESP)
+
+![](figures/example-clarity-2.png){fig-align="center" width="700"}
+:::
+
+## A good DA report: [originality, creativity and significance]{.maroon}
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+**Originality**
+
+From *Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota* (Yicheng Shen, Jacob Flignor, Libby Nachreiner, & Karen Wang , winner at 2022 Spring USRESP)
+
+![](figures/example-originality.png){fig-align="center" width="700"}
+:::
+
+## A good DA report: [originality, creativity and significance]{.maroon}
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+**Significance**
+
+From *Exploring Missingness and its Implications on Traffic Stop Data* (Amber Lee, winner at 2020 Fall USRESP)
+
+![](figures/example-significance-1.png){fig-align="center"}
+:::
+
+## A good DA report: [accuracy]{.maroon}
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+**Choosing a statistical model that accounts for specific aspects of the application considered (and motivating the choice)**
+
+From *Psychiatric Comorbidity In Opioid Use Treatment Outcomes* (Linda Tang, winner at 2021 Fall USRESP)
+
+![](figures/example-accuracy.png){fig-align="center"}
+:::
+
+# DA Report: *Fine* picture
+
+## Two questions
+
+::: columns
+::: {.column width="50%"}
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+**Why** do we write a DA report?
+:::
+
+-   To let **someone else** learn about:
+
+    -   an interesting problem (that they might not know)
+
+    -   ways to approach the problem (that they might not know!)
+
+    -   what results one gets when they approach the problem in these ways
+
+    -   what insights these results tell us (and how they relate to other insights that people could read elsewhere)
+:::
+
+::: {.column width="50%"}
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+What are the **common sections** of DA report?
+:::
+
+-   From [USREP - Report Template](https://www.causeweb.org/usproc/report-template-USRESP):
+
+    -   Title
+
+    -   Abstract
+
+    1.  Introduction (aka Background)
+
+    2.  Methods
+
+    3.  Results
+
+    4.  Discussion/Conclusion
+
+    -   References
+:::
+:::
+
+## ~~Two questions~~ Two ways of asking the same question
+
+::: columns
+::: {.column width="50%"}
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+**Why** do we write a DA report?
+:::
+
+::: nonincremental
+-   To let someone else learn about
+
+    1.  [an interesting problem (that they might not know)]{.orange}
+
+    2.  [ways to approach the problem (that they might not know!)]{.medium-green}
+
+    3.  [what results one gets when they approach the problem in these ways]{.maroon}
+
+    4.  [what insights these results tell us (and how they relate to other insights that people can find elsewhere)]{.dark-pink}
+:::
+:::
+
+::: {.column width="50%"}
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+What are the **common sections** of DA report?
+:::
+
+::: nonincremental
+-   From USREP - Report Template:
+
+    -   Title
+
+    -   Abstract
+
+    1.  [Introduction (aka Background)]{.orange}
+
+    2.  [Methods]{.medium-green}
+
+    3.  [Results]{.maroon}
+
+    4.  [Discussion/Conclusion]{.dark-pink}
+
+    -   References
+:::
+:::
+:::
+
+## Introduction
+
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+Guess what makes for a good introduction according to USRESP judging criteria?
+:::
+
+-   Does the background and significance have a **logical organization**? Does it move from the **general to the specific**?
+
+-   Has **sufficient background** been provided **to understand** the paper? How does this work **relate to other work** in the scientific literature?
+
+-   Has a reasonable explanation been given for why the research was done? **Why is the work important?** Why is it relevant?
+
+-   Does this section end with **statements about the hypothesis/goals** of the paper? :::
+
+## Introduction
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+Individually, read the snippet in `01-practice-introduction.qmd` in the folder `practice`
+
+[(5 min)]{.maroon}
+:::
+
+. . .
+
+::: {.callout-tip icon="false"}
+## [{{< fa feather >}} Practice]{.black}
+
+Discuss with your team members:\
+
+-   How do you think the snippet did, with reference to the USRESP judging criteria?
+
+-   What could be improved?
+
+[(5 min)]{.maroon}
+:::
+
+. . .
+
+::: {.callout-important icon="false"}
+## [{{< fa comments >}} Learn from each other]{.black}
+
+Let's share our thoughts between all groups.
+
+[(5 min)]{.maroon}
+:::
+
+## Methods
+
+What should be included (according to USRESP template):
+
+-   **Data collection**\
+    Explain how the data was collected/experiment was conducted. Additionally, you should provide information on the individuals who participated to assess representativeness. Non-response rates and other relevant data collection details should be mentioned here if they are an issue. However, you should not discuss the impact of these issues here - save that for the limitations section.
+
+-   **Variable creation**\
+    Detail the variables in your analysis and how they are defined (if necessary). For example, if you created a combined (frequency times quantity) drinking variable you should describe how. If you are talking about gender no further explanation is really needed.
+
+-   **Analytic Methods**\
+    Explain the statistical procedures that will be used to analyze your data. E.g. Boxplots are used to illustrate differences in GPA across gender and class standing. Correlations are used to assess the impacts of gender and class standing on GPA.
+
+## Methods
+
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+Guess what makes for a good method section according to USRESP judging criteria?
+:::
+
+-   Could the study be repeated based on the information given here? Is the material organized into logical categories \[like the ones in the previous slide\]?
+
+## Methods
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+Individually, read the snippet in `02-practice-methods.qmd` in the folder `practice`
+
+[(5 min)]{.maroon}
+:::
+
+. . .
+
+::: {.callout-tip icon="false"}
+## [{{< fa feather >}} Practice]{.black}
+
+Discuss with your team members:
+
+::: nonincremental
+-   Parts of methods covered in the snippet
+
+-   What you understand well by reading the snippet
+
+-   What is unclear from the snippet
+:::
+
+[(5 min)]{.maroon}
+:::
+
+. . .
+
+::: {.callout-important icon="false"}
+## [{{< fa comments >}} Learn from each other]{.black}
+
+Let's share our thoughts between all groups (if there is time).
+
+[(5 min)]{.maroon}
+:::
+
+## Results
+
+How USRESP guidelines suggest to frame the results section:
+
+. . .
+
+-   typically, results sections **start with descriptive statistics**
+
+. . .
+
+-   information presented must be relevant in helping to answer the research question(s) of interest
+
+. . .
+
+-   typically, **inferential** (i.e. hypothesis tests) **statistics come next**.
+
+. . .
+
+-   **Tables and figures** are useful in this section and should be labeled, embedded in the text, and **referenced appropriately**.
+
+. . .
+
+And here are the USRESP assessment questions:
+
+-   Is the content appropriate for a results section? Is there a clear description of the results?
+
+-   Are the results/data analyzed well? Given the data in each figure/table is the interpretation accurate and logical? Is the analysis of the data thorough (anything ignored?)
+
+-   Are the figures/tables appropriate for the data being discussed? Are the figure legends and titles clear and concise?
+
+## Results
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+Let's read this snippet together
+
+(From the Results section in *Psychiatric Comorbidity In Opioid Use Treatment Outcomes* by Linda Tang, winner at 2021 Fall USRESP)
+:::
+
+> Addressing our primary analysis, we observed that having psychiatric comorbidity is associated with higher incidence of treatment dropout and lower incidence of treatment completion. More specifically, holding all else constant, a client with psychiatric comorbidity is expected to have 1.05 times the subdistribution hazard of dropping out of the treatment and 0.91 times the subdistribution hazard of completing a treatment compared to a client without psychiatric comorbidity. Although the effect size of this association is modest, it still highlights that the current treatment programs need to better accommodate the special needs of this subgroup of clients.
+
+. . .
+
+::: {.callout-tip icon="false"}
+## [{{< fa feather >}} Practice]{.black}
+
+Can you guess:
+
+-   one thing that I like about the snippet
+
+-   two things that I think could be improved
+:::
+
+## Discussion
+
+Here are the USRESP assessment criteria:
+
+-   Does the author clearly state whether the results answer the question (support or disprove the hypothesis)?
+
+-   Were specific data cited from the results to support each interpretation? Does the author clearly articulate the basis for supporting or rejecting each hypothesis?
+
+-   Does the author adequately relate the results of the current work to previous research?
+
+. . .
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+Individually, read the snippet in `04-practice-discussion.qmd` in the folder `practice` [(2 min)]{.maroon}
+:::
+
+. . .
+
+::: {.callout-tip icon="false"}
+## [{{< fa feather >}} Practice]{.black}
+
+Think about these questions: [(2 min)]{.maroon}
+
+::: nonincremental
+-   Can you identify the strong elements in this snippets (according to USRESP assessment criteria)?
+
+-   Are there any weaker elements in this snippets (according to USRESP assessment criteria)? What would you suggest to change?
+:::
+:::
+
+::: {.callout-important icon="false"}
+## [{{< fa comments >}} Learn from each other]{.black}
+
+Let's share our thoughts between all groups (if there is time).
+
+[(5 min)]{.maroon}
+:::
+
+## Abstract
+
+::: {.callout-warning icon="false"}
+## [{{< fa circle-question >}} Question]{.black}
+
+What is an abstract?
+:::
+
+> The abstract provides a brief summary of the entire paper (background, methods, results and conclusions). The suggested length is no more than 150 words. This allows you **approximately 1 sentence (and likely no more than two sentences) summarizing each of the following sections**. Typically, abstracts are the last thing you write.
+
+**Assessment**: Are the main points of the paper described clearly and succinctly?
+
+## Abstract
+
+From *Investigation Of NCAA Basketball's Three Point Strategy Using Logistic Mixed Effects Regression Model* by (Che Hoon Jeong, winner of 2022 Fall USRESP):
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+Several studies have presented the increase of three point shot attempts and its significance in winning games in the National Basketball Association (NBA). However, there are limited quantitative research on whether collegiate basketball reflects the three-point strategy of the NBA. This paper conducts a Seasonal Mann-Kendall test to present a statistically significant increase in three-point shot distance in NCAA Division 1 basketball, which reflects the trend of the NBA. The Logistic Mixed Effects Regression reveals that each three-point attempt decreases the probability of winning on average, whereas a made three-point shot increases the probability of winning the most out of the sixteen variables used in the model. Thus, designating three-point shots primarily for efficient three-point shooters may increase the chances of winning. Nevertheless, drafting sharpshooters and developing three-point shooting skills may benefit teams in the long-run, who may capitalize on the impact of successful three-point shots.
+:::
+
+## Abstract
+
+From *Investigation Of NCAA Basketball's Three Point Strategy Using Logistic Mixed Effects Regression Model* by (Che Hoon Jeong, winner of 2022 Fall USRESP):
+
+::: {.callout-note icon="false"}
+## [{{< fa eye >}} Example]{.black}
+
+[Several studies have presented the increase of three point shot attempts and its significance in winning games in the National Basketball Association (NBA). However, there are limited quantitative research on whether collegiate basketball reflects the three-point strategy of the NBA.]{.orange} [This paper conducts a Seasonal Mann-Kendall test]{.medium-green} [to present a statistically significant increase in three-point shot distance in NCAA Division 1 basketball, which reflects the trend of the NBA. The Logistic Mixed Effects Regression reveals that each three-point attempt decreases the probability of winning on average, whereas a made three-point shot increases the probability of winning the most out of the sixteen variables used in the model.]{.maroon} [Thus, designating three-point shots primarily for efficient three-point shooters may increase the chances of winning. Nevertheless, drafting sharpshooters and developing three-point shooting skills may benefit teams in the long-run, who may capitalize on the impact of successful three-point shots.]{.dark-pink}
+:::
+
+1.  [Introduction (aka Background)]{.orange}
+
+2.  [Methods]{.medium-green}
+
+3.  [Results]{.maroon}
+
+4.  [Discussion/Conclusion]{.dark-pink}
+
+# DA Report: *Tools*
+
+## Demonstration
+
+In the `template` folder in your repo.
+
+-   Quarto for DA reports
+
+    -   child-documents
+
+    -   section planning
+
+    -   cross-references Sections, Equations, Figures and Tables
+
+-   Zotero for references
+
+    -   how I look for literature
+
+-   Zotero [+]{.maroon} Quarto
+
+# DA Report: *Feedback*
+
+##    
+
+-   **Give others** feedback
+
+    -   Highlight strengths (so they know what is good, what they don't need to change)
+
+    -   Identify potential weak points or issues and, when possible, suggest ways to improve
+
+    -   We have been doing it all along!
+
+-   **Give yourself** feedback
+
+    -   \[Hint\] Once you are done with putting your report together, leave it for a few days and then go back to it to review it, if you can.
+
+-   **Receive** feedback
+
+    -   Remember: [Everything can be improved]{.medium-green}.
+
+    -   Someone took time to read your work and tell you what they thought of it. You get the chance to see how your work reads in someone else's hands. Your goal is to understand from them what you could improve, e.g. make more clear.
+
+    -   Sometimes we receive "bad" feedback (non-constructive, perhaps even offensive). Try and feel grateful anyways (see point above). Don't lose all your confidence, but also interrogate yourself. Say thank you anyways and ask follow up questions.
+
+## Questions?
+
+<br>
+
+.. on writing DA reports
+
+<br>
+
+.. on submitting to USRESP
+
+<br>
+
+.. something else you're curious about
+
+## Your Feedback for me {{< fa handshake >}}
+
+::: columns
+::: {.column width="50%"}
+Link: [bit.ly/isi-buds-writers]{.medium-green}
+:::
+
+::: {.column width="50%"}
+## QR code: 
+
+![](figures/feedback-qr-code.jpeg){width="536"}
+:::
+:::

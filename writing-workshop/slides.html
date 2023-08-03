@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="slides_files/libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="slides_files/libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.353">
+
+  <title>slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+
+<section>
+<section id="writing-a-data-analysis-report" class="title-slide slide level1 center" data-background-image="figures/patrick-fore-typewriter.jpg" data-background-size="cover">
+<h1><span class="white">Writing a Data Analysis</span> <br> <span class="white">report</span></h1>
+<h2>
+<span class="light-blue">ISI-BUDS 2023</span>
+</h2>
+<h3>
+<span class="light-green">Federica Zoe Ricci</span>
+</h3>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<h3 id="link-to-slides">Link to slides</h3>
+<p>On the website with the <strong>ISI-BUDS Summer 2023 Schedule</strong></p>
+</div><div class="column" style="width:33%;">
+<h3 id="github">GitHub</h3>
+<p>Look for your research team repo <code>writing-workshop-teamXX</code> and clone it</p>
+</div><div class="column" style="width:33%;">
+<h3 id="set-up">Set up</h3>
+<p>Sit close to your research team members</p>
+</div>
+</div>
+</section>
+<section id="about-me" class="slide level2">
+<h2>About Me</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figures/federica-photo.jpg" width="536"></p>
+</div><div class="column" style="width:50%;">
+<p><strong>Federica Zoe Ricci</strong></p>
+<p>4th Year PhD student in Statistics at UC Irvine</p>
+<p><a href="https://federicazoe.github.io"><i class="fa-solid fa-link" aria-label="link"></i> Website</a></p>
+<p><a href="https://federicazoe.github.io/research.html"><i class="fa-solid fa-file-lines" aria-label="file-lines"></i> Publications</a></p>
+<p><br></p>
+<h3 id="interests">Interests</h3>
+<p>Network data, Bayesian nonparametrics, Statistics education</p>
+<p><br></p>
+<h3 id="background">Background</h3>
+<p>BS in Management for Arts, Culture and Communication (Bocconi, Milan)</p>
+<p>MS in Economics (Bocconi, Milan)</p>
+</div>
+</div>
+</section>
+<section id="about-you-da-reading-experience" class="slide level2">
+<h2>About you: DA reading experience</h2>
+
+<img data-src="figures/survey-ever-read.jpg" width="536" class="r-stretch"></section>
+<section id="about-you-da-structure-familiarity" class="slide level2">
+<h2>About you: DA structure familiarity</h2>
+<p><img data-src="figures/survey-familiar-structure.jpg" width="536"> ## About you: DA writing experience</p>
+<p><img data-src="figures/survey-ever-written.jpg" width="536"></p>
+</section>
+<section id="about-you-what-you-may-like-about-writing" class="slide level2">
+<h2>About you: what you may <span class="medium-green">like</span> about writing</h2>
+<ul>
+<li class="fragment"><p><em>I have written data analysis reports for school projects and assignments, but not in the format of an actual data analysis report. Based on the example above, I really liked how the report was <strong>structured</strong> because it makes it easier to read and understand. I also liked how the <strong>charts and tables are included too to refer to</strong> when reading the report.</em></p></li>
+<li class="fragment"><p><em><strong>making</strong> the analyzed data to <strong>look easy</strong>.</em></p></li>
+<li class="fragment"><p><em>I liked the puzzle of structuring the report and figuring out the best way to <strong>tell a story</strong></em></p></li>
+<li class="fragment"><p><em>It’s satisfying to be able to present research to others. There isn’t much <strong>point to research</strong> without sharing it.</em></p></li>
+</ul>
+</section>
+<section id="about-you-what-you-may-dislike-about-writing" class="slide level2">
+<h2>About you: what you may <span class="maroon">dislike</span> about writing</h2>
+<ul>
+<li class="fragment"><p><em>Not sure what is important, and which one is not. What to include or not</em></p></li>
+<li class="fragment"><p><em>Figuring out where to start and formatting</em></p></li>
+<li class="fragment"><p><em>I don’t think I’m very good at writing, and thus I can sometimes iterate too many times over my work and obsess over making it better</em></p></li>
+</ul>
+</section>
+<section id="about-you-submitting-to-usresp" class="slide level2">
+<h2>About you: submitting to USRESP</h2>
+
+<img data-src="figures/survey-submit-usresp.jpg" width="536" class="r-stretch"></section>
+<section id="about-this-workshop" class="slide level2">
+<h2>About this workshop</h2>
+<ul>
+<li class="fragment"><p><strong>What we will learn</strong>: writing a data analysis (DA) report</p>
+<ul>
+<li class="fragment"><p>USRESP competition guidelines</p></li>
+<li class="fragment"><p>writing papers in RStudio + references management</p></li>
+</ul></li>
+<li class="fragment"><p><strong>How we will learn</strong><br>
+</p>
+<p><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Asking ourselves questions (e.g.&nbsp;why we like/dislike a title)</p>
+<p><i class="fa-solid fa-eye" aria-label="eye"></i> Examples</p>
+<p><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</p>
+<p><i class="fa-solid fa-comments" aria-label="comments"></i> Learn from each other</p></li>
+</ul>
+</section></section>
+<section>
+<section id="da-report-big-picture" class="title-slide slide level1 center">
+<h1>DA Report: <em>Big</em> picture</h1>
+
+</section>
+<section id="da-report-vs.-creative-writing" class="slide level2">
+<h2>DA report <span class="maroon">VS.</span> Creative Writing</h2>
+<div class="fragment">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>How is a DA report different from creative writing?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">There is a lot of <strong>structure</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<blockquote>
+<p><em>“It felt very straight forward […] as in there seemed to be a set of common things people did in data analysis reports that you just needed to do”</em></p>
+<p>(From one of your responses to <em>What did you like of writing the report?</em>)</p>
+</blockquote>
+<ul>
+<li class="fragment">There are <strong>bricks</strong> to build with
+<ul>
+<li class="fragment">They are determined by your research project. e.g., figures, tables, previous research findings</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<p><i class="fa-solid fa-smile" aria-label="smile"></i> You don’t really start from a blank page</p>
+</div>
+<div class="fragment">
+<p><i class="fa-solid fa-meh" aria-label="meh"></i> Not a ton of room for creativity<br>
+<em>“The writing in data analysis reports often feels very clinical and boring”</em></p>
+</div>
+</section>
+<section id="types-of-da-report" class="slide level2">
+<h2>Types of DA report</h2>
+<p>USRESP identifies 2 main types of projects:</p>
+<ul>
+<li class="fragment"><p><span class="medium-green">application</span> focused</p></li>
+<li class="fragment"><p><span class="orange">methodology</span> focused (i.e.&nbsp;focused on the properties of a statistical method)</p></li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p>Some submissions to USRESP are applied research projects using existing statistical/analytical techniques to solve real world problems, while others are methodological research involving statistical applications or simulation studies evaluating different techniques.</p>
+</blockquote>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Can you tell the type from the title of past USRESP submissions?</p>
+<ul>
+<li class="fragment"><p><em>Performance of LDA And QDA On Non-Normally Distributed Predictors</em></p>
+<ul>
+<li class="fragment"><span class="orange">methodology</span></li>
+</ul></li>
+<li class="fragment"><p><em>Spatial Modeling Of Bird Populations Using Citizen Science Data</em></p>
+<ul>
+<li class="fragment"><span class="medium-green">application</span></li>
+</ul></li>
+<li class="fragment"><p><em>Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota</em></p>
+<ul>
+<li class="fragment"><span class="medium-green">application</span></li>
+</ul></li>
+<li class="fragment"><p><em>An Evaluation Of Regularization Methods: When There Are More Predictors Than Observations</em></p>
+<ul>
+<li class="fragment"><span class="orange">methodology</span></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-good-da-report" class="slide level2">
+<h2>A good DA report</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>What makes for a good DA report?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>It is clear and easy to read</p></li>
+<li class="fragment"><p>It tells an interesting story</p></li>
+<li class="fragment"><p>It makes a good statistical analysis and explains the results well</p></li>
+</ul>
+<div class="fragment">
+<p>From <em>Assessment of the USRESP projects</em> on <a href="https://www.causeweb.org/usproc/usresp">causeweb.org/usproc/usresp</a></p>
+</div>
+<div class="fragment">
+<blockquote>
+<p>Some <strong>general criteria</strong> that the judges may use include:</p>
+<ol type="1">
+<li class="fragment">Overall <span class="maroon">clarity</span> and <span class="maroon">presentation</span></li>
+<li class="fragment"><span class="maroon">Originality, creativity</span>, and <span class="maroon">significance</span> of the study</li>
+<li class="fragment"><span class="maroon">Accuracy</span> of data analysis, conclusions, and discussion</li>
+</ol>
+</blockquote>
+</div>
+<div class="fragment">
+<blockquote>
+<p><em>Each project will be judged by multiple judges. The judges have expertise in statistics but do not necessarily have expertise in the applied domain of your paper. Therefore, you should construct a paper that is <span class="maroon">understandable to a reader with little knowledge of any applied domains</span> that relate to your paper.</em></p>
+</blockquote>
+</div>
+</section>
+<section id="a-good-da-report-clarity-and-presentation" class="slide level2">
+<h2>A good DA report: <span class="maroon">clarity and presentation</span></h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Make notation concrete</strong></p>
+<p>From <em>An Evaluation Of Regularization Methods: When There Are More Predictors Than Observations</em> (Kenny Chen, honorable mention at 2021 Fall USRESP)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/example-clarity-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-good-da-report-clarity-and-presentation-1" class="slide level2">
+<h2>A good DA report: <span class="maroon">clarity and presentation</span></h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Design visualizations that help digest complicated methods + Write clear figure captions</strong></p>
+<p>From <em>Storm Chasers: Synthesizing New England Weather Data On A Dashboard For Emergency Response Workers</em> (Irene Foster, Sunshine Schneider, Caitlin Timmons, Katelyn Diaz,winner at 2022 Fall USRESP)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/example-clarity-2.png" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-good-da-report-originality-creativity-and-significance" class="slide level2">
+<h2>A good DA report: <span class="maroon">originality, creativity and significance</span></h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Originality</strong></p>
+<p>From <em>Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota</em> (Yicheng Shen, Jacob Flignor, Libby Nachreiner, &amp; Karen Wang , winner at 2022 Spring USRESP)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/example-originality.png" width="700"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-good-da-report-originality-creativity-and-significance-1" class="slide level2">
+<h2>A good DA report: <span class="maroon">originality, creativity and significance</span></h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Significance</strong></p>
+<p>From <em>Exploring Missingness and its Implications on Traffic Stop Data</em> (Amber Lee, winner at 2020 Fall USRESP)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/example-significance-1.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-good-da-report-accuracy" class="slide level2">
+<h2>A good DA report: <span class="maroon">accuracy</span></h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Choosing a statistical model that accounts for specific aspects of the application considered (and motivating the choice)</strong></p>
+<p>From <em>Psychiatric Comorbidity In Opioid Use Treatment Outcomes</em> (Linda Tang, winner at 2021 Fall USRESP)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figures/example-accuracy.png"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="da-report-fine-picture" class="title-slide slide level1 center">
+<h1>DA Report: <em>Fine</em> picture</h1>
+
+</section>
+<section id="two-questions" class="slide level2">
+<h2>Two questions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Why</strong> do we write a DA report?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>To let <strong>someone else</strong> learn about:</p>
+<ul>
+<li class="fragment"><p>an interesting problem (that they might not know)</p></li>
+<li class="fragment"><p>ways to approach the problem (that they might not know!)</p></li>
+<li class="fragment"><p>what results one gets when they approach the problem in these ways</p></li>
+<li class="fragment"><p>what insights these results tell us (and how they relate to other insights that people could read elsewhere)</p></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>What are the <strong>common sections</strong> of DA report?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>From <a href="https://www.causeweb.org/usproc/report-template-USRESP">USREP - Report Template</a>:</p>
+<ul>
+<li class="fragment"><p>Title</p></li>
+<li class="fragment"><p>Abstract</p></li>
+</ul>
+<ol type="1">
+<li class="fragment"><p>Introduction (aka Background)</p></li>
+<li class="fragment"><p>Methods</p></li>
+<li class="fragment"><p>Results</p></li>
+<li class="fragment"><p>Discussion/Conclusion</p></li>
+</ol>
+<ul>
+<li class="fragment">References</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="two-questions-two-ways-of-asking-the-same-question" class="slide level2">
+<h2><del>Two questions</del> Two ways of asking the same question</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Why</strong> do we write a DA report?</p>
+</div>
+</div>
+</div>
+<div>
+<ul>
+<li><p>To let someone else learn about</p>
+<ol type="1">
+<li><p><span class="orange">an interesting problem (that they might not know)</span></p></li>
+<li><p><span class="medium-green">ways to approach the problem (that they might not know!)</span></p></li>
+<li><p><span class="maroon">what results one gets when they approach the problem in these ways</span></p></li>
+<li><p><span class="dark-pink">what insights these results tell us (and how they relate to other insights that people can find elsewhere)</span></p></li>
+</ol></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>What are the <strong>common sections</strong> of DA report?</p>
+</div>
+</div>
+</div>
+<div>
+<ul>
+<li><p>From USREP - Report Template:</p>
+<ul>
+<li><p>Title</p></li>
+<li><p>Abstract</p></li>
+</ul>
+<ol type="1">
+<li><p><span class="orange">Introduction (aka Background)</span></p></li>
+<li><p><span class="medium-green">Methods</span></p></li>
+<li><p><span class="maroon">Results</span></p></li>
+<li><p><span class="dark-pink">Discussion/Conclusion</span></p></li>
+</ol>
+<ul>
+<li>References</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="introduction" class="slide level2">
+<h2>Introduction</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Guess what makes for a good introduction according to USRESP judging criteria?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment"><p>Does the background and significance have a <strong>logical organization</strong>? Does it move from the <strong>general to the specific</strong>?</p></li>
+<li class="fragment"><p>Has <strong>sufficient background</strong> been provided <strong>to understand</strong> the paper? How does this work <strong>relate to other work</strong> in the scientific literature?</p></li>
+<li class="fragment"><p>Has a reasonable explanation been given for why the research was done? <strong>Why is the work important?</strong> Why is it relevant?</p></li>
+<li class="fragment"><p>Does this section end with <strong>statements about the hypothesis/goals</strong> of the paper? :::</p></li>
+</ul>
+</section>
+<section id="introduction-1" class="slide level2">
+<h2>Introduction</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Individually, read the snippet in <code>01-practice-introduction.qmd</code> in the folder <code>practice</code></p>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Discuss with your team members:<br>
+</p>
+<ul>
+<li class="fragment"><p>How do you think the snippet did, with reference to the USRESP judging criteria?</p></li>
+<li class="fragment"><p>What could be improved?</p></li>
+</ul>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-comments" aria-label="comments"></i> Learn from each other</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Let’s share our thoughts between all groups.</p>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="methods" class="slide level2">
+<h2>Methods</h2>
+<p>What should be included (according to USRESP template):</p>
+<ul>
+<li class="fragment"><p><strong>Data collection</strong><br>
+Explain how the data was collected/experiment was conducted. Additionally, you should provide information on the individuals who participated to assess representativeness. Non-response rates and other relevant data collection details should be mentioned here if they are an issue. However, you should not discuss the impact of these issues here - save that for the limitations section.</p></li>
+<li class="fragment"><p><strong>Variable creation</strong><br>
+Detail the variables in your analysis and how they are defined (if necessary). For example, if you created a combined (frequency times quantity) drinking variable you should describe how. If you are talking about gender no further explanation is really needed.</p></li>
+<li class="fragment"><p><strong>Analytic Methods</strong><br>
+Explain the statistical procedures that will be used to analyze your data. E.g. Boxplots are used to illustrate differences in GPA across gender and class standing. Correlations are used to assess the impacts of gender and class standing on GPA.</p></li>
+</ul>
+</section>
+<section id="methods-1" class="slide level2">
+<h2>Methods</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Guess what makes for a good method section according to USRESP judging criteria?</p>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Could the study be repeated based on the information given here? Is the material organized into logical categories [like the ones in the previous slide]?</li>
+</ul>
+</section>
+<section id="methods-2" class="slide level2">
+<h2>Methods</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Individually, read the snippet in <code>02-practice-methods.qmd</code> in the folder <code>practice</code></p>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Discuss with your team members:</p>
+<div>
+<ul>
+<li><p>Parts of methods covered in the snippet</p></li>
+<li><p>What you understand well by reading the snippet</p></li>
+<li><p>What is unclear from the snippet</p></li>
+</ul>
+</div>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-comments" aria-label="comments"></i> Learn from each other</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Let’s share our thoughts between all groups (if there is time).</p>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="results" class="slide level2">
+<h2>Results</h2>
+<p>How USRESP guidelines suggest to frame the results section:</p>
+<div class="fragment">
+<ul>
+<li class="fragment">typically, results sections <strong>start with descriptive statistics</strong></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">information presented must be relevant in helping to answer the research question(s) of interest</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">typically, <strong>inferential</strong> (i.e.&nbsp;hypothesis tests) <strong>statistics come next</strong>.</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment"><strong>Tables and figures</strong> are useful in this section and should be labeled, embedded in the text, and <strong>referenced appropriately</strong>.</li>
+</ul>
+</div>
+<div class="fragment">
+<p>And here are the USRESP assessment questions:</p>
+<ul>
+<li class="fragment"><p>Is the content appropriate for a results section? Is there a clear description of the results?</p></li>
+<li class="fragment"><p>Are the results/data analyzed well? Given the data in each figure/table is the interpretation accurate and logical? Is the analysis of the data thorough (anything ignored?)</p></li>
+<li class="fragment"><p>Are the figures/tables appropriate for the data being discussed? Are the figure legends and titles clear and concise?</p></li>
+</ul>
+</div>
+</section>
+<section id="results-1" class="slide level2">
+<h2>Results</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Let’s read this snippet together</p>
+<p>(From the Results section in <em>Psychiatric Comorbidity In Opioid Use Treatment Outcomes</em> by Linda Tang, winner at 2021 Fall USRESP)</p>
+</div>
+</div>
+</div>
+<blockquote>
+<p>Addressing our primary analysis, we observed that having psychiatric comorbidity is associated with higher incidence of treatment dropout and lower incidence of treatment completion. More specifically, holding all else constant, a client with psychiatric comorbidity is expected to have 1.05 times the subdistribution hazard of dropping out of the treatment and 0.91 times the subdistribution hazard of completing a treatment compared to a client without psychiatric comorbidity. Although the effect size of this association is modest, it still highlights that the current treatment programs need to better accommodate the special needs of this subgroup of clients.</p>
+</blockquote>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Can you guess:</p>
+<ul>
+<li class="fragment"><p>one thing that I like about the snippet</p></li>
+<li class="fragment"><p>two things that I think could be improved</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="discussion" class="slide level2">
+<h2>Discussion</h2>
+<p>Here are the USRESP assessment criteria:</p>
+<ul>
+<li class="fragment"><p>Does the author clearly state whether the results answer the question (support or disprove the hypothesis)?</p></li>
+<li class="fragment"><p>Were specific data cited from the results to support each interpretation? Does the author clearly articulate the basis for supporting or rejecting each hypothesis?</p></li>
+<li class="fragment"><p>Does the author adequately relate the results of the current work to previous research?</p></li>
+</ul>
+<div class="fragment">
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Individually, read the snippet in <code>04-practice-discussion.qmd</code> in the folder <code>practice</code> <span class="maroon">(2 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="callout callout-tip no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-feather" aria-label="feather"></i> Practice</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Think about these questions: <span class="maroon">(2 min)</span></p>
+<div>
+<ul>
+<li><p>Can you identify the strong elements in this snippets (according to USRESP assessment criteria)?</p></li>
+<li><p>Are there any weaker elements in this snippets (according to USRESP assessment criteria)? What would you suggest to change?</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-important no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-comments" aria-label="comments"></i> Learn from each other</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Let’s share our thoughts between all groups (if there is time).</p>
+<p><span class="maroon">(5 min)</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="abstract" class="slide level2">
+<h2>Abstract</h2>
+<div class="callout callout-warning no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-circle-question" aria-label="circle-question"></i> Question</span></strong></p>
+</div>
+<div class="callout-content">
+<p>What is an abstract?</p>
+</div>
+</div>
+</div>
+<blockquote>
+<p>The abstract provides a brief summary of the entire paper (background, methods, results and conclusions). The suggested length is no more than 150 words. This allows you <strong>approximately 1 sentence (and likely no more than two sentences) summarizing each of the following sections</strong>. Typically, abstracts are the last thing you write.</p>
+</blockquote>
+<p><strong>Assessment</strong>: Are the main points of the paper described clearly and succinctly?</p>
+</section>
+<section id="abstract-1" class="slide level2">
+<h2>Abstract</h2>
+<p>From <em>Investigation Of NCAA Basketball’s Three Point Strategy Using Logistic Mixed Effects Regression Model</em> by (Che Hoon Jeong, winner of 2022 Fall USRESP):</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p>Several studies have presented the increase of three point shot attempts and its significance in winning games in the National Basketball Association (NBA). However, there are limited quantitative research on whether collegiate basketball reflects the three-point strategy of the NBA. This paper conducts a Seasonal Mann-Kendall test to present a statistically significant increase in three-point shot distance in NCAA Division 1 basketball, which reflects the trend of the NBA. The Logistic Mixed Effects Regression reveals that each three-point attempt decreases the probability of winning on average, whereas a made three-point shot increases the probability of winning the most out of the sixteen variables used in the model. Thus, designating three-point shots primarily for efficient three-point shooters may increase the chances of winning. Nevertheless, drafting sharpshooters and developing three-point shooting skills may benefit teams in the long-run, who may capitalize on the impact of successful three-point shots.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="abstract-2" class="slide level2">
+<h2>Abstract</h2>
+<p>From <em>Investigation Of NCAA Basketball’s Three Point Strategy Using Logistic Mixed Effects Regression Model</em> by (Che Hoon Jeong, winner of 2022 Fall USRESP):</p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong><span class="black"><i class="fa-solid fa-eye" aria-label="eye"></i> Example</span></strong></p>
+</div>
+<div class="callout-content">
+<p><span class="orange">Several studies have presented the increase of three point shot attempts and its significance in winning games in the National Basketball Association (NBA). However, there are limited quantitative research on whether collegiate basketball reflects the three-point strategy of the NBA.</span> <span class="medium-green">This paper conducts a Seasonal Mann-Kendall test</span> <span class="maroon">to present a statistically significant increase in three-point shot distance in NCAA Division 1 basketball, which reflects the trend of the NBA. The Logistic Mixed Effects Regression reveals that each three-point attempt decreases the probability of winning on average, whereas a made three-point shot increases the probability of winning the most out of the sixteen variables used in the model.</span> <span class="dark-pink">Thus, designating three-point shots primarily for efficient three-point shooters may increase the chances of winning. Nevertheless, drafting sharpshooters and developing three-point shooting skills may benefit teams in the long-run, who may capitalize on the impact of successful three-point shots.</span></p>
+</div>
+</div>
+</div>
+<ol type="1">
+<li class="fragment"><p><span class="orange">Introduction (aka Background)</span></p></li>
+<li class="fragment"><p><span class="medium-green">Methods</span></p></li>
+<li class="fragment"><p><span class="maroon">Results</span></p></li>
+<li class="fragment"><p><span class="dark-pink">Discussion/Conclusion</span></p></li>
+</ol>
+</section></section>
+<section>
+<section id="da-report-tools" class="title-slide slide level1 center">
+<h1>DA Report: <em>Tools</em></h1>
+
+</section>
+<section id="demonstration" class="slide level2">
+<h2>Demonstration</h2>
+<p>In the <code>template</code> folder in your repo.</p>
+<ul>
+<li class="fragment"><p>Quarto for DA reports</p>
+<ul>
+<li class="fragment"><p>child-documents</p></li>
+<li class="fragment"><p>section planning</p></li>
+<li class="fragment"><p>cross-references Sections, Equations, Figures and Tables</p></li>
+</ul></li>
+<li class="fragment"><p>Zotero for references</p>
+<ul>
+<li class="fragment">how I look for literature</li>
+</ul></li>
+<li class="fragment"><p>Zotero <span class="maroon">+</span> Quarto</p></li>
+</ul>
+</section></section>
+<section>
+<section id="da-report-feedback" class="title-slide slide level1 center">
+<h1>DA Report: <em>Feedback</em></h1>
+
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<ul>
+<li class="fragment"><p><strong>Give others</strong> feedback</p>
+<ul>
+<li class="fragment"><p>Highlight strengths (so they know what is good, what they don’t need to change)</p></li>
+<li class="fragment"><p>Identify potential weak points or issues and, when possible, suggest ways to improve</p></li>
+<li class="fragment"><p>We have been doing it all along!</p></li>
+</ul></li>
+<li class="fragment"><p><strong>Give yourself</strong> feedback</p>
+<ul>
+<li class="fragment">[Hint] Once you are done with putting your report together, leave it for a few days and then go back to it to review it, if you can.</li>
+</ul></li>
+<li class="fragment"><p><strong>Receive</strong> feedback</p>
+<ul>
+<li class="fragment"><p>Remember: <span class="medium-green">Everything can be improved</span>.</p></li>
+<li class="fragment"><p>Someone took time to read your work and tell you what they thought of it. You get the chance to see how your work reads in someone else’s hands. Your goal is to understand from them what you could improve, e.g.&nbsp;make more clear.</p></li>
+<li class="fragment"><p>Sometimes we receive “bad” feedback (non-constructive, perhaps even offensive). Try and feel grateful anyways (see point above). Don’t lose all your confidence, but also interrogate yourself. Say thank you anyways and ask follow up questions.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions?</h2>
+<p><br></p>
+<p>.. on writing DA reports</p>
+<p><br></p>
+<p>.. on submitting to USRESP</p>
+<p><br></p>
+<p>.. something else you’re curious about</p>
+</section>
+<section id="your-feedback-for-me-fa-handshake" class="slide level2">
+<h2>Your Feedback for me <i class="fa-solid fa-handshake" aria-label="handshake"></i></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Link: <span class="medium-green">bit.ly/isi-buds-writers</span></p>
+</div><div class="column" style="width:50%;">
+<section id="qr-code" class="slide level2">
+<h2>QR code:</h2>
+<p><img data-src="figures/feedback-qr-code.jpeg" width="536"></p>
+</section>
+</div>
+</div>
+<div class="footer footer-default">
+
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="slides_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1600,
+
+        height: 900,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>
