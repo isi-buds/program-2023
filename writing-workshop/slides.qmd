@@ -95,23 +95,29 @@ MS in Economics (Bocconi University, Milan)
 
 ## About you: what you may [dislike]{.maroon} about writing
 
--   *Not sure what is important, and which one is not. What to include or not*
+<br>
+
+-   *Not sure what is important, and which one is not. **What to include or not***
 
 <br>
 
--   *Figuring out where to start and formatting*
+-   *Figuring out **where to start** and **formatting***
 
 <br>
 
--   *I don't think I'm very good at writing, and thus I can sometimes iterate too many times over my work and obsess over making it better*
+-   *I **don't think I'm very good at writing**, and thus I can sometimes iterate too many times over my work and obsess over making it better*
 
 ## About this workshop
+
+<br> 
 
 -   **What we will learn**: writing a data analysis (DA) report
 
     -   USRESP competition guidelines
 
     -   writing papers in RStudio + references management
+
+<br> 
 
 -   **How we will learn**\
 
@@ -165,10 +171,6 @@ USRESP identifies 2 main types of projects:
 
 . . .
 
-> Some submissions to USRESP are applied research projects using existing statistical/analytical techniques to solve real world problems, while others are methodological research involving statistical applications or simulation studies evaluating different techniques.
-
-. . .
-
 ::: {.callout-tip icon="false"}
 ## [{{< fa feather >}} Practice]{.black}
 
@@ -219,14 +221,14 @@ From *Assessment of the USRESP projects* on [causeweb.org/usproc/usresp](https:/
 
 . . .
 
-> *Each project will be judged by multiple judges. The judges have expertise in statistics but do not necessarily have expertise in the applied domain of your paper. Therefore, you should construct a paper that is [understandable to a reader with little knowledge of any applied domains]{.maroon} that relate to your paper.*
+> *... you should construct a paper that is [understandable to a reader with little knowledge of any applied domains]{.maroon} that relate to your paper.*
 
 ## A good DA report: [clarity and presentation]{.maroon}
 
 ::: {.callout-note icon="false"}
 ## [{{< fa eye >}} Example]{.black}
 
-**Make notation concrete**
+- **Make notation concrete**
 
 From *An Evaluation Of Regularization Methods: When There Are More Predictors Than Observations* (Kenny Chen, honorable mention at 2021 Fall USRESP)
 
@@ -238,7 +240,9 @@ From *An Evaluation Of Regularization Methods: When There Are More Predictors Th
 ::: {.callout-note icon="false"}
 ## [{{< fa eye >}} Example]{.black}
 
-**Design visualizations that help digest complicated methods + Write clear figure captions**
+- **Design visualizations to help digest complicated methods**
+
+- **Write clear figure captions**
 
 From *Storm Chasers: Synthesizing New England Weather Data On A Dashboard For Emergency Response Workers* (Irene Foster, Sunshine Schneider, Caitlin Timmons, Katelyn Diaz,winner at 2022 Fall USRESP)
 
@@ -250,7 +254,7 @@ From *Storm Chasers: Synthesizing New England Weather Data On A Dashboard For Em
 ::: {.callout-note icon="false"}
 ## [{{< fa eye >}} Example]{.black}
 
-**Originality**
+- **Creativity**
 
 From *Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota* (Yicheng Shen, Jacob Flignor, Libby Nachreiner, & Karen Wang , winner at 2022 Spring USRESP)
 
@@ -262,7 +266,7 @@ From *Behind The Smoke: An Extreme Value Analysis Of Air Pollution In Minnesota*
 ::: {.callout-note icon="false"}
 ## [{{< fa eye >}} Example]{.black}
 
-**Significance**
+- **Significance**
 
 From *Exploring Missingness and its Implications on Traffic Stop Data* (Amber Lee, winner at 2020 Fall USRESP)
 
@@ -274,7 +278,7 @@ From *Exploring Missingness and its Implications on Traffic Stop Data* (Amber Le
 ::: {.callout-note icon="false"}
 ## [{{< fa eye >}} Example]{.black}
 
-**Choosing a statistical model that accounts for specific aspects of the application considered (and motivating the choice)**
+- **Choosing a statistical model that accounts for specific aspects of the application considered (and motivating the choice)**
 
 From *Psychiatric Comorbidity In Opioid Use Treatment Outcomes* (Linda Tang, winner at 2021 Fall USRESP)
 
@@ -393,7 +397,7 @@ Guess what makes for a good introduction according to USRESP judging criteria?
 
 -   Has a reasonable explanation been given for why the research was done? **Why is the work important?** Why is it relevant?
 
--   Does this section end with **statements about the hypothesis/goals** of the paper? :::
+-   Does this section end with **statements about the hypothesis/goals** of the paper? 
 
 ## Introduction
 
@@ -450,7 +454,7 @@ What should be included (according to USRESP template):
 Guess what makes for a good method section according to USRESP judging criteria?
 :::
 
--   Could the study be repeated based on the information given here? Is the material organized into logical categories \[like the ones in the previous slide\]?
+-   Could the study be **repeated** based on the information given here? Is the material organized into logical categories \[like the ones in the previous slide\]?
 
 ## Methods
 
@@ -494,19 +498,15 @@ Let's share our thoughts between all groups (if there is time).
 
 How USRESP guidelines suggest to frame the results section:
 
-. . .
 
 -   typically, results sections **start with descriptive statistics**
 
-. . .
 
 -   information presented must be relevant in helping to answer the research question(s) of interest
 
-. . .
 
 -   typically, **inferential** (i.e. hypothesis tests) **statistics come next**.
 
-. . .
 
 -   **Tables and figures** are useful in this section and should be labeled, embedded in the text, and **referenced appropriately**.
 
@@ -576,6 +576,8 @@ Think about these questions: [(2 min)]{.maroon}
 :::
 :::
 
+. . . 
+
 ::: {.callout-important icon="false"}
 ## [{{< fa comments >}} Learn from each other]{.black}
 
@@ -591,6 +593,8 @@ Let's share our thoughts between all groups (if there is time).
 
 What is an abstract?
 :::
+
+. . .
 
 > The abstract provides a brief summary of the entire paper (background, methods, results and conclusions). The suggested length is no more than 150 words. This allows you **approximately 1 sentence (and likely no more than two sentences) summarizing each of the following sections**. Typically, abstracts are the last thing you write.
 
@@ -616,6 +620,7 @@ From *Investigation Of NCAA Basketball's Three Point Strategy Using Logistic Mix
 [Several studies have presented the increase of three point shot attempts and its significance in winning games in the National Basketball Association (NBA). However, there are limited quantitative research on whether collegiate basketball reflects the three-point strategy of the NBA.]{.orange} [This paper conducts a Seasonal Mann-Kendall test]{.medium-green} [to present a statistically significant increase in three-point shot distance in NCAA Division 1 basketball, which reflects the trend of the NBA. The Logistic Mixed Effects Regression reveals that each three-point attempt decreases the probability of winning on average, whereas a made three-point shot increases the probability of winning the most out of the sixteen variables used in the model.]{.maroon} [Thus, designating three-point shots primarily for efficient three-point shooters may increase the chances of winning. Nevertheless, drafting sharpshooters and developing three-point shooting skills may benefit teams in the long-run, who may capitalize on the impact of successful three-point shots.]{.dark-pink}
 :::
 
+:::{.nonincremental}
 1.  [Introduction (aka Background)]{.orange}
 
 2.  [Methods]{.medium-green}
@@ -623,12 +628,13 @@ From *Investigation Of NCAA Basketball's Three Point Strategy Using Logistic Mix
 3.  [Results]{.maroon}
 
 4.  [Discussion/Conclusion]{.dark-pink}
+:::
 
 # DA Report: *Tools*
 
 ## Demonstration
 
-In the `template` folder in your repo.
+In the `template` folder in your research-team workshop repo.
 
 -   Quarto for DA reports
 
